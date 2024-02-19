@@ -13,11 +13,14 @@ const columns = [
     headerName: 'First name',
     width: 600,
     editable: false,
+    sortable: false
   },
   {
     field: 'actions',
     headerName: 'Actions',
     width: 150,
+    sortable: false,
+    
     getActions: (params) => [
       <GridActionsCellItem
         icon={<IconTrash/>}
@@ -55,6 +58,7 @@ const PerfilesUsuario = () => (
           Nuevo perfil
         </Button>
         <DataGrid
+          disableColumnMenu
           rows={rows}
           columns={columns}
           initialState={{
