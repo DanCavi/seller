@@ -1,0 +1,33 @@
+URL original orangefi.ecloudapp.site
+
+URL migración seller.ecloudapp.site
+
+ 
+ 
+
+Paso a produción:  
+
+Template a Utilizar: https://payment.ecloudapp.cloud/
+
+Arquitectura  Phyton: front: framework javascript React, back framework flask Phyton
+
+
+Gantt de migración de Maquina de Ventas 20/02
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ralvarez
+Ax963D0qjfCUewr$
