@@ -1,58 +1,60 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 
 // material-ui
-import { Grid } from '@mui/material';
+// import { Grid } from '@mui/material';
 
 // project imports
-import EarningCard from './EarningCard';
-import PopularCard from './PopularCard';
-import TotalOrderLineChartCard from './TotalOrderLineChartCard';
-import TotalIncomeDarkCard from './TotalIncomeDarkCard';
-import TotalIncomeLightCard from './TotalIncomeLightCard';
-import TotalGrowthBarChart from './TotalGrowthBarChart';
-import { gridSpacing } from 'store/constant';
+// import EarningCard from './EarningCard';
+// import PopularCard from './PopularCard';
+// import TotalOrderLineChartCard from './TotalOrderLineChartCard';
+// import TotalIncomeDarkCard from './TotalIncomeDarkCard';
+// import TotalIncomeLightCard from './TotalIncomeLightCard';
+// import TotalGrowthBarChart from './TotalGrowthBarChart';
+// import { gridSpacing } from 'store/constant';
+import MainCard from 'ui-component/cards/MainCard';
+import AnalisisChart from './components/AnalisisChart';
+import ProyeccionChart from './components/ProyeccionChart';
+import IngresosChart from './components/IngresosChart';
+import ProspectosChart from './components/ProspectosChart';
+import { Grid } from '@mui/material';
 
 // ==============================|| DEFAULT DASHBOARD ||============================== //
 
 const Dashboard = () => {
-  const [isLoading, setLoading] = useState(true);
-  useEffect(() => {
-    setLoading(false);
-  }, []);
+  // const [isLoading, setLoading] = useState(true);
+  // useEffect(() => {
+  //   setLoading(false);
+  // }, []);
 
   return (
-    <Grid container spacing={gridSpacing}>
+    <Grid container spacing={2}>
       <Grid item xs={12}>
-        <Grid container spacing={gridSpacing}>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
-            <EarningCard isLoading={isLoading} />
-          </Grid>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
-            <TotalOrderLineChartCard isLoading={isLoading} />
-          </Grid>
-          <Grid item lg={4} md={12} sm={12} xs={12}>
-            <Grid container spacing={gridSpacing}>
-              <Grid item sm={6} xs={12} md={6} lg={12}>
-                <TotalIncomeDarkCard isLoading={isLoading} />
-              </Grid>
-              <Grid item sm={6} xs={12} md={6} lg={12}>
-                <TotalIncomeLightCard isLoading={isLoading} />
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
+        <MainCard title="Análisis">
+          <AnalisisChart/>
+        </MainCard>
       </Grid>
       <Grid item xs={12}>
-        <Grid container spacing={gridSpacing}>
-          <Grid item xs={12} md={8}>
-            <TotalGrowthBarChart isLoading={isLoading} />
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <PopularCard isLoading={isLoading} />
-          </Grid>
-        </Grid>
+        <MainCard title="Proyección">
+          <ProyeccionChart/>
+        </MainCard>
+      </Grid>
+      <Grid item xs={12}>
+        <MainCard title="Ingresos">
+          <IngresosChart/>
+        </MainCard>
+      </Grid>
+      <Grid item xs={12}>
+        <MainCard title="Análisis">
+          <AnalisisChart/>
+        </MainCard>
+      </Grid>
+      <Grid item xs={12}>
+        <MainCard title="Prospectos">
+          <ProspectosChart/>
+        </MainCard>
       </Grid>
     </Grid>
+    
   );
 };
 

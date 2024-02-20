@@ -1,5 +1,5 @@
 // material-ui
-import { FormControl, Typography, TextField, Grid, Button } from '@mui/material';
+import { FormControl, Typography, TextField, Grid, Button, MenuItem } from '@mui/material';
 import { IconLink } from '@tabler/icons-react';
 
 // project imports
@@ -16,13 +16,15 @@ const EstadoEC2 = () => (
             <TextField
             select
             label = "Select">
-
+              <MenuItem value='Test'>Test</MenuItem>
+              <MenuItem value='Test2'>Test2</MenuItem>
+              <MenuItem value='Test3'>Test3</MenuItem>
             </TextField>
           </FormControl>
         </Typography>
       </Grid>
       <Grid item xs={6}>
-         <Button variant ="contained" fullWidth startIcon={<IconLink/>}>
+         <Button variant ="contained" fullWidth startIcon={<IconLink/>} size='large'>
             <Typography variant="body1">Iniciar</Typography>
          </Button>
       </Grid>

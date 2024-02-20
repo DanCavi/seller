@@ -1,7 +1,7 @@
 // material-ui
 import { Button, Paper } from '@mui/material';
-import { IconPlus, IconEdit, IconTrash } from '@tabler/icons-react';
-import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
+import { IconPlus } from '@tabler/icons-react';
+import { DataGrid } from '@mui/x-data-grid';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
@@ -19,20 +19,10 @@ const columns = [
     field: 'actions',
     headerName: 'Actions',
     width: 150,
+    editable: false,
     sortable: false,
     
-    getActions: (params) => [
-      <GridActionsCellItem
-        icon={<IconTrash/>}
-        label="Delete"
-        onClick={deleteUser(params.firstName)}
-      />,
-      <GridActionsCellItem
-        icon={<IconEdit/>}
-        label="Edit"
-        onClick={editUser(params.firstName)}
-      />,
-    ]
+    
   }
 ];
 

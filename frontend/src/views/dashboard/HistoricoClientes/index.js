@@ -1,19 +1,67 @@
 // material-ui
-import { Typography } from '@mui/material';
+import { Button } from '@mui/material';
+import { DataGrid } from '@mui/x-data-grid';
+import { IconEye } from '@tabler/icons-react';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 
+const columns = [
+  {
+    field: 'rut',
+    headerName: 'Rut',
+    minWidth: 200
+  },
+  {
+    field: 'razon_social',
+    headerName: 'Razón Social',
+    flex: 1
+  },
+  {
+    field: 'fecha_creacion',
+    headerName: 'Fecha Creación',
+    flex: 1
+  },
+  {
+    field: 'opcion',
+    headerName: 'Opción',
+    flex: .3
+  }
+]
+
+const rows = [
+  {
+    id: 1,
+    rut: 'test',
+    razon_social: 'test',
+    fecha_creacion: 'test',
+    opcion: {
+      icon: <IconEye/>
+    }
+  },
+  {
+    id: 2,
+    rut: 'test',
+    razon_social: 'test',
+    fecha_creacion: 'test',
+    opcion: {
+      icon: <IconEye/>
+    }
+  }
+]
+
 // ==============================|| SAMPLE PAGE ||============================== //
 
 const HistoricoClientes = () => (
-  <MainCard title="Sample Card">
-    <Typography variant="body2">
-      Lorem ipsum dolor sit amen, consenter nipissing eli, sed do elusion tempos incident ut laborers et doolie magna alissa. Ut enif ad
-      minim venice, quin nostrum exercitation illampu laborings nisi ut liquid ex ea commons construal. Duos aube grue dolor in reprehended
-      in voltage veil esse colum doolie eu fujian bulla parian. Exceptive sin ocean cuspidate non president, sunk in culpa qui officiate
-      descent molls anim id est labours.
-    </Typography>
+  <MainCard title="">
+    <Button
+      variant="contained"
+      sx={{ mb: 2 }}>
+      Agregar nuevo cliente
+    </Button>
+    <DataGrid
+      columns={columns}
+      rows={rows}/>
   </MainCard>
 );
 

@@ -1,19 +1,98 @@
 // material-ui
-import { Typography } from '@mui/material';
-
+import { Button, InputLabel, MenuItem, Select } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { DataGrid } from '@mui/x-data-grid';
+import { IconCloudUpload } from '@tabler/icons-react';
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
+
+const VisuallyHiddenInput = styled('input')({
+  clip: 'rect(0 0 0 0)',
+  clipPath: 'inset(50%)',
+  height: 1,
+  overflow: 'hidden',
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  whiteSpace: 'nowrap',
+  width: 1,
+});
+
+const rows = [
+  {
+    id: 1,
+    nombre: 'test',
+    apellido: 'test',
+    correo: 'test',
+    telefono: 'test',
+    Nacionalidad: 'test',
+  }
+]
+
+const columns = [
+  {
+    field: 'nombre',
+    headerName: 'Nombre',
+    width: 200
+  },
+  {
+    field: 'apellido',
+    headerName: 'Apellido',
+    width: 200
+  },
+  {
+    field: 'correo',
+    headerName: 'Correo',
+    width: 200
+  },
+  {
+    field: 'telefono',
+    headerName: 'Telefono',
+    width: 200
+  },
+  {
+    field: 'Nacionalidad',
+    headerName: 'Nacionalidad',
+    width: 200
+  }
+]
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
 const CargaDeDatos = () => (
-  <MainCard title="Sample Card">
-    <Typography variant="body2">
-      Lorem ipsum dolor sit amen, consenter nipissing eli, sed do elusion tempos incident ut laborers et doolie magna alissa. Ut enif ad
-      minim venice, quin nostrum exercitation illampu laborings nisi ut liquid ex ea commons construal. Duos aube grue dolor in reprehended
-      in voltage veil esse colum doolie eu fujian bulla parian. Exceptive sin ocean cuspidate non president, sunk in culpa qui officiate
-      descent molls anim id est labours.
-    </Typography>
+  <MainCard title="Modulo de Cargas">
+    <InputLabel>Seleccione canal para subir datos</InputLabel>
+    <Select fullWidth sx={{ mb: 2 }}>
+      <MenuItem value="Test">Test</MenuItem>
+      <MenuItem value="Test2">Test2</MenuItem>
+      <MenuItem value="Test3">Test3</MenuItem>
+    </Select>
+    <InputLabel>Seleccione la data cargada</InputLabel>
+    <Select fullWidth sx={{ mb: 2 }}>
+      <MenuItem value="Test">Test</MenuItem>
+      <MenuItem value="Test2">Test2</MenuItem>
+      <MenuItem value="Test3">Test3</MenuItem>
+    </Select>
+    <Button
+      fullWidth
+      sx={{ mb: 2 }}
+      component="label"
+      variant="contained"
+      tabIndex={-1}
+      startIcon={<IconCloudUpload />}
+    >
+      Carga de datos
+      <VisuallyHiddenInput type="file" />
+    </Button>
+    <DataGrid
+      rows={rows}
+      columns={columns}
+      sx={{ mb: 2 }}
+    />
+    <Button
+      variant='contained'
+      fullWidth
+      onClick={() => { alert('Carga de datos exitosa') }}>Cargar</Button>
   </MainCard>
 );
 
