@@ -19,19 +19,8 @@ conn_params = {
 
 @app.route("/perfiles-usuario", methods=["GET"])
 def index():
-    conn = mariadb.connect(**conn_params)
 
-    cur = conn.cursor()
-
-    cur.execute("select * from perfil")
-
-    row_headers = [x[0] for x in cur.description]
-    rv = cur.fetchall()
     json_data = []
-    for result in rv:
-
-        json_data.append(dict(zip(row_headers, result)))
-
     return json_data
     conn.close()
 
@@ -61,16 +50,7 @@ def getScripts():
         inner join tbl_canal tc on tas.ID_CANAL = tc.ID
         inner join tbl_estado_script tes on tas.ID_ESTADO = tes.ID; 
     """
-    conn = mariadb.connect(**conn_params)
-    cur = conn.cursor()
-    cur.execute(query)
-
-    row_headers = [x[0] for x in cur.description]
-    rv = cur.fetchall()
     json_data = []
-    for result in rv:
-
-        json_data.append(dict(zip(row_headers, result)))
 
     return json_data
     conn.close()
