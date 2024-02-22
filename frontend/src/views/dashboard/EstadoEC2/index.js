@@ -1,5 +1,6 @@
 // material-ui
 import { FormControl, Typography, TextField, Grid, Button, MenuItem } from '@mui/material';
+import { Box } from '@mui/system';
 import { IconLink } from '@tabler/icons-react';
 
 // project imports
@@ -27,6 +28,16 @@ const EstadoEC2 = () => (
          <Button variant ="contained" fullWidth startIcon={<IconLink/>} size='large'>
             <Typography variant="body1">Iniciar</Typography>
          </Button>
+      </Grid>
+      <Grid item xs = {8}>
+        <Box
+          sx={{
+            width: '100%',
+            height: 300,
+            bgcolor: 'black' 
+          }}>
+            <Typography variant="body2" sx={{ color: 'white', m: 2 }}>Pinging ...</Typography>
+        </Box>
       </Grid>
     </Grid>
   </MainCard>

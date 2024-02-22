@@ -1,20 +1,29 @@
 // material-ui
-import { Typography } from '@mui/material';
+import { Button } from '@mui/material';
+import { IconPlus } from '@tabler/icons-react';
+import { columns, rows }  from './utils/utils';
+import { DataGrid } from '@mui/x-data-grid';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
-const Usuarios = () => (
-  <MainCard title="Sample Card">
-    <Typography variant="body2">
-      Lorem ipsum dolor sit amen, consenter nipissing eli, sed do elusion tempos incident ut laborers et doolie magna alissa. Ut enif ad
-      minim venice, quin nostrum exercitation illampu laborings nisi ut liquid ex ea commons construal. Duos aube grue dolor in reprehended
-      in voltage veil esse colum doolie eu fujian bulla parian. Exceptive sin ocean cuspidate non president, sunk in culpa qui officiate
-      descent molls anim id est labours.
-    </Typography>
-  </MainCard>
-);
+const Usuarios = () => {
 
-export default Usuarios
+
+  return (
+    <MainCard title="Lista de Usuarios">
+      <Button variant="contained" startIcon={<IconPlus />}>
+        Nuevo usuario
+      </Button>
+      <DataGrid 
+        sx={{ mt: 2 }}
+        rows={rows} 
+        columns={columns}
+      />
+    </MainCard>
+  )
+};
+
+export default Usuarios;

@@ -1,20 +1,92 @@
 // material-ui
-import { Typography } from '@mui/material';
+// import { Grid, InputLabel, Select, MenuItem, Paper } from '@mui/material';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
+import Selectors from './components/Selectors';
+import Avg from './components/Avg';
+import { DataGrid } from '@mui/x-data-grid';
+
+const columns = [
+  {
+    field: 'topic',
+    headerName: 'Topic',
+  },
+  {
+    field: 'engaged_conversations',
+    headerName: 'Engaged Conversations',
+  },
+  {
+    field: 'volume',
+    headerName: 'Volume',
+  },
+  {
+    field: 'volume_change',
+    headerName: 'Volume Change',
+  },
+  {
+    field: 'avg_conversation',
+    headerName: 'Avg. Conversation handle time (min)',
+  },
+  {
+    field: 'avg_csat',
+    headerName: 'Avg. CSAT',
+  },
+  {
+    field: 'csat_impact',
+    headerName: 'CSAT Impact',
+  },
+  {
+    field: 'avg_sentiment',
+    headerName: 'Avg. Sentiment',
+  },
+  {
+    field: 'sentiment_impact',
+    headerName: 'Sentiment Impact',
+  }
+]
+
+const rows = [
+  {
+    id: 1,
+    topic: 'Topic 1',
+    engaged_conversations: 10,
+    volume: '100%',
+    volume_change: '10%',
+    avg_conversation: '10',
+    avg_csat: '10',
+    csat_impact: '10%',
+    avg_sentiment: '10',
+    sentiment_impact: '10%'
+  },
+  {
+    id: 2,
+    topic: 'Topic 2',
+    engaged_conversations: 10,
+    volume: '100%',
+    volume_change: '10%',
+    avg_conversation: '10',
+    avg_csat: '10',
+    csat_impact: '10%',
+    avg_sentiment: '10',
+    sentiment_impact: '10%'
+  }
+]
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
-const SeguimientoScripts = () => (
-  <MainCard title="Sample Card">
-    <Typography variant="body2">
-      Lorem ipsum dolor sit amen, consenter nipissing eli, sed do elusion tempos incident ut laborers et doolie magna alissa. Ut enif ad
-      minim venice, quin nostrum exercitation illampu laborings nisi ut liquid ex ea commons construal. Duos aube grue dolor in reprehended
-      in voltage veil esse colum doolie eu fujian bulla parian. Exceptive sin ocean cuspidate non president, sunk in culpa qui officiate
-      descent molls anim id est labours.
-    </Typography>
-  </MainCard>
-);
+const SeguimientoScripts = () => {
+  return (
+    <MainCard title="Motor de Seguimiento">
+      <Selectors />
+      <Avg />
+      <DataGrid
+        rows={rows}
+        columns={columns}
+      />
 
-export default SeguimientoScripts
+    </MainCard>
+  );
+};
+
+export default SeguimientoScripts;
