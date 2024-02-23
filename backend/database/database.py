@@ -1,35 +1,18 @@
-from flask import Flask
 from sqlalchemy import create_engine
-from controllers.perfiles import getPerfiles
-from controllers.usuarios import getUsuarios
-import json
+from sqlalchemy.orm import sessionmaker
 
+engine = create_engine(
+    "mysql+pymysql://root:root@localhost:3306/EC_MaquinaVentas?charset=utf8mb4"
+)
 
-engine = create_engine('mysql+pymysql://root:root@localhost:3306/EC_MaquinaVentas=charset=utf8mb4')
-
-app = Flask(__name__)
-
-conn_params = {
-    "user": "root",
-    "password": "root",
-    "host": "localhost",
-    "database": "EC_MaquinaVentas",
-    "port": 3306,
-}
-
-
-@app.route("/perfiles-usuario", methods=["GET"])
-def profilesToJson():
-    jsondata = getPerfiles()
-    return json.dumps(jsondata)
-
-@app.route("/usuarios", methods=["GET"])
-def usersToJson():
-    jsondata = getUsuarios()
-    return json.dumps(jsondata)
-
-# @app.route("/administrador-script", methods=["GET"])
-# def getScripts():
+def getSession():
+    try:
+        Session = sessionmaker(bind=engine)
+        return Session()
+    except Exception as e:
+        return print(f"Error: {e}")
+    
+# with engine.connect() as conn:
 #     query = """
 #     select tas.ID as "id", 
 #         tas.NOMBRE_SCRIPT as "nombre",
@@ -48,7 +31,9 @@ def usersToJson():
 #         inner join tbl_canal tc on tas.ID_CANAL = tc.ID
 #         inner join tbl_estado_script tes on tas.ID_ESTADO = tes.ID; 
 #     """
+#     result = conn.execute(text(query))
+#     print(result)
 #     json_data = []
-
-#     return json_data
-#     conn.close()
+#     for row in result:
+#         # json_data.append(dict(zip(row_headers, result)))
+#         print(row)

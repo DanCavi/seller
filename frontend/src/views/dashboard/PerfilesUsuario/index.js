@@ -20,7 +20,7 @@ const PerfilesUsuario = () => {
 
   const fetchData = async () => {
     const response = await fetch('/perfiles-usuario').then((response) => response.json());
-
+    console.log(response)
     setData(response);
   };
   useEffect(() => {
@@ -28,6 +28,7 @@ const PerfilesUsuario = () => {
   }, []);
 
   const rows = data;
+  console.log(rows)
 
   return (
     <MainCard title="Perfiles">

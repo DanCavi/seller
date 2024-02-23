@@ -1,5 +1,5 @@
 // assets
-import { 
+import {
   IconDashboard,
   IconFileUpload,
   IconCalendarEvent,
@@ -14,10 +14,43 @@ import {
   IconUserCircle,
   IconChartDots2,
   IconVariable,
-  IconStatusChange } from '@tabler/icons-react';
+  IconStatusChange,
+  IconFilter,
+  IconCircleDot,
+  IconHistory,
+  IconTrendingUp,
+  IconCircleCheck,
+  IconGitFork,
+  IconUserPlus,
+  IconListDetails
+} from '@tabler/icons-react';
 
 // constant
-const icons = { IconDashboard, IconFileUpload, IconCalendarEvent, IconBrandAirtable, IconBrandCodepen, IconCodeDots, IconBrandOpenSource, IconManualGearbox, IconSettings, IconId, IconUsers, IconUserCircle, IconChartDots2, IconVariable, IconStatusChange };
+const icons = {
+  IconCircleCheck,
+  IconTrendingUp,
+  IconHistory,
+  IconCircleDot,
+  IconFilter,
+  IconDashboard,
+  IconFileUpload,
+  IconCalendarEvent,
+  IconBrandAirtable,
+  IconBrandCodepen,
+  IconCodeDots,
+  IconBrandOpenSource,
+  IconManualGearbox,
+  IconSettings,
+  IconId,
+  IconUsers,
+  IconUserCircle,
+  IconChartDots2,
+  IconVariable,
+  IconStatusChange,
+  IconGitFork,
+  IconUserPlus,
+  IconListDetails
+};
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
@@ -39,7 +72,7 @@ const dashboard = {
       title: 'Maestro Leads',
       type: 'item',
       url: '/dashboard/maestro-leads',
-      icon: icons.IconDashboard,
+      icon: icons.IconListDetails,
       breadcrumbs: false
     },
     {
@@ -47,7 +80,7 @@ const dashboard = {
       title: 'Crear Prospecto',
       type: 'item',
       url: '/dashboard/crear-prospecto',
-      icon: icons.IconDashboard,
+      icon: icons.IconUserPlus,
       breadcrumbs: false
     },
     {
@@ -55,7 +88,7 @@ const dashboard = {
       title: 'Inteligencia Maquina',
       type: 'item',
       url: '/dashboard/inteligencia-maquina',
-      icon: icons.IconFileUpload,
+      icon: icons.IconGitFork,
       breadcrumbs: false
     },
     {
@@ -63,7 +96,7 @@ const dashboard = {
       title: 'Seguimiento Humano',
       type: 'item',
       url: '/dashboard/seguimiento-humano',
-      icon: icons.IconFileUpload,
+      icon: icons.IconCircleCheck,
       breadcrumbs: false
     },
     {
@@ -71,7 +104,7 @@ const dashboard = {
       title: 'Control Ventas',
       type: 'item',
       url: '/dashboard/control-ventas',
-      icon: icons.IconFileUpload,
+      icon: icons.IconTrendingUp,
       breadcrumbs: false
     },
     {
@@ -79,7 +112,7 @@ const dashboard = {
       title: 'Historico Clientes',
       type: 'item',
       url: '/dashboard/historico-clientes',
-      icon: icons.IconFileUpload,
+      icon: icons.IconHistory,
       breadcrumbs: false
     },
     {
@@ -95,7 +128,7 @@ const dashboard = {
       title: 'Ingreso Metas',
       type: 'item',
       url: '/dashboard/ingreso-metas',
-      icon: icons.IconFileUpload,
+      icon: icons.IconCircleDot,
       breadcrumbs: false
     },
     {
@@ -103,7 +136,7 @@ const dashboard = {
       title: 'Funnel Comercial',
       type: 'item',
       url: '/dashboard/funnel-comercial',
-      icon: icons.IconFileUpload,
+      icon: icons.IconFilter,
       breadcrumbs: false
     },
     {
