@@ -1,20 +1,29 @@
 // material-ui
-import { Typography } from '@mui/material';
+import { Grid } from '@mui/material';
 
 // project imports
-import MainCard from 'ui-component/cards/MainCard';
+import { RepoWhats, PlantillaCorreo, AsignacionChat } from './views';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
-const IntegracionesOutbound = () => (
-  <MainCard title="Sample Card">
-    <Typography variant="body2">
-      Lorem ipsum dolor sit amen, consenter nipissing eli, sed do elusion tempos incident ut laborers et doolie magna alissa. Ut enif ad
-      minim venice, quin nostrum exercitation illampu laborings nisi ut liquid ex ea commons construal. Duos aube grue dolor in reprehended
-      in voltage veil esse colum doolie eu fujian bulla parian. Exceptive sin ocean cuspidate non president, sunk in culpa qui officiate
-      descent molls anim id est labours.
-    </Typography>
-  </MainCard>
-);
+const IntegracionesOutbound = () => {
+
+
+
+  return (
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+      <RepoWhats />
+      </Grid>
+      <Grid item xs={12}>
+      <PlantillaCorreo />
+      </Grid>
+      <Grid item xs={12}>
+      <AsignacionChat />
+      </Grid>
+    </Grid>
+
+  );
+}
 
 export default IntegracionesOutbound

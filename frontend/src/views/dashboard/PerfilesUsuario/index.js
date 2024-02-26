@@ -19,7 +19,7 @@ const PerfilesUsuario = () => {
   const [data, setData] = useState(array);
 
   const fetchData = async () => {
-    const response = await fetch('/perfiles-usuario').then((response) => response.json());
+    const response = await fetch('/profiles').then((response) => response.json());
     console.log(response)
     setData(response);
   };
@@ -28,7 +28,6 @@ const PerfilesUsuario = () => {
   }, []);
 
   const rows = data;
-  console.log(rows)
 
   return (
     <MainCard title="Perfiles">

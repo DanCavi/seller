@@ -21,6 +21,7 @@
     "@mui/x-data-grid": "^6.19.4",
     "@tabler/icons-react": "^2.46.0",
     "apexcharts": "^3.46.0",
+    "axios": "^1.6.7",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "formik": "^2.4.5",

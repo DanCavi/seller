@@ -1,19 +1,37 @@
 // material-ui
 import { DataGrid } from '@mui/x-data-grid';
-import { columns, rows } from './utils/utils';
+import { columns } from './utils/utils';
+import { useEffect, useState } from 'react';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
-const SeguimientoHumano = () => (
-  <MainCard title="Prospectos">
+const SeguimientoHumano = () => {
+
+  const array = [];
+  const [rows, setRows] = useState(array);
+  
+  const fetchRows = async () => {
+    const response = await fetch('/prospectos').then((response) => response.json());
+    setRows(response);
+    
+  };
+  useEffect(() => {
+    fetchRows();
+  }, [])
+
+  return (
+
+    <MainCard title="Prospectos">
     <DataGrid
       rows={rows}
       columns={columns}
-    />
-  </MainCard>
-);
+      getRowId={(row) => row.ID}
+      />
+    </MainCard>
+  );
+}
 
 export default SeguimientoHumano

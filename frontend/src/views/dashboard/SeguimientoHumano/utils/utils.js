@@ -1,58 +1,68 @@
-export const columns = [
-    {
-      field: 'ejecutivo',
-      headerName: 'Ejecutivo',
-    },
-    {
-      field: 'cliente',
-      headerName: 'Cliente',
-    },
-    {
-      field: 'contacto',
-      headerName: 'Contacto',
-    },
-    {
-      field: 'fecha_gestion',
-      headerName: 'Fecha Gestion',
-    },
-    {
-      field: 'producto',
-      headerName: 'Producto',
-    },
-    {
-      field: 'tipo_gestion',
-      headerName: 'Tipo Gestión',
-    },
-    {
-      field: 'estado_negocio',
-      headerName: 'Estado Negocio',
-    },
-    {
-      field: 'canal_de_salida',
-      headerName: 'Canal de Salida',
-    },
-    {
-      field: 'prioridad',
-      headerName: 'Prioridad',
-    },
-    {
-      field: 'cierre',
-      headerName: 'Cierre',
-    }
-];
+function getFechaGestion(params) {
+  if (params.row.GESTION != null) {
+    return params.row.GESTION.FECHA_GESTION.slice(0, 10);
+  }
+  return '-';
+}
 
-export const rows = [
-    {
-      id: 1,
-      ejecutivo: 'Ejecutivo 1',
-      cliente: 'Cliente 1',
-      contacto: 'Contacto 1',
-      fecha_gestion: 'Fecha Gestion 1',
-      producto: 'Proyecto 1',
-      tipo_gestion: 'Tipo Gestión 1',
-      estado_negocio: 'Estado Negocio 1',
-      canal_de_salida: 'Canal de Salida 1',
-      prioridad: 'Prioridad 1',
-      cierre: '1'
-    }
-]
+function getNombre(params) {
+  if (params.row.NOMBRE != null && params.row.APELLIDO != null) {
+    return params.row.NOMBRE + ' ' + params.row.APELLIDO;
+  }
+  return 'Sin Nombre';
+}
+
+export const columns = [
+  {
+    field: 'ejecutivo',
+    headerName: 'Ejecutivo',
+    flex: 1
+  },
+  {
+    field: 'NOMBRE',
+    headerName: 'Cliente',
+    flex: 1,
+    valueGetter: getNombre
+  },
+  {
+    field: 'TELEFONO',
+    headerName: 'Contacto',
+    flex: 1
+  },
+  {
+    field: 'GESTION',
+    headerName: 'Fecha Gestion',
+    flex: 1,
+    valueGetter: getFechaGestion
+  },
+  {
+    field: 'producto',
+    headerName: 'Producto',
+    flex: 1
+  },
+  {
+    field: 'tipo_gestion',
+    headerName: 'Tipo Gestión',
+    flex: 1
+  },
+  {
+    field: 'estado_negocio',
+    headerName: 'Estado Negocio',
+    flex: 1
+  },
+  {
+    field: 'canal_de_salida',
+    headerName: 'Canal de Salida',
+    flex: 1
+  },
+  {
+    field: 'prioridad',
+    headerName: 'Prioridad',
+    flex: 1
+  },
+  {
+    field: 'cierre',
+    headerName: 'Cierre',
+    flex: 1
+  }
+];

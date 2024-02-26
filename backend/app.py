@@ -1,7 +1,8 @@
 from flask import Flask
 from sqlalchemy import create_engine
-from controllers.perfiles import getPerfiles
-from controllers.usuarios import getUsuarios
+from controllers.profiles.perfiles import getPerfiles
+from controllers.users.usuarios import getUsers, getUser
+from controllers.prospectos.prospectos import getProspectos, getProspecto
 import json
 
 
@@ -18,14 +19,29 @@ conn_params = {
 }
 
 
-@app.route("/perfiles-usuario", methods=["GET"])
+@app.route("/profiles", methods=["GET"])
 def profilesToJson():
     jsondata = getPerfiles()
     return json.dumps(jsondata)
 
-@app.route("/usuarios", methods=["GET"])
+@app.route("/users", methods=["GET"])
 def usersToJson():
-    jsondata = getUsuarios()
+    jsondata = getUsers()
+    return json.dumps(jsondata)
+
+@app.route("/users/<int:id>", methods=["GET"])
+def userToJson(id):
+    jsondata = getUser(id)
+    return json.dumps(jsondata)
+
+@app.route("/prospectos", methods=["GET"])
+def prospectosToJson():
+    jsondata = getProspectos()
+    return json.dumps(jsondata)
+
+@app.route("/prospectos/<int:id>", methods=["GET"])
+def prospectoToJson(id):
+    jsondata = getProspecto(id)
     return json.dumps(jsondata)
 
 # @app.route("/administrador-script", methods=["GET"])
