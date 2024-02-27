@@ -1,33 +1,38 @@
-URL original orangefi.ecloudapp.site
-
-URL migración seller.ecloudapp.site
-
- 
- 
-
-Paso a produción:  
-
-Template a Utilizar: https://payment.ecloudapp.cloud/
-
-Arquitectura  Phyton: front: framework javascript React, back framework flask Phyton
-
-
-Gantt de migración de Maquina de Ventas 20/02
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+URL original 		https://orangefi.ecloudapp.site
 
 ralvarez
 Ax963D0qjfCUewr$
+
+-------------------------
+
+URL QA frontend 		https://orangefi.seller.ecloudapp.cloud
+
+URL QA backend		https://backorangefi.seller.ecloudapp.cloud
+
+Template a Utilizar: 	https://payment.ecloudapp.cloud/
+
+---------- SFTP ----------
+
+Host: 54.208.180.191
+
+Usuario: orangefi_seller
+
+Contraseña: q2i9j8vdppcH
+
+Puerto: 22
+
+--------------------------
+
+----------JENKINS---------
+
+Host:				https://deploy.expertchoice.tech
+
+Usuario: dcavieres
+
+Contraseña: 6Y0MuNNvgEJL
+
+URL de la tarea 		https://deploy.expertchoice.tech/view/testing/job/backend-seller-orangefi-qa/
+
+--------------------------
+
+
