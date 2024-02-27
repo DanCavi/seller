@@ -1,9 +1,10 @@
 import { Grid, InputLabel, Select, TextField, MenuItem, Button } from '@mui/material';
 import { IconPlus } from '@tabler/icons-react';
 import MainCard from 'ui-component/cards/MainCard';
-import { DateField } from './components';
 import { DataGrid } from '@mui/x-data-grid';
 import { columns, rows } from './utils/utils';
+import InputFecha from 'ui-component/InputFecha/InputFecha';
+
 
 const PlantillaCorreo = () => {
   return (
@@ -22,11 +23,11 @@ const PlantillaCorreo = () => {
         </Grid>
         <Grid item xs={2.5}>
           <InputLabel>Fecha Inicio</InputLabel>
-          <DateField />
+          <InputFecha />
         </Grid>
         <Grid item xs={2.5}>
           <InputLabel>Fecha Fin</InputLabel>
-          <DateField />
+          <InputFecha />
         </Grid>
         <Grid item xs={3} sx={{ mt: 2.4 }}>
           <Button variant="contained" fullWidth startIcon={<IconPlus />}>Agregar plantilla</Button>

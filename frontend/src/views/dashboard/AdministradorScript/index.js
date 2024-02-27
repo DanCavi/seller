@@ -2,7 +2,7 @@ import { Button, Grid, InputLabel, MenuItem, TextField, Select, Typography, Tabl
 import { IconCopy, IconDeviceFloppy, IconCloudUpload } from '@tabler/icons-react';
 import { styled } from '@mui/material/styles';
 import MainCard from 'ui-component/cards/MainCard';
-import DateField from './components/DateField';
+import InputFecha from 'ui-component/InputFecha/InputFecha';
 import SubCard from 'ui-component/cards/SubCard';
 import { DataGrid } from '@mui/x-data-grid';
 import { columns } from './utils/utils';
@@ -76,11 +76,11 @@ const AdministradorScript = () => {
             </Grid>
             <Grid item xs={3}>
               <InputLabel>Fecha Inicio Vigencia:</InputLabel>
-              <DateField />
+              <InputFecha />
             </Grid>
             <Grid item xs={3}>
               <InputLabel>Fecha Fin Vigencia:</InputLabel>
-              <DateField />
+              <InputFecha />
             </Grid>
             <Grid item xs={3}>
               <InputLabel>Campaña</InputLabel>

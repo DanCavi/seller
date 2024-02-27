@@ -1,20 +1,23 @@
 // material-ui
-import { Typography } from '@mui/material';
+import { Grid } from '@mui/material';
+import { Prospecto } from './views';
 
-// project imports
-import MainCard from 'ui-component/cards/MainCard';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
-const DataExit = () => (
-  <MainCard title="Sample Card">
-    <Typography variant="body2">
-      Lorem ipsum dolor sit amen, consenter nipissing eli, sed do elusion tempos incident ut laborers et doolie magna alissa. Ut enif ad
-      minim venice, quin nostrum exercitation illampu laborings nisi ut liquid ex ea commons construal. Duos aube grue dolor in reprehended
-      in voltage veil esse colum doolie eu fujian bulla parian. Exceptive sin ocean cuspidate non president, sunk in culpa qui officiate
-      descent molls anim id est labours.
-    </Typography>
-  </MainCard>
-);
+const DataExit = () => {
+
+
+  return (
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <Prospecto />
+      </Grid>
+      <Grid item xs={12}>
+      </Grid>
+    </Grid>
+  );
+
+}
 
 export default DataExit

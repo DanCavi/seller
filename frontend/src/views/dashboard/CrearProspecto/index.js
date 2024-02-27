@@ -11,38 +11,44 @@ const CrearProspecto = () => (
     <Grid container spacing={2}>
       <Grid item xs={6}>
         <TextField
+          size='small'
           fullWidth
           label="Nombre"
           sx={{ mb: 2 }}/>
         <TextField
+          size='small'
           fullWidth
           label="Teléfono"
           sx={{ mb: 2 }}/>
         <TextField
+          size='small'
           fullWidth
           label="Nacionalidad"/>
-      </Grid>
-      <Grid item xs={6}>
-        <TextField
-          fullWidth
-          label="Apellido"
-          sx={{ mb: 2 }}/>
-        <TextField
-          fullWidth
-          label="DNI"
-          sx={{ mb: 2 }}/>
-        <TextField
-          fullWidth
-          label="Correo"
-          sx={{ mb: 2 }}/>
         <Button
-          fullWidth
+          sx={{ mt: 2 }}
           variant="contained"
           onClick={() => {
             alert("Guardado con exito");
           }}>
           Guardar
         </Button>
+      </Grid>
+      <Grid item xs={6}>
+        <TextField
+          size='small'
+          fullWidth
+          label="Apellido"
+          sx={{ mb: 2 }}/>
+        <TextField
+          size='small'
+          fullWidth
+          label="DNI"
+          sx={{ mb: 2 }}/>
+        <TextField
+          size='small'
+          fullWidth
+          label="Correo"
+          sx={{ mb: 2 }}/>
       </Grid>
     </Grid>
 

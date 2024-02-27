@@ -61,6 +61,15 @@ class User(Base):
     USERESTADO: Mapped["UserEstado"] = relationship()
     SUPERVISOR_USUARIO: Mapped[int]
     PERFIL: Mapped[Perfil] = relationship(secondary=user_perfil)
+    METAS: Mapped["Metas"] = relationship()
+
+class Metas(Base):
+    __tablename__ = "metas"
+
+    ID: Mapped[int] = mapped_column(primary_key=True)
+    EJECUTIVO_ID: Mapped[int] = mapped_column(ForeignKey("usuario.USU_ID"))
+    FECHA: Mapped[DateTime] = mapped_column(DateTime)
+    MONTO: Mapped[int]
 
 class UserEstado(Base):
     __tablename__ = "usuario_estado"
@@ -89,3 +98,13 @@ class ProspectoGestion(Base):
     FECHA_GESTION: Mapped[DateTime] = mapped_column(DateTime)
     ID_PROSPECTO: Mapped[int] = mapped_column(ForeignKey("tbl_prospecto_chat_wsp.ID"))
 
+class FunnelComercial(Base):
+    __tablename__ = "tbl_funnelcomercial"
+
+    ID: Mapped[int] = mapped_column(primary_key=True)
+    NOMBRE_SECCION: Mapped[str]
+    FECHA_CREACION: Mapped[DateTime] = mapped_column(DateTime, default=datetime.now())
+    AUTOR_ID: Mapped[int]
+    ACTIVA: Mapped[int]
+    REQUISITOS: Mapped[str]
+    ORDEN: Mapped[int]

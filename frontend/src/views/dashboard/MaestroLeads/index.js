@@ -1,24 +1,58 @@
-import { styled } from '@mui/material/styles';
-import { Card } from '@mui/material';
-
 // project imports
+import { Button, Grid, InputLabel, MenuItem, Select, Typography } from '@mui/material';
+import { DataGrid } from '@mui/x-data-grid';
+import { IconFilter, IconRefresh } from '@tabler/icons-react';
 import MainCard from 'ui-component/cards/MainCard';
-
-// styles
-const IFrameWrapper = styled('iframe')(({ theme }) => ({
-  height: 'calc(100vh - 210px)',
-  border: '1px solid',
-  borderColor: theme.palette.primary.light
-}));
+import { columns, rows } from './utils/utils';
 
 // ============================|| MATERIAL ICONS ||============================ //
 
-const MaterialIcons = () => (
+const MaestroLeads = () => (
   <MainCard title="Maestro Leads">
-    <Card sx={{ overflow: 'hidden' }}>
-      <IFrameWrapper title="Material Icon" width="100%" src="https://material-ui.com/components/material-icons/" />
-    </Card>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <Typography variant='subtitle1'><IconFilter size={20}/> Filtros </Typography>
+      </Grid>
+      <Grid item xs={4}>
+        <InputLabel>Canal Entrada</InputLabel>
+        <Select fullWidth size="small">
+          <MenuItem>Todos</MenuItem>
+          <MenuItem>Whatsapp</MenuItem>
+          <MenuItem>Chat</MenuItem>
+          <MenuItem>Correo</MenuItem>
+        </Select>
+      </Grid>
+      <Grid item xs={4}>
+        <InputLabel>Funnel Comercial</InputLabel>
+        <Select fullWidth size="small">
+          <MenuItem>Prospecto</MenuItem>
+          <MenuItem>Cotización</MenuItem>
+          <MenuItem>Orden de Compra</MenuItem>
+          <MenuItem>Cliente</MenuItem>
+        </Select>
+      </Grid>
+      <Grid item xs={4}>
+        <InputLabel>Producto</InputLabel>
+        <Select fullWidth size="small">
+          <MenuItem>Todos</MenuItem>
+          <MenuItem>GO911</MenuItem>
+          <MenuItem>MAF</MenuItem>
+          <MenuItem>Provida</MenuItem>
+          <MenuItem>USJMX</MenuItem>
+        </Select>
+      </Grid>
+      <Grid item xs={12}>
+        <Button variant="contained" startIcon={<IconRefresh />} size='small'>Recargar</Button>
+      </Grid>
+      <Grid item xs={12}>
+        <DataGrid
+          columns={columns}
+          rows={rows}
+        />
+      </Grid>
+
+    </Grid>
   </MainCard>
 );
 
-export default MaterialIcons;
+export default MaestroLeads;

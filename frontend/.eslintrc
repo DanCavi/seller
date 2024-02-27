@@ -38,7 +38,7 @@
     },
     "ecmaVersion": 12
   },
-  "plugins": ["prettier", "react", "react-hooks", "@babel"],
+  "plugins": ["prettier", "react", "react-hooks"],
   "rules": {
     "@babel/no-invalid-this": "off",
     "react/jsx-uses-react": "error",

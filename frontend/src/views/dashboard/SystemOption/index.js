@@ -1,7 +1,8 @@
 import { InputLabel, TextField, Button, Grid, Select, MenuItem, FormControlLabel, Switch } from '@mui/material';
 import { IconDeviceFloppy, IconPlus } from '@tabler/icons-react';
 import MainCard from 'ui-component/cards/MainCard';
-import { DateField, HourField } from './components';
+import { HourField } from './components';
+import InputFecha from 'ui-component/InputFecha/InputFecha';
 import { DataGrid } from '@mui/x-data-grid';
 import { columns, rows } from './utils/utils.js';
 import { SeleccionPais, SeleccionMoneda, DataExit, Semaforo } from './views';
@@ -24,7 +25,7 @@ const SystemOption = () => (
         <Grid container spacing={2}>
           <Grid item xs={3}>
             <InputLabel>Fecha</InputLabel>
-            <DateField />
+            <InputFecha />
           </Grid>
           <Grid item xs={3}>
             <InputLabel>Dia Feriado</InputLabel>

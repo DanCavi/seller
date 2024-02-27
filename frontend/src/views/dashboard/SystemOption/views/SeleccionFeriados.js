@@ -3,7 +3,7 @@
 //         <Grid container spacing={2}>
 //           <Grid item xs={3}>
 //             <InputLabel>Fecha</InputLabel>
-//             <DateField />
+//             <InputFecha />
 //           </Grid>
 //           <Grid item xs={3}>
 //             <InputLabel>Dia Feriado</InputLabel>

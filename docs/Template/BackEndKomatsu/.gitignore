@@ -1,0 +1,6 @@
+myenv
+include
+Lib
+Scripts
+dist
+__pycache__/
