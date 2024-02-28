@@ -1,0 +1,117 @@
+.fc .fc-daygrid-day-number { 
+    color: rgb(80, 137, 184); 
+    text-decoration: none;
+    
+}
+
+.fc .fc-col-header-cell-cushion {  
+    color: rgb(72, 148, 148);  
+    text-decoration: none;
+    
+}
+.fc-direction-ltr .fc-daygrid-more-link {
+    float: left;
+    text-decoration: none;
+    color: rgb(72, 148, 148); 
+}
+
+/*============================|| Estilo de botones header ||==========================*/
+/*Boton anterior*/
+.fc .fc-prev-button  {
+    color: azure;
+    background-color: #2196F3;
+    border-color: #2196F3;
+    transition: background-color 0.3s;
+}
+.fc .fc-prev-button:hover{
+    background-color: #1565C0;
+}
+
+
+/*Boton NEXT*/
+.fc .fc-next-button {
+    color: azure;
+    background-color: #2196F3;
+    border-color: #2196F3;
+
+}
+.fc .fc-next-button:hover{
+    background-color: #1565C0;
+}
+
+/*Boton Hoy*/
+.fc .fc-today-button{
+    color: azure;
+    border-color: #2196F3;
+    background-color: #2196F3;
+    transition: background-color 0.3s;
+}
+
+.fc .fc-today-button:hover{
+    background-color: #1565C0;
+}
+
+
+
+/*Boton de mes activado*/
+button.fc-dayGridMonth-button.fc-button.fc-button-primary.fc-button-active {
+    color: azure;
+    background-color: #1565C0;
+    border-color: #2196F3;
+    transition: background-color 0.3s;
+}
+
+button.fc-dayGridMonth-button.fc-button.fc-button-primary.fc-button-active:hover {    
+    background-color: #1565C0;
+   
+}
+
+/*Boton mes desactivado*/
+button.fc-dayGridMonth-button.fc-button.fc-button-primary {
+    color: azure;
+    background-color: #2196F3;
+    border-color: #2196F3;
+    transition: background-color 0.3s;
+}
+
+button.fc-dayGridMonth-button.fc-button.fc-button-primary:hover{
+    background-color:#1565C0 ;
+    border-color: #1565C0;
+}
+
+/*Boton Semana Activado*/
+button.fc-timeGridWeek-button.fc-button.fc-button-primary.fc-button-active {
+    color: azure;
+    background-color: #1565C0;
+}
+
+/*Boton semana desactivado*/
+button.fc-timeGridWeek-button.fc-button.fc-button-primary {
+    color: azure;
+    background-color: #2196F3;
+    border-color: #2196F3;
+    transition: background-color 0.3s;
+}
+button.fc-timeGridWeek-button.fc-button.fc-button-primary:hover {
+    background-color:#1565C0 ;
+    border-color: #1565C0;
+}
+
+/*Boton Día activado*/
+button.fc-timeGridDay-button.fc-button.fc-button-primary.fc-button-active{
+    color: azure;
+    background-color: #1565C0;
+}
+
+/*Boton Día Desactivado*/
+button.fc-timeGridDay-button.fc-button.fc-button-primary{
+    color: azure;
+    background-color: #2196F3;
+    border-color: #2196F3;
+    transition: background-color 0.3s;
+}
+
+button.fc-timeGridDay-button.fc-button.fc-button-primary:hover{
+    background-color: #1565C0;
+    border-color: #1565C0;
+}

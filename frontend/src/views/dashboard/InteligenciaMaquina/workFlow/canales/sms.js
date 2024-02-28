@@ -5,8 +5,8 @@ import { Handle, Position } from 'reactflow';
 //Style
 import { useTheme } from '@mui/material/styles';
 //Icon
-import { IconCircleX } from '@tabler/icons-react';
-import { IconMessage2 } from '@tabler/icons-react';
+import { IconCircleX } from '@tabler/icons';
+import { IconMessage2 } from '@tabler/icons';
 
 const CanalSms = ({ isConnectable, id, data }) => {
   const theme = useTheme();

@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { Grid, IconButton, Avatar, Card, CardContent, Typography } from '@mui/material';
-import { IconCircleX } from '@tabler/icons-react';
+import { IconCircleX } from '@tabler/icons';
 import { useTheme } from '@mui/material/styles';
 //Icons
-import { IconUser } from '@tabler/icons-react';
+import { IconUser } from '@tabler/icons';
 
 export default () => {
   const onDragStart = (event, nodeType) => {
@@ -49,7 +49,7 @@ export default () => {
             <IconUser />
           </Grid>
           <Grid item md={9} sx={{ width: '100%', pt: 0.6 }}>
-            <Typography>Derivar a Ejecutiva</Typography>
+            <Typography>Ejecutivo</Typography>
           </Grid>
         </Grid>
       </CardContent>

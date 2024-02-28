@@ -5,8 +5,8 @@ import { Handle, Position } from 'reactflow';
 //Style
 import { useTheme } from '@mui/material/styles';
 //Icon
-import { IconCircleX } from '@tabler/icons-react';
-import { IconDeviceMobile } from '@tabler/icons-react';
+import { IconCircleX } from '@tabler/icons';
+import { IconDeviceMobile } from '@tabler/icons';
 
 const CanalTelefonico = ({ isConnectable, id, data }) => {
   const theme = useTheme();

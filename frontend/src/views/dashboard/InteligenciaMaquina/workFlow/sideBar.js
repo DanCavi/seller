@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Divider, Grid, Stack, IconButton, Avatar, Card, CardContent, Typography } from '@mui/material';
-import { IconCircleX } from '@tabler/icons-react';
+import { IconCircleX } from '@tabler/icons';
 import { useTheme } from '@mui/material/styles';
 
 export default () => {

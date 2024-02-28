@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { Grid, Stack, IconButton, Avatar, Card, CardContent, Typography } from '@mui/material';
-import { IconCircleX } from '@tabler/icons-react';
+import { IconCircleX } from '@tabler/icons';
 import { useTheme } from '@mui/material/styles';
 //Icons
-import { IconMail } from '@tabler/icons-react';
+import { IconMail } from '@tabler/icons';
 
 export default () => {
   const onDragStart = (event, nodeType) => {

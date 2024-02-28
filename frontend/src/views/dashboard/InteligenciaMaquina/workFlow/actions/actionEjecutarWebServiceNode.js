@@ -5,7 +5,7 @@ import { Handle, Position } from 'reactflow';
 //Style
 import { useTheme } from '@mui/material/styles';
 //Icon
-import { IconCircleX, IconNetwork } from '@tabler/icons-react';
+import { IconCircleX, IconNetwork } from '@tabler/icons';
 import { useEffect } from 'react';
 
 const EjecutarWebService = ({ isConnectable, id, data }) => {

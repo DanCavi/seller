@@ -3,7 +3,7 @@ import React from 'react';
 import OperadorStandar from './operadorStandar';
 
 //Icons
-import { IconBoxOff } from '@tabler/icons-react';
+import { IconBoxOff } from '@tabler/icons';
 
 function NoContiene() {
   return (

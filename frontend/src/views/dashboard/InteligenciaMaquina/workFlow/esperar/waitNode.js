@@ -5,7 +5,7 @@ import { Handle, Position } from 'reactflow';
 //Style
 import { useTheme } from '@mui/material/styles';
 //Icon
-import { IconCircleX, IconHourglassEmpty } from '@tabler/icons-react';
+import { IconCircleX, IconHourglassEmpty } from '@tabler/icons';
 
 const Wait = ({ isConnectable, id, data }) => {
   const theme = useTheme();

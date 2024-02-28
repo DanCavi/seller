@@ -2,7 +2,7 @@ import React from 'react';
 //Operador Standar
 import OperadorStandar from './operadorStandar';
 //Icons
-import { IconEqualNot } from '@tabler/icons-react';
+import { IconEqualNot } from '@tabler/icons';
 
 function Distinto() {
   return (

@@ -8,7 +8,7 @@ import { CardActionArea, Avatar, CardHeader, Grid, Divider, Stack } from '@mui/m
 import { useTheme } from '@mui/material/styles';
 
 //Nombres y cargo
-export default function EjecutivoCard({ nombre, cantidadClientes, porcentajeMetasCumplidas, gestiones, cargo }) {
+export default function EjecutivoCard({ nombre, cantidadDeudores, porcentajeMetasCumplidas, gestiones, cargo }) {
   const theme = useTheme();
   return (
     <Card sx={{ maxWidth: '100%' }}>
@@ -66,7 +66,7 @@ export default function EjecutivoCard({ nombre, cantidadClientes, porcentajeMeta
             <CardContent>
               <Stack direction="column" justifyContent="center" alignItems="center">
                 <Typography>Cliente:</Typography>
-                <Typography>{cantidadClientes}</Typography>
+                <Typography>{cantidadDeudores}</Typography>
               </Stack>
             </CardContent>
           </Grid>

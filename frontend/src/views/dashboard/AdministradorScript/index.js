@@ -7,6 +7,7 @@ import SubCard from 'ui-component/cards/SubCard';
 import { DataGrid } from '@mui/x-data-grid';
 import { columns } from './utils/utils';
 import { useEffect, useState } from 'react';
+import SelectStandar from 'ui-component/Select/Select';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -51,20 +52,11 @@ const AdministradorScript = () => {
             </Grid>
             <Grid item xs={4}>
               <InputLabel>Funnel Comercial</InputLabel>
-              <Select fullWidth>
-                <MenuItem>No inscrito</MenuItem>
-                <MenuItem>Preventa</MenuItem>
-                <MenuItem>Venta</MenuItem>
-                <MenuItem>Titulados</MenuItem>
-              </Select>
+              <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
             </Grid>
             <Grid item xs={4}>
               <InputLabel>Canal</InputLabel>
-              <Select fullWidth>
-                <MenuItem>Correo</MenuItem>
-                <MenuItem>SMS</MenuItem>
-                <MenuItem>Whatsapp</MenuItem>
-              </Select>
+              <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
             </Grid>
             <Grid item xs={7}>
               <InputLabel>Cc</InputLabel>
@@ -84,19 +76,11 @@ const AdministradorScript = () => {
             </Grid>
             <Grid item xs={3}>
               <InputLabel>Campaña</InputLabel>
-              <Select fullWidth>
-                <MenuItem>¿Si?</MenuItem>
-                <MenuItem>¿No?</MenuItem>
-              </Select>
+              <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
             </Grid>
             <Grid item xs={3}>
               <InputLabel>Estado</InputLabel>
-              <Select fullWidth>
-                <MenuItem>Cargado</MenuItem>
-                <MenuItem>Visado</MenuItem>
-                <MenuItem>Producción con reparos</MenuItem>
-                <MenuItem>Sin reparos</MenuItem>
-              </Select>
+              <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
             </Grid>
             <Grid item xs={12}>
               <SubCard title="Archivos Adjuntos" sx={{ mb: 2 }}>
@@ -127,15 +111,11 @@ const AdministradorScript = () => {
                 <Grid container spacing={2}>
                   <Grid item xs={4}>
                     <InputLabel>Tabla</InputLabel>
-                    <Select fullWidth>
-                      <MenuItem>test</MenuItem>
-                    </Select>
+                    <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
                   </Grid>
                   <Grid item xs={4}>
                     <InputLabel>Variable</InputLabel>
-                    <Select fullWidth>
-                      <MenuItem>test</MenuItem>
-                    </Select>
+                    <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
                   </Grid>
                   <Grid item xs={4}>
                     <InputLabel>Shortcode</InputLabel>

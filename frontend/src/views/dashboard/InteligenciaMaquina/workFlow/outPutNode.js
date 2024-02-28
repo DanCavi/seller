@@ -5,8 +5,8 @@ import { Handle, Position } from 'reactflow';
 //Style
 import { useTheme } from '@mui/material/styles';
 //Icon
-import { IconCircleX } from '@tabler/icons-react';
-import { IconPlayerPause } from '@tabler/icons-react';
+import { IconCircleX } from '@tabler/icons';
+import { IconPlayerPause } from '@tabler/icons';
 
 const CreadaCustomNodeOutPut = ({ isConnectable, id, data }) => {
   const theme = useTheme();

@@ -20,7 +20,7 @@ import ForAddNode from '../condiciones/forAddNode';
 import CorreoAddNode from '../canales/correoAddNode';
 import SmsAddNode from '../canales/smsAddNode';
 import WhatsappAddNode from '../canales/whatsappAddNode';
-import TelefonicoAddNode from '../canales/telefonicoAddNode';
+import Responder from '../actions/responderAdd';
 import { useTheme } from '@mui/material';
 
 function SideBarNodos() {
@@ -31,98 +31,99 @@ function SideBarNodos() {
   };
   const theme = useTheme();
   return (
-    <Grid item md={2}>
-      <Stack direction="column" spacing={2}>
-        <Grid item md={12} sx={{ width: '100%', pl: 1 }}>
-          <Stack direction="row">
-            <Grid justify="center" alignItems="center">
-              <Typography
-                sx={{
-                  fontWeight: 600,
-                  fontSize: '13px',
-                  color: theme.palette.grey[500]
-                }}
-              >
-                Nodos
-              </Typography>
-            </Grid>
-          </Stack>
+    <Stack direction={{ xs: 'row', md: 'column', sm: 'row' }} spacing={2}>
+      <Grid item sx={{ width: '100%', pl: 1 }}>
+        <Grid justify="center" alignItems="center">
+          <Typography
+            sx={{
+              fontWeight: 600,
+              fontSize: '13px',
+              color: theme.palette.grey[500]
+            }}
+          >
+            Nodos
+          </Typography>
+        </Grid>
 
-          <Box sx={{ width: '100%', typography: 'body1' }}>
-            <TabContext value={value}>
-              <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <TabList variant="scrollable" scrollButtons="auto" onChange={handleChange} aria-label="lab API tabs example">
-                  <Tab label="Acciones" value="1" />
-                  <Tab label="Condiciones" value="2" />
-                  <Tab label="Canal" value="3" />
-                </TabList>
-              </Box>
-              <TabPanel value="1" sx={{ p: 1 }}>
-                <Grid item md={12} sx={{ width: '100%', pb: 1 }}>
+        <Box sx={{ width: '100%', typography: 'body1', overflow: 'auto' }}>
+          <TabContext value={value}>
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+              <TabList variant="scrollable" scrollButtons="auto" onChange={handleChange} aria-label="lab API tabs example">
+                <Tab label="Acciones" value="1" />
+                <Tab label="Condiciones" value="2" />
+                <Tab label="Canal" value="3" />
+              </TabList>
+            </Box>
+            <TabPanel value="1" sx={{ p: 1 }}>
+              <Stack direction="row" spacing={2}>
+                <Grid item md={4} sx={{ width: '100%', pb: 1 }}>
                   <InputAdd />
                 </Grid>
-                <Grid item md={12} sx={{ width: '100%', pb: 1 }}>
+                <Grid item md={4} sx={{ width: '100%', pb: 1 }}>
                   <OutputAdd />
                 </Grid>
-                <Grid item md={12} sx={{ width: '100%', pb: 1 }}>
+                <Grid item md={4} sx={{ width: '100%', pb: 1 }}>
                   <EjecutarWebServiceAddNode />
                 </Grid>
-                <Grid item md={12} sx={{ width: '100%' }} pb={1}>
+                <Grid item md={4} sx={{ width: '100%' }} pb={1}>
                   <ActionDerivarEjecutivoAddNode />
                 </Grid>
-                <Grid item md={12} sx={{ width: '100%' }} pb={1}>
+                <Grid item md={4} sx={{ width: '100%' }} pb={1}>
                   <ListeningAddNode />
                 </Grid>
-                <Grid item md={12} sx={{ width: '100%' }} pb={1}>
+                <Grid item md={4} sx={{ width: '100%' }} pb={1}>
                   <WaitAddNode />
                 </Grid>
-                <Grid item md={12} sx={{ width: '100%' }} pb={1}>
+                <Grid item md={4} sx={{ width: '100%' }} pb={1}>
                   <SemanticoAddNode />
                 </Grid>
-                <Grid item md={12} sx={{ width: '100%' }} pb={1}>
+                <Grid item md={4} sx={{ width: '100%' }} pb={1}>
                   <CutAddNode />
                 </Grid>
-                <Grid item md={12} sx={{ width: '100%' }} pb={1}>
+                <Grid item md={4} sx={{ width: '100%' }} pb={1}>
                   <ScriptAddNode />
                 </Grid>
-              </TabPanel>
-              <TabPanel value="2" sx={{ p: 1 }}>
-                <Grid item md={12} pb={1}>
+                <Grid item md={4} sx={{ width: '100%' }} pb={1}>
+                  <Responder />
+                </Grid>
+              </Stack>
+            </TabPanel>
+            <TabPanel value="2" sx={{ p: 1 }}>
+              <Stack direction="row" spacing={2}>
+                <Grid item md={1} sx={{ width: '100%' }}>
                   <IfAddNode />
                 </Grid>
-                <Grid item md={12} pb={1}>
+                <Grid item md={1} sx={{ width: '100%' }}>
                   <ElseAddNode />
                 </Grid>
-                <Grid item md={12} pb={1}>
+                <Grid item md={1} sx={{ width: '100%' }}>
                   <ElseIfAddNode />
                 </Grid>
-                <Grid item md={12}>
+                <Grid item md={1} sx={{ width: '100%' }}>
                   <ForAddNode />
                 </Grid>
-              </TabPanel>
-              <TabPanel value="3" sx={{ p: 1 }}>
-                <Grid item md={12} pb={1}>
+              </Stack>
+            </TabPanel>
+            <TabPanel value="3" sx={{ p: 1 }}>
+              <Stack direction="row" spacing={2}>
+                <Grid item md={2} pb={1}>
                   {' '}
                   <CorreoAddNode />{' '}
                 </Grid>
-                <Grid item md={12} pb={1}>
+                <Grid item md={2} pb={1}>
                   {' '}
                   <SmsAddNode />{' '}
                 </Grid>
-                <Grid item md={12} pb={1}>
+                <Grid item md={2} pb={1}>
                   {' '}
                   <WhatsappAddNode />{' '}
                 </Grid>
-                <Grid item md={12} pb={1}>
-                  {' '}
-                  <TelefonicoAddNode />{' '}
-                </Grid>
-              </TabPanel>
-            </TabContext>
-          </Box>
-        </Grid>
-      </Stack>
-    </Grid>
+              </Stack>
+            </TabPanel>
+          </TabContext>
+        </Box>
+      </Grid>
+    </Stack>
   );
 }
 

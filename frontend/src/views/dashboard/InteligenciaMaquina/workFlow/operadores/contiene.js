@@ -4,7 +4,7 @@ import React from 'react';
 import OperadorStandar from './operadorStandar';
 
 //Icons
-import { IconBox } from '@tabler/icons-react';
+import { IconBox } from '@tabler/icons';
 
 function Contiene() {
   return (

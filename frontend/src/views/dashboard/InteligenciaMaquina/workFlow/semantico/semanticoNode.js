@@ -5,7 +5,7 @@ import { Handle, Position } from 'reactflow';
 //Style
 import { useTheme } from '@mui/material/styles';
 //Icon
-import { IconCircleX, IconTimelineEventText } from '@tabler/icons-react';
+import { IconCircleX, IconTimelineEventText } from '@tabler/icons';
 
 const Semantico = ({ isConnectable, id, data }) => {
   const theme = useTheme();

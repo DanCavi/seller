@@ -5,8 +5,8 @@ import { Handle, Position } from 'reactflow';
 //Style
 import { useTheme } from '@mui/material/styles';
 //Icon
-import { IconCircleX } from '@tabler/icons-react';
-import { IconMail } from '@tabler/icons-react';
+import { IconCircleX } from '@tabler/icons';
+import { IconMail } from '@tabler/icons';
 
 const CanalCorreo = ({ isConnectable, id, data }) => {
   const theme = useTheme();
@@ -22,6 +22,13 @@ const CanalCorreo = ({ isConnectable, id, data }) => {
   // FIN FUNCION DELETE NODE
   return (
     <>
+      <Handle
+        type="target"
+        position={Position.Left}
+        //style={{ background: '#555555' }}
+        onConnect={(params) => console.log('handle onConnect', params)}
+        isConnectable={isConnectable}
+      />
       <Card
         sx={{
           minWidth: 190,
@@ -68,8 +75,8 @@ const CanalCorreo = ({ isConnectable, id, data }) => {
       </Card>
 
       <Handle
-        type="target"
-        position={Position.Left}
+        type="source"
+        position={Position.Right}
         id="a"
         //style={{ background: '#555555' }}
         isConnectable={isConnectable}

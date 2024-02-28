@@ -6,6 +6,8 @@ import { IconCloudUpload } from '@tabler/icons-react';
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 
+import SelectStandar from 'ui-component/Select/Select';
+
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
   clipPath: 'inset(50%)',
@@ -62,17 +64,9 @@ const columns = [
 const CargaDeDatos = () => (
   <MainCard title="Modulo de Cargas">
     <InputLabel>Seleccione canal para subir datos</InputLabel>
-    <Select fullWidth sx={{ mb: 2 }}>
-      <MenuItem value="Test">Test</MenuItem>
-      <MenuItem value="Test2">Test2</MenuItem>
-      <MenuItem value="Test3">Test3</MenuItem>
-    </Select>
+    <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
     <InputLabel>Seleccione la data cargada</InputLabel>
-    <Select fullWidth sx={{ mb: 2 }}>
-      <MenuItem value="Test">Test</MenuItem>
-      <MenuItem value="Test2">Test2</MenuItem>
-      <MenuItem value="Test3">Test3</MenuItem>
-    </Select>
+    <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
     <Button
       fullWidth
       sx={{ mb: 2 }}

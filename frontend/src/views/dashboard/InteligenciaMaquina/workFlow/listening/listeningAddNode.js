@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { Grid, IconButton, Avatar, Card, CardContent, Typography } from '@mui/material';
-import { IconCircleX } from '@tabler/icons-react';
+import { IconCircleX } from '@tabler/icons';
 import { useTheme } from '@mui/material/styles';
 //Icons
-import { IconSpeakerphone } from '@tabler/icons-react';
+import { IconSpeakerphone } from '@tabler/icons';
 
 export default () => {
   const onDragStart = (event, nodeType) => {
@@ -17,6 +17,7 @@ export default () => {
       onDragStart={(event) => onDragStart(event, 'listening')}
       draggable
       sx={{
+        width: '100%',
         cursor: 'grab',
         minWidth: 160,
         padding: 0.5,
@@ -26,7 +27,7 @@ export default () => {
         borderLeft: '4px solid #009988'
       }}
     >
-      <CardContent sx={{ padding: 0, margin: 0 }}>
+      <CardContent sx={{ padding: 0, margin: 0, width: '100%' }}>
         <Grid container direction="row">
           <Grid item sx={{ width: '100%' }}>
             <Avatar

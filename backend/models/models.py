@@ -2,7 +2,7 @@ from sqlalchemy import DateTime, ForeignKey, Column, Table
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from sqlalchemy_serializer import SerializerMixin
 from datetime import datetime
-from typing import Optional
+from typing import List
 
 class Base(DeclarativeBase, SerializerMixin):
     pass
@@ -61,7 +61,7 @@ class User(Base):
     USERESTADO: Mapped["UserEstado"] = relationship()
     SUPERVISOR_USUARIO: Mapped[int]
     PERFIL: Mapped[Perfil] = relationship(secondary=user_perfil)
-    METAS: Mapped["Metas"] = relationship()
+    METAS: Mapped[List["Metas"]] = relationship()
 
 class Metas(Base):
     __tablename__ = "metas"
@@ -88,7 +88,7 @@ class Prospecto(Base):
     NACIONALIDAD: Mapped[str]
     DNI: Mapped[str]
     FECHA_CREACION: Mapped[DateTime] = mapped_column(DateTime, default=datetime.now())
-    GESTION: Mapped["ProspectoGestion"] = relationship()
+    GESTION: Mapped[List["ProspectoGestion"]] = relationship()
 
 class ProspectoGestion(Base):
     __tablename__ = "prospecto_gestion"

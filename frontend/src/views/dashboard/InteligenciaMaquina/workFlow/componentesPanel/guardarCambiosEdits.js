@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Button } from '@mui/material';
 //Icons
-import { IconDeviceFloppy, IconRecycle, IconArrowBackUp } from '@tabler/icons-react';
+import { IconDeviceFloppy, IconRecycle, IconArrowBackUp } from '@tabler/icons';
 //Panels
 import { Panel } from 'reactflow';
 //import input

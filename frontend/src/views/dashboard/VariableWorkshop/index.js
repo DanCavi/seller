@@ -4,6 +4,7 @@ import { IconInfoCircle } from '@tabler/icons-react';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
+import SelectStandar from 'ui-component/Select/Select';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
@@ -14,31 +15,15 @@ const VariableWorkshop = () => (
     <Grid container spacing={2}>
     <Grid item xs={6}>
       <InputLabel>Tipo Persona</InputLabel>
-      <Select fullWidth sx={{ mb: 2 }}>
-        <MenuItem value="Test">Test</MenuItem>
-        <MenuItem value="Test">Test1</MenuItem>
-        <MenuItem value="Test">Test2</MenuItem>
-      </Select>
+      <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
       <InputLabel>País</InputLabel>
-      <Select fullWidth sx={{ mb: 2 }}>
-        <MenuItem value="Test">Test</MenuItem>
-        <MenuItem value="Test">Test1</MenuItem>
-        <MenuItem value="Test">Test2</MenuItem>
-      </Select>
+      <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
       <InputLabel>Origen variable</InputLabel>
-      <Select fullWidth sx={{ mb: 2 }}>
-        <MenuItem value="Test">Test</MenuItem>
-        <MenuItem value="Test">Test1</MenuItem>
-        <MenuItem value="Test">Test2</MenuItem>
-      </Select>
+      <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
       <Grid container spacing={2} alignItems={'center'}>
         <Grid item xs={8}>
           <InputLabel>Variable</InputLabel>
-          <Select fullWidth sx={{ mb: 2 }}>
-            <MenuItem>Test</MenuItem>
-            <MenuItem>Test1</MenuItem>
-            <MenuItem>Test2</MenuItem>
-          </Select>
+          <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
         </Grid>
         <Grid item xs={4}>
           <Button variant="contained">Agregar</Button>
@@ -85,11 +70,7 @@ const VariableWorkshop = () => (
           </Grid>
           <Grid item xs={4}>
             <InputLabel>Variables Creadas</InputLabel>
-            <Select fullWidth> 
-              <MenuItem>Test</MenuItem>
-              <MenuItem>Test1</MenuItem>
-              <MenuItem>Test2</MenuItem>
-            </Select>
+            <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
           </Grid>
           <Grid item xs={4}>
             <Button variant="contained" fullWidth>Examinar</Button>

@@ -1,6 +1,15 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useContext } from 'react';
 import { Divider, Grid } from '@mui/material';
-import ReactFlow, { addEdge, useNodesState, useEdgesState, Controls, Background, useReactFlow, ReactFlowProvider } from 'reactflow';
+import ReactFlow, {
+  addEdge,
+  useNodesState,
+  useEdgesState,
+  Controls,
+  Background,
+  useReactFlow,
+  ReactFlowProvider,
+  applyNodeChanges
+} from 'reactflow';
 import 'reactflow/dist/style.css';
 
 // import Sidebar from './sideBar';
@@ -24,6 +33,7 @@ import CanalTelefonico from './canales/telefonico';
 import CanalCorreo from './canales/correo';
 import CanalWhatsapp from './canales/whatsapp';
 import CanalSms from './canales/sms';
+import Responder from './actions/responder';
 
 //Import SideBar AddNodes
 import SideBarNodos from './sideBarNodos/sideBarNodos';
@@ -39,9 +49,14 @@ import PanelGuardarArbol from './componentesPanel/guardarArbol';
 
 //IMPORTAR AXIOS
 import axios from 'axios';
-import { useEffect } from 'react';
+//DAYJS
+import dayjs from 'dayjs';
 import PanelDeEdicion from './componentesPanel/guardarCambiosEdits';
+//IMPORTAR URL BASE
+// import url from 'baseUrl';
+// import { AuthContext } from 'AuthContext';
 
+//const id_usuario = 2;
 //type Nodes
 const nodeTypes = {
   listening: Listening,
@@ -60,16 +75,18 @@ const nodeTypes = {
   correo: CanalCorreo,
   whatsapp: CanalWhatsapp,
   sms: CanalSms,
-  telefonico: CanalTelefonico
+  telefonico: CanalTelefonico,
+  responder: Responder
 };
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
-console.log('hola mundo1');
 const DnDFlow = ({ editOn, setEditionActive }) => {
+  // const { idUser } = useContext(AuthContext);
+
   //declaracion de  URI peticiones al backend
-  const URISAVEFLOW = 'http://localhost:3300/dashboard/inteligencia/save/flow';
-  const URIEDITFLOW = 'http://localhost:3300/dashboard/inteligencia/edit-flow/';
+  const URISAVEFLOW = '/dashboard/inteligencia/save/flow';
+  const URIEDITFLOW = '/dashboard/inteligencia/edit-flow/';
 
   //Constante para titulo
   const tituloKey = 'titulo';
@@ -78,9 +95,12 @@ const DnDFlow = ({ editOn, setEditionActive }) => {
   const [fechaActual, setFechaActual] = useState(null);
   useEffect(() => {
     const fechaHoraActual = new Date();
-    setFechaActual(fechaHoraActual);
+    const fecha = dayjs(fechaHoraActual);
+    const fechaFormateada = fecha.format('YYYY-MM-DD HH:mm:ss');
+    setFechaActual(fechaFormateada);
   }, []);
 
+  console.log('fecha days :', fechaActual);
   const reactFlowWrapper = useRef(null);
 
   //ESTADOS PARA INPUTS
@@ -116,7 +136,7 @@ const DnDFlow = ({ editOn, setEditionActive }) => {
   //Fin de funcion para save title local Storage
   // Constante FlowKey que guarda los datos del Arbol guardado.
 
-  const [nodes, setNodes, onNodesChange] = useNodesState([]);
+  const [nodes, setNodes] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   // INICIO DE ESTADOS PARA USAR SAVE Y USAR RESTORE
@@ -126,70 +146,92 @@ const DnDFlow = ({ editOn, setEditionActive }) => {
 
   const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
 
+  ///////////////////////////// CAMBIOS EN NODOS //////////////////////////////////
+  const onNodesChange = React.useCallback((changes) => setNodes((nds) => applyNodeChanges(changes, nds)), [setNodes]);
+
+  console.log('setNodes :', nodes);
+
   ////////////////////////////////// FUNCION PARA EL SAVE ///////////////////////////
   const onSave = useCallback(
     async (e) => {
       if (reactFlowInstance) {
-        const flow = reactFlowInstance.toObject();
-        localStorage.setItem(flowKeys, JSON.stringify(flow)); //linea para guardar en localstorage
-        //sacar el titulo del storage
-        const saveTitle = 'saveTitle';
-        const tituloGetStorage = localStorage.getItem(saveTitle);
-        const tituloJSON = JSON.parse(tituloGetStorage);
+        if (idUser != '') {
+          const flow = reactFlowInstance.toObject();
+          localStorage.setItem(flowKeys, JSON.stringify(flow)); //linea para guardar en localstorage
+          //sacar el titulo del storage
+          const saveTitle = 'saveTitle';
+          const tituloGetStorage = localStorage.getItem(saveTitle);
+          const tituloJSON = JSON.parse(tituloGetStorage);
+          const jsonFlow = JSON.stringify(flow);
+          console.log('FLOW COMPONENTES :', flow);
+          console.log('JSON FLOW', jsonFlow);
+          /*Funcion para fragmentar el array flow */
+          const { nodes: flowNodos, viewport: flowViewport, edges: flowEdges } = flow;
+          const fechaDeHoy = fechaActual;
+          console.log('nodes : ', nodes);
+          console.log('fecha con dayjs :', fechaDeHoy);
+          console.log('titulo en save :', tituloJSON);
 
-        /*Funcion para fragmentar el array flow */
-        const { nodes: flowNodos, viewport: flowViewport, edges: flowEdges } = flow;
-        const fechaActualOnSave = fechaActual.toISOString();
-        console.log('fecha Actual : ', fechaActualOnSave);
-        console.log('titulo en save :', tituloJSON);
-        const viewportToSend = {
-          x: flowViewport.x,
-          y: flowViewport.y,
-          zoom: flowViewport.zoom,
-          titulo: tituloJSON.titulo,
-          fecha_creacion: fechaActualOnSave
-        };
-        console.log('FlowKey', flowKeys);
-        console.log('titulo :', viewportToSend.titulo);
-        //pasar los datos de edges
-        const edgesToSend = flowEdges.map((edge) => ({
-          id_edge: edge.id,
-          source: edge.source,
-          target: edge.target,
-          target_handle: edge.targetHandle,
-          source_handle: edge.sourceHandle
-        }));
+          const viewportToSend = {
+            x: flowViewport.x,
+            y: flowViewport.y,
+            zoom: flowViewport.zoom,
+            titulo: tituloJSON.titulo,
+            fecha_creacion: fechaDeHoy,
+            id_usuario: idUser
+          };
 
-        //transforma los nodos al formato para enviar al servidor
-        const nodosToSend = flowNodos.map((nodo) => ({
-          width: nodo.width,
-          height: nodo.height,
-          id_nodo: nodo.id,
-          type: nodo.type,
-          positionX: nodo.position.x,
-          positionY: nodo.position.y,
-          positionAbsoluteX: nodo.positionAbsolute.x,
-          positionAbsoluteY: nodo.positionAbsolute.y,
-          inputValue: nodo.data.inputValue
-        }));
+          console.log('FlowKey', flowKeys);
+          console.log('titulo :', viewportToSend.titulo);
+          //pasar los datos de edges
+          const edgesToSend = flowEdges.map((edge) => ({
+            id_edge: edge.id,
+            source: edge.source,
+            target: edge.target,
+            target_handle: edge.targetHandle,
+            source_handle: edge.sourceHandle
+          }));
 
-        const dataToSend = {
-          nodos: nodosToSend,
-          viewport: viewportToSend,
-          edges: edgesToSend
-        };
+          //transforma los nodos al formato para enviar al servidor
+          const nodosToSend = flowNodos.map((nodo) => ({
+            width: nodo.width,
+            height: nodo.height,
+            id_nodo: nodo.id,
+            type: nodo.type,
+            positionX: nodo.position.x,
+            positionY: nodo.position.y,
+            positionAbsoluteX: nodo.positionAbsolute.x,
+            positionAbsoluteY: nodo.positionAbsolute.y,
+            inputValue: nodo.data.inputValue,
+            opcion: nodo.data.opcion,
+            operador: nodo.data.operador
+          }));
+          const dataToSend = {
+            nodos: nodosToSend,
+            viewport: viewportToSend,
+            edges: edgesToSend
+          };
 
-        console.log('nodos :', dataToSend.nodos, 'viewport', dataToSend.viewport, 'edges :', dataToSend.edges);
-        e.preventDefault();
-        axios
-          .post(URISAVEFLOW, dataToSend)
-          .then((response) => {
-            console.log(response.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-        localStorage.clear();
+          console.log('nodos :', dataToSend.nodos, 'viewport', dataToSend.viewport, 'edges :', dataToSend.edges, 'id_usuario :', idUser);
+          e.preventDefault();
+          axios
+            .post(`${url.BASE_URL}${URISAVEFLOW}`, dataToSend)
+            .then((response) => {
+              console.log({
+                message: 'Registro exitoso',
+                'response data': response.data,
+                status: 200
+              });
+            })
+            .catch((error) => {
+              console.log({
+                message: 'Error al enviar datos',
+                Error: error,
+                status: 405
+              });
+            });
+          localStorage.clear();
+        }
       }
     },
     [reactFlowInstance]
@@ -267,23 +309,34 @@ const DnDFlow = ({ editOn, setEditionActive }) => {
         const tituloStorage = localStorage.getItem(tituloKey);
         const tituloFlow = JSON.parse(tituloStorage);
         console.log('tituloFlow :', tituloFlow);
+        //rescatar el Id
+        const dataFlow = 'dataFlow';
+        const getIdFlow = localStorage.getItem(dataFlow);
+        const idFlow = JSON.parse(getIdFlow);
+        console.log('get id flow :', idFlow);
+        //fin rescatar id
+
+        //Guardar en local storage para posterior recuperación y guardado
+        const editsaveKey = 'editSave';
+        const dataNow = reactFlowInstance.toObject();
+        localStorage.setItem(editsaveKey, JSON.stringify(dataNow));
+        //Fin de guardado en local storage
 
         //Recuperar el flujo que viene desde el storage con todos los datos de DB
-        const keyForStorage = 'dataFlow';
-        const flowJson = localStorage.getItem(keyForStorage);
+        const flowJson = localStorage.getItem(editsaveKey);
         const flowById = JSON.parse(flowJson);
         //se puede recuperar el flujo ya restaurado con nodos y edges viewport, pero no datos de db
         // const flow = reactFlowInstance.toObject();
         // localStorage.setItem(nombreArbol, JSON.stringify(flow));
 
         /*Funcion para fragmentar el array flow */
-        const { nodos: flowNodos, viewport: flowViewport, edges: flowEdges, flow: flowData } = flowById;
+        const { nodes: flowNodos, viewport: flowViewport, edges: flowEdges } = flowById;
 
         console.log('datos totales :', flowById);
         console.log('nodos :', flowNodos);
         console.log('viewport :', flowViewport);
         console.log('edges :', flowEdges);
-        console.log('flowData :', flowData);
+        console.log('flowData :', idFlow);
         console.log('fecha Actual : ', fechaActual);
 
         const titulo = tituloEditJSON === null ? tituloFlow : tituloEditJSON;
@@ -293,7 +346,7 @@ const DnDFlow = ({ editOn, setEditionActive }) => {
           y: flowViewport.y,
           zoom: flowViewport.zoom,
           titulo: titulo.titulo,
-          id: flowData.id
+          id: idFlow.flow.id
         };
         console.log('FlowKey :', flowKeys);
         console.log('titulo :', viewportToSend.titulo);
@@ -341,12 +394,20 @@ const DnDFlow = ({ editOn, setEditionActive }) => {
         const id = dataToSend.viewport.id;
         e.preventDefault();
         axios
-          .post(`${URIEDITFLOW}${id}`, dataToSend)
+          .post(`${url.BASE_URL}${URIEDITFLOW}${id}`, dataToSend)
           .then((response) => {
-            console.log(response.data);
+            console.log({
+              message: 'Registro exitoso',
+              'response data': response.data,
+              status: 200
+            });
           })
           .catch((error) => {
-            console.log(error);
+            console.log({
+              message: 'Error al guardar su reactFlow',
+              Error: error,
+              status: 405
+            });
           });
         //localStorage.clear();
       }
@@ -375,17 +436,24 @@ const DnDFlow = ({ editOn, setEditionActive }) => {
       x: event.clientX - reactFlowBounds.left,
       y: event.clientY - reactFlowBounds.top
     });
+
     const newNode = {
       id: getId(),
       type: type,
       position,
-      data: { onDeleteNode: handleDeleteNode, inputValue: '' }
+      data: {
+        onDeleteNode: handleDeleteNode,
+        inputValue: ``,
+        opcion: ``,
+        operador: ``
+      }
     };
 
     setNodes((nds) => nds.concat(newNode));
     //console.log(newNode);
   }, [setNodes][reactFlowInstance]);
   //console.log(nodes);
+
   // //Funcion Delete
   const handleDeleteNode = (nodeId) => {
     const updatedNodes = nodes.filter((node) => node.id !== nodeId);
@@ -418,21 +486,24 @@ const DnDFlow = ({ editOn, setEditionActive }) => {
   //Fin estados y Funcion para Nuevo arbol
   //volver a nuevo arbol
   const handleBolberNuevoArbol = () => {
+    localStorage.clear();
+    setNodes([]);
+    setEdges([]);
     setNewWorkFlow(false);
     setEditionActive(false);
   };
   //fin volver a nuevo arbol
   return (
-    <Grid container direction="row" spacing={1}>
+    <Grid container spacing={1} direction="row" mb={2} sx={{ minHeight: '700px', overflow: 'auto' }}>
       {console.log('estado en reactflow :', editOn)}
 
-      {/*||================= Side Bar Nodos =================================||*/}
-      <SideBarNodos />
-      {/*||==================FIN Side Bar Nodos ===============================||*/}
-      <Divider sx={{ border: '1px solid grey', m: 1 }}></Divider>
       {/*||================== Inicio React Flow =============================|| */}
-      <Grid item md={8.5}>
-        <div style={{ width: '100%', height: '100%', minHeight: '700px' }} className="reactflow-wrapper" ref={reactFlowWrapper}>
+      <Grid item sm={12} md={10} xs={12} sx={{ width: '100%' }}>
+        {/*||================= Side Bar Nodos =================================||*/}
+        <SideBarNodos />
+        {/*||==================FIN Side Bar Nodos ===============================||*/}
+
+        <div style={{ width: '100%', height: '90%', minHeight: '100px' }} className="reactflow-wrapper" ref={reactFlowWrapper}>
           <ReactFlow
             style={{ height: '100%', width: '100%' }}
             nodes={nodes}
@@ -475,10 +546,11 @@ const DnDFlow = ({ editOn, setEditionActive }) => {
         </div>
       </Grid>
       {/*||================== FIN Inicio React Flow =============================|| */}
-      <Divider sx={{ border: '1px solid grey', m: 1 }}></Divider>
+      <Divider sx={{ border: { xs: 'none', md: '1px solid grey' }, m: 1 }}></Divider>
       {/*||================== SideBar Operadores ============================|| */}
-      <SideBarOperadores />
-
+      <Grid item md={1} mt={{ xs: 20 }}>
+        <SideBarOperadores />
+      </Grid>
       {/*||================== SideBar Operadores ============================|| */}
     </Grid>
   );
@@ -493,36 +565,3 @@ const App = ({ editOn, setEditionActive }) => {
   );
 };
 export default App;
-/* <Panel position="top-left">
-              <Grid container direction="row" spacing={1}>
-                <NuevoArbol onClick={handlerNewRowkFlow} />
-
-                <Grid item md={6} sx={{ width: '100%' }}>
-                  <Button sx={{ width: '100%' }} variant="contained" onClick={onSave} startIcon={<IconDeviceFloppy />}>
-                    Guardar
-                  </Button>
-                </Grid>
-                <Grid item md={6} sx={{ width: '100%' }}>
-                  <Button sx={{ width: '100%' }} variant="contained" onClick={onRestore}>
-                    Restore
-                  </Button>
-                </Grid>
-              </Grid>
-            </Panel>
-            <Panel position="top-right">
-              <Grid container direction="row" spacing={1}>
-                <Grid item md={6} sx={{ width: '100%' }}>
-                  <InputText value={nombreArbol} onChange={handleNombreArbol} />
-                </Grid>
-                <Grid item md={6} sx={{ width: '100%' }}>
-                  <Button
-                    startIcon={<IconDeviceFloppy />}
-                    sx={{ width: '100%' }}
-                    variant="contained"
-                    onClick={handleGuardarNombreArbolClick}
-                  >
-                    Guardar nombre
-                  </Button>
-                </Grid>
-              </Grid>
-            </Panel> */

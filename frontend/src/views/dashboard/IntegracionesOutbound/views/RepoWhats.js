@@ -3,6 +3,7 @@ import { DataGrid } from "@mui/x-data-grid"
 import { IconPlus } from "@tabler/icons-react"
 import { columns, rows } from "./utils/utils"
 import MainCard from "ui-component/cards/MainCard"
+import SelectStandar from 'ui-component/Select/Select';
 
 const RepoWhats = () => {
   return (
@@ -18,10 +19,7 @@ const RepoWhats = () => {
         </Grid>
         <Grid item xs={3}>
           <InputLabel>Telefono</InputLabel>
-          <Select size="small" fullWidth>
-            <MenuItem>+123445678</MenuItem>
-            <MenuItem>+123445678</MenuItem>
-          </Select>
+          <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
         </Grid>
         <Grid item xs={3} sx={{ mt: 2.4 }}>
         <Button variant="contained"   fullWidth startIcon={<IconPlus />}>Agregar grupo</Button>

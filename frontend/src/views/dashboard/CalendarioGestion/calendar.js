@@ -7,7 +7,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import allLocales from '@fullcalendar/core/locales-all';
 
 import { INITIAL_EVENTS, createEventId } from './event-utils';
-import './calendario.css';
+import './calendar.css';
 export default class DemoApp extends React.Component {
   state = {
     weekendsVisible: true,

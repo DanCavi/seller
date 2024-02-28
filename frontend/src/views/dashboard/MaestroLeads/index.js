@@ -4,6 +4,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import { IconFilter, IconRefresh } from '@tabler/icons-react';
 import MainCard from 'ui-component/cards/MainCard';
 import { columns, rows } from './utils/utils';
+import SelectStandar from 'ui-component/Select/Select';
 
 // ============================|| MATERIAL ICONS ||============================ //
 
@@ -15,31 +16,15 @@ const MaestroLeads = () => (
       </Grid>
       <Grid item xs={4}>
         <InputLabel>Canal Entrada</InputLabel>
-        <Select fullWidth size="small">
-          <MenuItem>Todos</MenuItem>
-          <MenuItem>Whatsapp</MenuItem>
-          <MenuItem>Chat</MenuItem>
-          <MenuItem>Correo</MenuItem>
-        </Select>
+        <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
       </Grid>
       <Grid item xs={4}>
         <InputLabel>Funnel Comercial</InputLabel>
-        <Select fullWidth size="small">
-          <MenuItem>Prospecto</MenuItem>
-          <MenuItem>Cotización</MenuItem>
-          <MenuItem>Orden de Compra</MenuItem>
-          <MenuItem>Cliente</MenuItem>
-        </Select>
+        <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
       </Grid>
       <Grid item xs={4}>
         <InputLabel>Producto</InputLabel>
-        <Select fullWidth size="small">
-          <MenuItem>Todos</MenuItem>
-          <MenuItem>GO911</MenuItem>
-          <MenuItem>MAF</MenuItem>
-          <MenuItem>Provida</MenuItem>
-          <MenuItem>USJMX</MenuItem>
-        </Select>
+        <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
       </Grid>
       <Grid item xs={12}>
         <Button variant="contained" startIcon={<IconRefresh />} size='small'>Recargar</Button>

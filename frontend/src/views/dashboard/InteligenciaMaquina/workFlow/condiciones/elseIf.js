@@ -5,7 +5,7 @@ import { Handle, Position } from 'reactflow';
 //Style
 import { useTheme } from '@mui/material/styles';
 //Icon
-import { IconCircleX } from '@tabler/icons-react';
+import { IconCircleX } from '@tabler/icons';
 
 //IMPORT ESTILOS BOTONES
 const ConditionElseIf = ({ isConnectable, id, data }) => {

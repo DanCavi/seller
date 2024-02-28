@@ -5,7 +5,7 @@ import { Handle, Position } from 'reactflow';
 //Style
 import { useTheme } from '@mui/material/styles';
 //Icon
-import { IconCircleX, IconAntenna } from '@tabler/icons-react';
+import { IconCircleX, IconAntenna } from '@tabler/icons';
 //IMPORT ESTILOS DE BOTONES
 import { styleContiene, styleNoContiene, styleIgual, styleDistinto } from '../estilosArtefactos';
 

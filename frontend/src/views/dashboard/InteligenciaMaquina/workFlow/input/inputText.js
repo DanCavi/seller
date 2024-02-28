@@ -22,31 +22,8 @@ const ValidationTextField = styled(TextField)({
   }
 });
 function NombreArbol({ value, onChange, placeHolder }) {
-  //   const [nombreArbol, setNombreArbol] = useState('');
-  //   const handleNombreArbol = (e) => {
-  //     const newValue = e.target.value;
-  //     setNombreArbol(newValue);
-  //     onNombreArbol(newValue); // Llama a la función proporcionada con el nuevo valor
-  //   };
-  //   useEffect(() => {
-  //     // Llama a la función proporcionada con el nuevo valor cada vez que nombreArbol cambie
-  //     onNombreArbol(nombreArbol);
-  //   }, [nombreArbol, onNombreArbol]);
   return (
     <>
-      {/* <Typography
-        sx={{
-          color: '#6a6c6f',
-          fontFamily: `'Open Sans','Helvetica Neue',Helvetica,Arial, sans-serif`,
-          fontSize: '13px',
-          fontWeight: 700,
-          marginBottom: 1,
-          width: '100%'
-        }}
-      >
-        Nombre árbol
-      </Typography> */}
-
       <ValidationTextField
         label={placeHolder}
         variant="outlined"

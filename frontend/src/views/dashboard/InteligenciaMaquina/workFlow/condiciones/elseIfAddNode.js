@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Grid, IconButton, Avatar, Card, CardContent, Typography } from '@mui/material';
-import { IconCircleX } from '@tabler/icons-react';
+import { IconCircleX } from '@tabler/icons';
 import { useTheme } from '@mui/material/styles';
 
 export default () => {
@@ -16,7 +16,6 @@ export default () => {
       draggable
       sx={{
         width: '100%',
-
         padding: 0.5,
         margin: 0,
         paddingBottom: 0,

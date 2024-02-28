@@ -1,6 +1,6 @@
 import React from 'react';
 //import mui materials
-import { Grid, Stack, Typography, Box } from '@mui/material';
+import { Grid, Stack, Typography } from '@mui/material';
 //Operadores
 import Igual from '../operadores/igualA';
 import Mayor from '../operadores/mayor';
@@ -19,50 +19,48 @@ function SideBarOperadores() {
   const theme = useTheme();
   return (
     <Grid item sx={{ width: '100%' }} md={1}>
-      <Stack direction="column" spacing={2}>
-        <Grid item md={12} sx={{ width: '100%', pl: 0.5 }} textAlign="center">
-          <Typography
-            sx={{
-              fontWeight: 600,
-              fontSize: '13px',
-              color: theme.palette.grey[500]
-            }}
-          >
-            Operadores
-          </Typography>
+      <Grid item md={12} sx={{ width: '100%', pb: 2 }} textAlign="center">
+        <Typography
+          sx={{
+            fontWeight: 600,
+            fontSize: '13px',
+            color: theme.palette.grey[500]
+          }}
+        >
+          Operadores
+        </Typography>
+      </Grid>
+      <Stack direction={{ xs: 'row', md: 'column' }} sx={{ width: '100%', textAlign: 'center', alignItems: 'center' }} spacing={2}>
+        <Grid item md={4} xs={3} sx={{ width: '100%' }}>
+          <Contiene />
         </Grid>
-        <Box sx={{ width: '100%', typography: 'body1' }}>
-          <Grid item md={4} sx={{ pb: 1, marginLeft: 'auto', marginRight: 'auto' }}>
-            <Contiene />
-          </Grid>
-          <Grid item md={4} sx={{ pb: 1, marginLeft: 'auto', marginRight: 'auto' }}>
-            <NoContiene />
-          </Grid>
-          <Grid item md={4} sx={{ pb: 1, marginLeft: 'auto', marginRight: 'auto' }}>
-            <Igual />
-          </Grid>
-          <Grid item md={4} sx={{ pb: 1, marginLeft: 'auto', marginRight: 'auto' }}>
-            <Distinto />
-          </Grid>
-          <Grid item md={4} sx={{ pb: 1, marginLeft: 'auto', marginRight: 'auto' }}>
-            <Mayor />
-          </Grid>
-          <Grid item md={4} sx={{ pb: 1, marginLeft: 'auto', marginRight: 'auto' }}>
-            <Menor />
-          </Grid>
-          <Grid item md={4} sx={{ pb: 1, marginLeft: 'auto', marginRight: 'auto' }}>
-            <MayorIgual />
-          </Grid>
-          <Grid item md={4} sx={{ pb: 1, marginLeft: 'auto', marginRight: 'auto' }}>
-            <MenorIgual />
-          </Grid>
-          <Grid item md={4} sx={{ pb: 1, marginLeft: 'auto', marginRight: 'auto' }}>
-            <OperadorO />
-          </Grid>
-          <Grid item md={4} sx={{ pb: 1, marginLeft: 'auto', marginRight: 'auto' }}>
-            <OperadorY />
-          </Grid>
-        </Box>
+        <Grid item md={4} xs={3} sx={{ width: '100%' }}>
+          <NoContiene />
+        </Grid>
+        <Grid item md={4} xs={3} sx={{ width: '100%' }}>
+          <Igual />
+        </Grid>
+        <Grid item md={4} xs={3} sx={{ width: '100%' }}>
+          <Distinto />
+        </Grid>
+        <Grid item md={4} xs={3} sx={{ width: '100%' }}>
+          <Mayor />
+        </Grid>
+        <Grid item md={4} xs={3} sx={{ width: '100%' }}>
+          <Menor />
+        </Grid>
+        <Grid item md={4} xs={3} sx={{ width: '100%' }}>
+          <MayorIgual />
+        </Grid>
+        <Grid item md={4} xs={3} sx={{ width: '100%' }}>
+          <MenorIgual />
+        </Grid>
+        <Grid item md={4} xs={3} sx={{ width: '100%' }}>
+          <OperadorO />
+        </Grid>
+        <Grid item md={4} xs={3} sx={{ width: '100%' }}>
+          <OperadorY />
+        </Grid>
       </Stack>
     </Grid>
   );

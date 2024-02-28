@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { Grid, IconButton, Avatar, Card, CardContent, Typography } from '@mui/material';
-import { IconCircleX } from '@tabler/icons-react';
+import { IconCircleX } from '@tabler/icons';
 import { useTheme } from '@mui/material/styles';
 
 //Icons
-import { IconBrandNexo } from '@tabler/icons-react';
+import { IconBrandNexo } from '@tabler/icons';
 
 export default () => {
   const onDragStart = (event, nodeType) => {
@@ -18,8 +18,6 @@ export default () => {
       onDragStart={(event) => onDragStart(event, 'for')}
       draggable
       sx={{
-        minWidth: 110,
-        minHeight: 110,
         padding: 0.5,
         margin: 0,
         paddingBottom: 0,

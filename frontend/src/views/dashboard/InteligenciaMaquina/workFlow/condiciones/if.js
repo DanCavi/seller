@@ -5,7 +5,7 @@ import { Handle, Position } from 'reactflow';
 //Style
 import { useTheme } from '@mui/material/styles';
 //Icon
-import { IconCircleX, IconSwitch3 } from '@tabler/icons-react';
+import { IconCircleX, IconSwitch3 } from '@tabler/icons';
 
 const ConditionIf = ({ isConnectable, id, data }) => {
   //Definir theme para colores

@@ -1,6 +1,7 @@
 import { Grid, InputLabel, Select, MenuItem, TextField, Button } from '@mui/material';
 import { CurrencySwitch } from './components';
 import { IconPlus } from '@tabler/icons-react';
+import SelectStandar from 'ui-component/Select/Select';
 
 const SeleccionMoneda = () => {
   return (
@@ -11,11 +12,7 @@ const SeleccionMoneda = () => {
       </Grid>
       <Grid item xs={3}>
         <InputLabel>País</InputLabel>
-        <Select fullWidth size="small">
-          <MenuItem>Internacional</MenuItem>
-          <MenuItem>Chile</MenuItem>
-          <MenuItem>USA</MenuItem>
-        </Select>
+        <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
       </Grid>
       <Grid item xs={3}></Grid>
       <Grid item xs={3}>

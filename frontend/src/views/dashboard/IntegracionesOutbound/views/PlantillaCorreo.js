@@ -4,6 +4,7 @@ import MainCard from 'ui-component/cards/MainCard';
 import { DataGrid } from '@mui/x-data-grid';
 import { columns, rows } from './utils/utils';
 import InputFecha from 'ui-component/InputFecha/InputFecha';
+import SelectStandar from 'ui-component/Select/Select';
 
 
 const PlantillaCorreo = () => {
@@ -16,10 +17,7 @@ const PlantillaCorreo = () => {
         </Grid>
         <Grid item xs={2}>
           <InputLabel>Correo</InputLabel>
-          <Select size="small" fullWidth>
-            <MenuItem>Test</MenuItem>
-            <MenuItem>Test2</MenuItem>
-          </Select>
+          <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
         </Grid>
         <Grid item xs={2.5}>
           <InputLabel>Fecha Inicio</InputLabel>

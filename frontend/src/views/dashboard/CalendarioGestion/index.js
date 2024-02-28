@@ -3,20 +3,20 @@
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
-import Calendario from './components/Calendario';
-import Filtro from './components/SeccionFiltro';
+import Calendar from './calendar';
+import Filtro from './seccionFiltro';
 // import { Grid } from '@mui/material';
 import SubCard from 'ui-component/cards/SubCard';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
-const CalendarioGestion = () => (
+const Calendario = () => (
   <MainCard title="Calendario Gestión">
-    <Calendario />
+    <Calendar />
     <SubCard title="Filtro" style={{ marginTop: 10 }}>
       <Filtro />
     </SubCard>
   </MainCard>
 );
 
-export default CalendarioGestion;
+export default Calendario;

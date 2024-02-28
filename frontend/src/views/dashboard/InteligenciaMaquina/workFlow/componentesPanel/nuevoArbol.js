@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Button } from '@mui/material';
 //Import Icons
-import { IconCirclePlus } from '@tabler/icons-react';
+import { IconCirclePlus } from '@tabler/icons';
 import { Panel } from 'reactflow';
 
 function NuevoArbol({ onClick }) {

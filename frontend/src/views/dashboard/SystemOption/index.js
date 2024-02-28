@@ -6,6 +6,7 @@ import InputFecha from 'ui-component/InputFecha/InputFecha';
 import { DataGrid } from '@mui/x-data-grid';
 import { columns, rows } from './utils/utils.js';
 import { SeleccionPais, SeleccionMoneda, DataExit, Semaforo } from './views';
+import SelectStandar from 'ui-component/Select/Select';
 // ==============================|| SAMPLE PAGE ||============================== //
 
 const SystemOption = () => (
@@ -48,15 +49,7 @@ const SystemOption = () => (
         <Grid container spacing={2}>
           <Grid item xs={3}>
             <InputLabel>Día de la Semana</InputLabel>
-            <Select fullWidth size="small">
-              <MenuItem>Lunes</MenuItem>
-              <MenuItem>Martes</MenuItem>
-              <MenuItem>Miercoles</MenuItem>
-              <MenuItem>Jueves</MenuItem>
-              <MenuItem>Viernes</MenuItem>
-              <MenuItem>Sabado</MenuItem>
-              <MenuItem>Domingo</MenuItem>
-            </Select>
+            <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
           </Grid>
           <Grid item xs={3}>
             <InputLabel>De</InputLabel>
@@ -87,14 +80,7 @@ const SystemOption = () => (
           <TextField size="small" fullWidth />
         </Grid>
         <Grid item xs={3}>
-          <Select fullWidth size="small">
-            <MenuItem>Segundos</MenuItem>
-            <MenuItem>Minutos</MenuItem>
-            <MenuItem>Horas</MenuItem>
-            <MenuItem>Días</MenuItem>
-            <MenuItem>Semanas</MenuItem>
-            <MenuItem>Meses</MenuItem>
-          </Select>
+        <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
         </Grid>
         <Grid item xs={3}>
           <Button variant='contained' fullWidth startIcon={<IconDeviceFloppy />}>
@@ -137,10 +123,7 @@ const SystemOption = () => (
             Propensión de cierre
           </Grid>
           <Grid item xs={4}>
-            <Select size="small" fullWidth>
-              <MenuItem>Tasa Finalización</MenuItem>
-              <MenuItem>Tasa Pago</MenuItem>
-            </Select>
+          <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
           </Grid>
           <Grid item xs={4}>
             <Button variant='contained' fullWidth startIcon={<IconDeviceFloppy />}>
@@ -150,10 +133,7 @@ const SystemOption = () => (
             Prioridad
           </Grid>
           <Grid item xs={4}>
-            <Select size="small" fullWidth>
-              <MenuItem>Tasa Finalización</MenuItem>
-              <MenuItem>Tasa Pago</MenuItem>
-            </Select>
+          <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
           </Grid>
           <Grid item xs={4}>
             <Button variant='contained' fullWidth startIcon={<IconDeviceFloppy />}>

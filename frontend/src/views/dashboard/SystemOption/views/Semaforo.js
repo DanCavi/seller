@@ -1,5 +1,6 @@
 import { Button, Grid, Select, MenuItem, TextField, Typography } from '@mui/material';
 import { IconDeviceFloppy } from '@tabler/icons-react';
+import SelectStandar from 'ui-component/Select/Select';
 
 const Semaforo = () => {
   return (
@@ -8,14 +9,7 @@ const Semaforo = () => {
         Formato de tiempo
       </Grid>
       <Grid item xs={3}>
-        <Select size="small" fullWidth>
-          <MenuItem>Segundos</MenuItem>
-          <MenuItem>Minutos</MenuItem>
-          <MenuItem>Horas</MenuItem>
-          <MenuItem>Días</MenuItem>
-          <MenuItem>Semanas</MenuItem>
-          <MenuItem>Meses</MenuItem>
-        </Select>
+      <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
       </Grid>
       <Grid item xs={3}>
         <Button variant="contained" fullWidth startIcon={<IconDeviceFloppy />}>

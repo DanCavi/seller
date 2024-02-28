@@ -1,13 +1,21 @@
-import MainCard from 'ui-component/cards/MainCard';
+// material-ui
+import React, { useState } from 'react';
 import { Grid } from '@mui/material';
+// project imports
+import MainCard from 'ui-component/cards/MainCard';
+// import WorkFlow from './workFlow';
+// import Test from './reactFlowTest';
+// import Custom from './indexCustom';
 import DnDFlow from './workFlow/dragAndDrop';
-import { useState } from 'react';
-import { DataGrid } from '@mui/x-data-grid';
-import { columns, rows } from './utils';
+import Tabla from './workFlow/tabla/tabla';
+import SubCard from 'ui-component/cards/SubCard';
+//Proyecto mainCard
+import SecondaryAction from 'ui-component/cards/CardSecondaryAction';
+//Import Icons
+import PaymentsIcon from '@mui/icons-material/Payments';
 
 // ==============================|| SAMPLE PAGE ||============================== //
-
-const InteligenciaMaquina = () => {
+function InteligenciaPayments() {
   const [editionActive, setEditionActive] = useState(false);
   const [flowById, setFlowById] = useState([]);
 
@@ -16,35 +24,28 @@ const InteligenciaMaquina = () => {
     setFlowById(datosFlowById);
   };
   console.log('Data from tabla:', flowById);
-  console.log(handleDataFlowById)
   //estado para click de edicion
 
   //manejador de estado de edicion desde tabla
   const handleEditionActive = () => {
     setEditionActive(true);
   };
-  console.log(handleEditionActive)
   console.log('estado de edicion :', editionActive);
-
+  //fin estados
   return (
+    <MainCard
+      title="Inteligencia Maquina"
+      secondary={<SecondaryAction title="Payments" icon={<PaymentsIcon fontSize="small" id="workflow" />} />}
+    >
+      <DnDFlow editOn={editionActive} setEditionActive={setEditionActive} />
 
-    
-    <Grid container spacing={2}>
-    <Grid item xs={12}>
-      <MainCard title="Sales Machine Flow">
-        <DnDFlow editOn={editionActive} editionActive={editionActive} setEditionActive={setEditionActive} />
-      </MainCard>
-    </Grid>
-    <Grid item xs={12}>
-      <MainCard title="Repositorio">
-        <DataGrid
-          columns={columns}
-          rows={rows}/>
-      </MainCard>
-    </Grid>
-  </Grid>
+      <SubCard title="Repositorio de Arbol Risk Tier">
+        <Grid>
+          <Tabla dataFlow={handleDataFlowById} onClick={handleEditionActive} />
+        </Grid>
+      </SubCard>
+    </MainCard>
   );
-
 }
 
-export default InteligenciaMaquina
+export default InteligenciaPayments;

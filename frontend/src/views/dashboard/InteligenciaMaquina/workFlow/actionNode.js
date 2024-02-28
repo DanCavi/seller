@@ -5,7 +5,7 @@ import { Handle, Position } from 'reactflow';
 //Style
 import { useTheme } from '@mui/material/styles';
 //Icon
-import { IconCircleX, IconPuzzle } from '@tabler/icons-react';
+import { IconCircleX, IconPuzzle } from '@tabler/icons';
 
 const ActionNode = ({ isConnectable }) => {
   const theme = useTheme();
