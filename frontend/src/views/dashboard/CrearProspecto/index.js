@@ -1,5 +1,7 @@
 // material-ui
-import { Button, Grid, TextField } from '@mui/material';
+import { InputLabel } from '@material-ui/core';
+import { Button, Grid } from '@mui/material';
+import Input from 'ui-component/Input/Input';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
@@ -10,20 +12,12 @@ const CrearProspecto = () => (
   <MainCard title="Validar Prospecto">
     <Grid container spacing={2}>
       <Grid item xs={6}>
-        <TextField
-          size='small'
-          fullWidth
-          label="Nombre"
-          sx={{ mb: 2 }}/>
-        <TextField
-          size='small'
-          fullWidth
-          label="Teléfono"
-          sx={{ mb: 2 }}/>
-        <TextField
-          size='small'
-          fullWidth
-          label="Nacionalidad"/>
+        <InputLabel>Nombre</InputLabel>
+        <Input />
+        <InputLabel>Telefono</InputLabel>
+        <Input />
+        <InputLabel>Nacionalidad</InputLabel>
+        <Input />
         <Button
           sx={{ mt: 2 }}
           variant="contained"
@@ -34,21 +28,12 @@ const CrearProspecto = () => (
         </Button>
       </Grid>
       <Grid item xs={6}>
-        <TextField
-          size='small'
-          fullWidth
-          label="Apellido"
-          sx={{ mb: 2 }}/>
-        <TextField
-          size='small'
-          fullWidth
-          label="DNI"
-          sx={{ mb: 2 }}/>
-        <TextField
-          size='small'
-          fullWidth
-          label="Correo"
-          sx={{ mb: 2 }}/>
+        <InputLabel>Apellido</InputLabel>
+        <Input />
+        <InputLabel>Dni</InputLabel>
+        <Input />
+        <InputLabel>Correo</InputLabel>
+        <Input />
       </Grid>
     </Grid>
 

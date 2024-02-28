@@ -2,7 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 import json
 from routes.profiles.route_perfiles import route_get_perfiles
-from controllers.users.usuarios import getUsers, getUser
+from controllers.usuarios.usuarios import getUsers, getUser
 from routes.prospectos.route_prospectos import route_get_prospecto, route_get_prospectos
 
 app = Flask(__name__)

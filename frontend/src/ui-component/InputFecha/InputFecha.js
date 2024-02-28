@@ -15,7 +15,7 @@ function InputFecha({ onChange, value }) {
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DatePicker
           className="myDatePicker "
-          sx={{ width: '100%' }}
+          sx={{ width: '100%', mt:1, mb: 1 }}
           defaultValue={dayjs('2022-04-17')}
           slotProps={{ textField: { size: 'small' } }}
           value={value}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 //import Icons
@@ -27,9 +27,9 @@ import MuiAlert from '@mui/material/Alert';
 import CustomNoRowsOverlay from 'ui-component/NoRows/noRows';
 // import url from 'baseUrl';
 
-const URIGETFLOWS = '/dashboard/inteligencia/get-all-flows';
-const GETFLOWBYID = '/dashboard/inteligencia/flow/';
-const URIPROCESARFLOW = '/dashboard/inteligencia/ejecutar-workflow/';
+// const URIGETFLOWS = '/dashboard/inteligencia/get-all-flows';
+// const GETFLOWBYID = '/dashboard/inteligencia/flow/';
+// const URIPROCESARFLOW = '/dashboard/inteligencia/ejecutar-workflow/';
 // const URIEDITBYID = 'http://localhost:3300/dashboard/inteligencia/edit-flow/<int:id>';
 const URIDELETEBYID = '/dashboard/inteligencia/delete-flow/';
 
@@ -37,7 +37,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export default function FullFeaturedCrudGrid({ dataFlow, onClick }) {
+export default function FullFeaturedCrudGrid(/* { dataFlow, onClick } */) {
   const [rows, setRows] = useState([]);
   const [rowModesModel, setRowModesModel] = useState({});
   const [openConectar, setOpenConectar] = useState(false);

@@ -1,4 +1,4 @@
-import { Button, Grid, InputLabel, MenuItem, TextField, Select, Typography, Table, TableHead, TableRow, TableCell } from '@mui/material';
+import { Button, Grid, InputLabel, Typography, Table, TableHead, TableRow, TableCell } from '@mui/material';
 import { IconCopy, IconDeviceFloppy, IconCloudUpload } from '@tabler/icons-react';
 import { styled } from '@mui/material/styles';
 import MainCard from 'ui-component/cards/MainCard';
@@ -8,6 +8,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import { columns } from './utils/utils';
 import { useEffect, useState } from 'react';
 import SelectStandar from 'ui-component/Select/Select';
+import Input from 'ui-component/Input/Input';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -18,7 +19,7 @@ const VisuallyHiddenInput = styled('input')({
   bottom: 0,
   left: 0,
   whiteSpace: 'nowrap',
-  width: 1,
+  width: 1
 });
 // ==============================|| SAMPLE PAGE ||============================== //
 
@@ -48,23 +49,23 @@ const AdministradorScript = () => {
             </Grid>
             <Grid item xs={4}>
               <InputLabel>Nombre</InputLabel>
-              <TextField fullWidth />
+              <Input />
             </Grid>
             <Grid item xs={4}>
               <InputLabel>Funnel Comercial</InputLabel>
-              <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
+              <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
             </Grid>
             <Grid item xs={4}>
               <InputLabel>Canal</InputLabel>
-              <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
+              <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
             </Grid>
             <Grid item xs={7}>
               <InputLabel>Cc</InputLabel>
-              <TextField fullWidth />
+              <Input />{' '}
             </Grid>
             <Grid item xs={5}>
               <InputLabel>Cco</InputLabel>
-              <TextField fullWidth />
+              <Input />{' '}
             </Grid>
             <Grid item xs={3}>
               <InputLabel>Fecha Inicio Vigencia:</InputLabel>
@@ -76,34 +77,27 @@ const AdministradorScript = () => {
             </Grid>
             <Grid item xs={3}>
               <InputLabel>Campaña</InputLabel>
-              <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
+              <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
             </Grid>
             <Grid item xs={3}>
               <InputLabel>Estado</InputLabel>
-              <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
+              <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
             </Grid>
             <Grid item xs={12}>
               <SubCard title="Archivos Adjuntos" sx={{ mb: 2 }}>
-              <Button
-                fullWidth
-                sx={{ mb: 2 }}
-                component="label"
-                variant="contained"
-                tabIndex={-1}
-                startIcon={<IconCloudUpload />}
-              >
-                Elegir archivo
-                <VisuallyHiddenInput type="file" />
-              </Button>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Nombre</TableCell>
-                    <TableCell>Creada</TableCell>
-                    <TableCell>Acciones</TableCell>
-                  </TableRow>
-                </TableHead>
-              </Table>
+                <Button fullWidth sx={{ mb: 2 }} component="label" variant="contained" tabIndex={-1} startIcon={<IconCloudUpload />}>
+                  Elegir archivo
+                  <VisuallyHiddenInput type="file" />
+                </Button>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Nombre</TableCell>
+                      <TableCell>Creada</TableCell>
+                      <TableCell>Acciones</TableCell>
+                    </TableRow>
+                  </TableHead>
+                </Table>
               </SubCard>
             </Grid>
             <Grid item xs={12}>
@@ -111,17 +105,17 @@ const AdministradorScript = () => {
                 <Grid container spacing={2}>
                   <Grid item xs={4}>
                     <InputLabel>Tabla</InputLabel>
-                    <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
+                    <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
                   </Grid>
                   <Grid item xs={4}>
                     <InputLabel>Variable</InputLabel>
-                    <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
+                    <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
                   </Grid>
                   <Grid item xs={4}>
                     <InputLabel>Shortcode</InputLabel>
                     <Grid container spacing={1}>
                       <Grid item xs={6}>
-                        <TextField fullWidth inputProps={{ readOnly: true }} />
+                        <Input />{' '}
                       </Grid>
                       <Grid item xs={6}>
                         <Button variant="contained" startIcon={<IconCopy />}>
@@ -133,11 +127,9 @@ const AdministradorScript = () => {
                 </Grid>
               </SubCard>
               <InputLabel>Header</InputLabel>
-              <TextField fullWidth multiline rows={6} />
-              <InputLabel>Cuerpo</InputLabel>
-              <TextField fullWidth multiline rows={6} />
-              <InputLabel>Footer</InputLabel>
-              <TextField fullWidth multiline rows={6} />
+              <Input /> <InputLabel>Cuerpo</InputLabel>
+              <Input /> <InputLabel>Footer</InputLabel>
+              <Input />{' '}
             </Grid>
           </Grid>
         </MainCard>
@@ -146,13 +138,13 @@ const AdministradorScript = () => {
         <MainCard title="Repositorio de Script">
           <DataGrid
             initialState={{
-             pagination: {
-               paginationModel: { page: 0, pageSize: 5 },
-             }
-           }}
-            getRowHeight={() => 'auto'} 
-            columns={columns} 
-            rows={rows} 
+              pagination: {
+                paginationModel: { page: 0, pageSize: 5 }
+              }
+            }}
+            getRowHeight={() => 'auto'}
+            columns={columns}
+            rows={rows}
           />
         </MainCard>
       </Grid>

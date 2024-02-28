@@ -25,9 +25,9 @@ function SelectStandar({ datos, value, onChange }) {
   return (
     <div>
       <ThemeProvider theme={theme}>
-        <FormControl sx={{ m: 0, minWidth: '100%', backgroundColor: '#FAFAFA' }} size="small">
+        <FormControl sx={{ mt: 1, mb: 1, minWidth: '100%', backgroundColor: '#FAFAFA' }} size="small">
           {/* <InputLabel id="demo-select-small-label">Cliente</InputLabel> */}
-          <Select displayEmpty inputProps={{ 'aria-label': 'Without label' }} value={value} onChange={onChange} size="small">
+          <Select displayEmpty inputProps={{ 'aria-label': 'Without label' }} value={value} onChange={onChange} size="small" sx={{  }}>
             <MenuItem value="">
               <em style={{ color: '#9E9E9E' }}>Seleccione</em>
             </MenuItem>

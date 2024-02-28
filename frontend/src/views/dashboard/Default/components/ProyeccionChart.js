@@ -7,6 +7,7 @@ class ProyeccionChart extends Component {
 
     this.state = {
       options: {
+        colors: ['#2196F3', '#673AB7'],
         title: {
           text: '% Proyección Mensual de cumplimiento de Presupuesto',
           align: 'center'

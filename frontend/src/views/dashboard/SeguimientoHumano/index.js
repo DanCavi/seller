@@ -29,6 +29,12 @@ const SeguimientoHumano = () => {
       rows={rows}
       columns={columns}
       getRowId={(row) => row.ID}
+      initialState={{
+        pagination: {
+          paginationModel: { pageSize: 5 },
+        }
+      }}
+      pageSizeOptions={[5, 10, 20]}
       />
     </MainCard>
   );

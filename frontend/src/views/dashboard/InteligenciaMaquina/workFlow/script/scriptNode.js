@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, Grid, Card, CardContent, Avatar, IconButton } from '@mui/material';
 import { Handle, Position } from 'reactflow';
 
@@ -8,13 +8,13 @@ import { useTheme } from '@mui/material/styles';
 import { IconCircleX, IconScript } from '@tabler/icons';
 
 //AXIOS
-import axios from 'axios';
+// import axios from 'axios';
 
 //BASE URL
 // import url from 'baseUrl';
 
 // console.log('USER ID ', url.USERID);
-const URI = '/dashboard/inteligencia/get-script-flow/';
+// const URI = '/dashboard/inteligencia/get-script-flow/';
 const Script = ({ isConnectable, id, data }) => {
   //==================================|| Get Script ||====================================//
   // const [scripts, setScript] = useState([]);

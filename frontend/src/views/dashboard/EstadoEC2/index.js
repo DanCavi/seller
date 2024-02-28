@@ -1,7 +1,8 @@
 // material-ui
-import { FormControl, Typography, TextField, Grid, Button, MenuItem } from '@mui/material';
+import { FormControl, Typography, Grid, Button } from '@mui/material';
 import { Box } from '@mui/system';
 import { IconLink } from '@tabler/icons-react';
+import SelectStandar from 'ui-component/Select/Select';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
@@ -14,13 +15,7 @@ const EstadoEC2 = () => (
       <Grid item xs={6}>
         <Typography variant="body1">
           <FormControl fullWidth>
-            <TextField
-            select
-            label = "Select">
-              <MenuItem value='Test'>Test</MenuItem>
-              <MenuItem value='Test2'>Test2</MenuItem>
-              <MenuItem value='Test3'>Test3</MenuItem>
-            </TextField>
+            <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
           </FormControl>
         </Typography>
       </Grid>

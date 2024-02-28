@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import Chart from 'react-apexcharts';
 import CanvasJSReact from '@canvasjs/react-charts';
 
-var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 class ProspectosChart extends Component {
@@ -49,8 +47,6 @@ class ProspectosChart extends Component {
   //   )
   // }
   render() {
-    var dataPoint;
-    var total;
     const options = {
       animationEnabled: true,
       title:{

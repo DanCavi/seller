@@ -1,11 +1,11 @@
-import { Grid, InputLabel, Select, TextField, MenuItem, Button } from '@mui/material';
+import { Grid, InputLabel, Button } from '@mui/material';
 import { IconPlus } from '@tabler/icons-react';
 import MainCard from 'ui-component/cards/MainCard';
 import { DataGrid } from '@mui/x-data-grid';
 import { columns, rows } from './utils/utils';
 import InputFecha from 'ui-component/InputFecha/InputFecha';
 import SelectStandar from 'ui-component/Select/Select';
-
+import Input from 'ui-component/Input/Input';
 
 const PlantillaCorreo = () => {
   return (
@@ -13,11 +13,11 @@ const PlantillaCorreo = () => {
       <Grid container spacing={2}>
         <Grid item xs={2}>
           <InputLabel>Nombre</InputLabel>
-          <TextField size="small" fullWidth />
+          <Input />{' '}
         </Grid>
         <Grid item xs={2}>
           <InputLabel>Correo</InputLabel>
-          <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
+          <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
         </Grid>
         <Grid item xs={2.5}>
           <InputLabel>Fecha Inicio</InputLabel>
@@ -28,13 +28,12 @@ const PlantillaCorreo = () => {
           <InputFecha />
         </Grid>
         <Grid item xs={3} sx={{ mt: 2.4 }}>
-          <Button variant="contained" fullWidth startIcon={<IconPlus />}>Agregar plantilla</Button>
+          <Button variant="contained" fullWidth startIcon={<IconPlus />}>
+            Agregar plantilla
+          </Button>
         </Grid>
         <Grid item xs={12}>
-          <DataGrid 
-            columns={columns}
-            rows={rows}
-          />
+          <DataGrid columns={columns} rows={rows} />
         </Grid>
       </Grid>
     </MainCard>

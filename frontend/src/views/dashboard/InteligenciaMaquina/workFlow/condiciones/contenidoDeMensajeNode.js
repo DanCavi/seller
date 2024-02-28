@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Card, CardContent, Typography, IconButton, Avatar, Button } from '@mui/material';
 import { Handle, Position } from 'reactflow';
+import Input from 'ui-component/Input/Input';
 
 //Style
 import { useTheme } from '@mui/material/styles';
@@ -153,7 +154,7 @@ const ConditionContenidoDelMensaje = ({ isConnectable, id, data }) => {
           </Grid>
           <Grid container direction="row" p={1}>
             <Grid item>
-              <input />
+              <Input />
             </Grid>
           </Grid>
         </CardContent>

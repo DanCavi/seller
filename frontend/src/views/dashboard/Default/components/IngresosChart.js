@@ -7,6 +7,7 @@ class IngresosChart extends Component {
 
     this.state = {
       options: {
+        colors: ['#2196F3', '#673AB7'],
         title: {
           text: 'Venta Mensual Montos Real',
           align: 'center'

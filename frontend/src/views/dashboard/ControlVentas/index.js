@@ -1,10 +1,11 @@
 // material-ui
-import { Button, Grid, TextField } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { IconFileDownload } from '@tabler/icons-react';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
+import Input from 'ui-component/Input/Input';
 
 const column = [
   {
@@ -83,11 +84,7 @@ const ControlVentas = () => (
         </Button>
       </Grid>
       <Grid item xs={4}>
-        <TextField
-          fullWidth
-          label="Buscar"
-          sx={{ mb: 2 }}
-        />
+        <Input />
       </Grid>
     </Grid>
     <DataGrid

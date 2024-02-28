@@ -1,5 +1,5 @@
 // project imports
-import { Button, Grid, InputLabel, MenuItem, Select, Typography } from '@mui/material';
+import { Button, Grid, InputLabel, Typography } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { IconFilter, IconRefresh } from '@tabler/icons-react';
 import MainCard from 'ui-component/cards/MainCard';

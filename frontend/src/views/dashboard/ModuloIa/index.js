@@ -1,6 +1,7 @@
 // material-ui
-import { Button, Grid, InputLabel, TextField } from '@mui/material';
+import { Button, Grid, InputLabel } from '@mui/material';
 import MainCard from 'ui-component/cards/MainCard';
+import Input from 'ui-component/Input/Input';
 
 import { IconPlus } from '@tabler/icons-react';
 import { DataGrid } from '@mui/x-data-grid';
@@ -49,7 +50,7 @@ const ModuloIa = () => (
         <Grid container direction="column" spacing={2} alignItems={'center'} item xs={12}>
           <Grid item xs={6}>
             <InputLabel>Ingrese el token</InputLabel>
-            <TextField />
+            <Input />{' '}
           </Grid>
           <Grid item xs={6}>
             <Button variant="contained">Validar Token</Button>
@@ -62,7 +63,7 @@ const ModuloIa = () => (
             Nombre del producto
           </Grid>
           <Grid item xs={3}>
-            <TextField fullWidth />
+            <Input />{' '}
           </Grid>
           <Grid item align={'center'} xs={3}>
             <Button variant="contained" startIcon={<IconPlus />}>

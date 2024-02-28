@@ -1,6 +1,6 @@
 function getFechaGestion(params) {
   if (params.row.GESTION != null) {
-    return params.row.GESTION.FECHA_GESTION.slice(0, 10);
+    return params.row.GESTION.FECHA_GESTION;
   }
   return '-';
 }

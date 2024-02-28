@@ -7,6 +7,7 @@ class AnalisisChart extends Component {
 
     this.state = {
       options: {
+        colors: ['#2196F3', '#673AB7'],
         title: {
           text: 'Real v/s Presupuesto',
           align: 'center'

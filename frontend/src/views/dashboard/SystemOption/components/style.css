@@ -1,0 +1,20 @@
+.mobileTimePickerContainer {
+  /* Estilos para el contenedor del MobileTimePicker */
+  border-radius: 0;
+}
+
+.mobileTimePickerHeader {
+  /* Estilos para el encabezado del MobileTimePicker */
+  border-radius: 0;
+}
+
+.mobileTimePickerClock {
+  /* Estilos para el reloj del MobileTimePicker */
+  border-radius: 0;
+}
+
+.myDatePicker fieldset.MuiOutlinedInput-notchedOutline {
+  border-radius: 0%;
+  
+
+}

@@ -1,6 +1,7 @@
-import { Button, Grid, Select, MenuItem, TextField, Typography } from '@mui/material';
+import { Button, Grid, Typography } from '@mui/material';
 import { IconDeviceFloppy } from '@tabler/icons-react';
 import SelectStandar from 'ui-component/Select/Select';
+import Input from 'ui-component/Input/Input';
 
 const Semaforo = () => {
   return (
@@ -9,20 +10,7 @@ const Semaforo = () => {
         Formato de tiempo
       </Grid>
       <Grid item xs={3}>
-      <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
-      </Grid>
-      <Grid item xs={3}>
-        <Button variant="contained" fullWidth startIcon={<IconDeviceFloppy />}>
-          Guardar
-        </Button>
-        </Grid>
-        <Grid item xs={6}>
-        <Typography>
-          Luz Amarilla &lt;=
-        </Typography>
-      </Grid>
-      <Grid item xs={3}>
-        <TextField size="small" fullWidth />
+        <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
       </Grid>
       <Grid item xs={3}>
         <Button variant="contained" fullWidth startIcon={<IconDeviceFloppy />}>
@@ -30,12 +18,10 @@ const Semaforo = () => {
         </Button>
       </Grid>
       <Grid item xs={6}>
-        <Typography>
-          Luz Roja &lt;=
-        </Typography>
+        <Typography>Luz Amarilla &lt;=</Typography>
       </Grid>
       <Grid item xs={3}>
-        <TextField size="small" fullWidth />
+        <Input />
       </Grid>
       <Grid item xs={3}>
         <Button variant="contained" fullWidth startIcon={<IconDeviceFloppy />}>
@@ -43,19 +29,27 @@ const Semaforo = () => {
         </Button>
       </Grid>
       <Grid item xs={6}>
-        <Typography>
-          IA &lt;=
-        </Typography>
+        <Typography>Luz Roja &lt;=</Typography>
       </Grid>
       <Grid item xs={3}>
-        <TextField size="small" fullWidth />
+        <Input />{' '}
       </Grid>
       <Grid item xs={3}>
         <Button variant="contained" fullWidth startIcon={<IconDeviceFloppy />}>
           Guardar
         </Button>
       </Grid>
-      
+      <Grid item xs={6}>
+        <Typography>IA &lt;=</Typography>
+      </Grid>
+      <Grid item xs={3}>
+        <Input />{' '}
+      </Grid>
+      <Grid item xs={3}>
+        <Button variant="contained" fullWidth startIcon={<IconDeviceFloppy />}>
+          Guardar
+        </Button>
+      </Grid>
     </Grid>
   );
 };
