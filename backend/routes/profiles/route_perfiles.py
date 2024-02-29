@@ -1,6 +1,6 @@
 from flask import Blueprint
 
-from controllers.profiles.perfiles import getPerfiles
+from controllers.perfiles_usuario.perfiles import getPerfiles
 
 route_get_perfiles = Blueprint("get_perfiles", __name__)
 

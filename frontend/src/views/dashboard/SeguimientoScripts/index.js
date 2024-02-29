@@ -10,41 +10,41 @@ import { DataGrid } from '@mui/x-data-grid';
 const columns = [
   {
     field: 'topic',
-    headerName: 'Topic',
+    headerName: 'Topic'
   },
   {
     field: 'engaged_conversations',
-    headerName: 'Engaged Conversations',
+    headerName: 'Engaged Conversations'
   },
   {
     field: 'volume',
-    headerName: 'Volume',
+    headerName: 'Volume'
   },
   {
     field: 'volume_change',
-    headerName: 'Volume Change',
+    headerName: 'Volume Change'
   },
   {
     field: 'avg_conversation',
-    headerName: 'Avg. Conversation handle time (min)',
+    headerName: 'Avg. Conversation handle time (min)'
   },
   {
     field: 'avg_csat',
-    headerName: 'Avg. CSAT',
+    headerName: 'Avg. CSAT'
   },
   {
     field: 'csat_impact',
-    headerName: 'CSAT Impact',
+    headerName: 'CSAT Impact'
   },
   {
     field: 'avg_sentiment',
-    headerName: 'Avg. Sentiment',
+    headerName: 'Avg. Sentiment'
   },
   {
     field: 'sentiment_impact',
-    headerName: 'Sentiment Impact',
+    headerName: 'Sentiment Impact'
   }
-]
+];
 
 const rows = [
   {
@@ -71,7 +71,7 @@ const rows = [
     avg_sentiment: '10',
     sentiment_impact: '10%'
   }
-]
+];
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
@@ -80,11 +80,7 @@ const SeguimientoScripts = () => {
     <MainCard title="Motor de Seguimiento">
       <Selectors />
       <Avg />
-      <DataGrid
-        rows={rows}
-        columns={columns}
-      />
-
+      <DataGrid autoHeight rows={rows} columns={columns} />
     </MainCard>
   );
 };

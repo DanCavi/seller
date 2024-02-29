@@ -1,14 +1,12 @@
-import { DataGrid } from "@mui/x-data-grid"
-import MainCard from "ui-component/cards/MainCard"
-
+import { DataGrid } from '@mui/x-data-grid';
+import MainCard from 'ui-component/cards/MainCard';
 
 const ListReglas = () => {
-
   const columns = [
     {
       field: 'ORDEN_TUBO',
       headerName: 'Orden Tubo',
-      flex: .5
+      flex: 0.5
     },
     {
       field: 'NOMBRE',
@@ -18,7 +16,7 @@ const ListReglas = () => {
     {
       field: 'CREADA',
       headerName: 'Creada',
-      flex: 1    
+      flex: 1
     },
     {
       field: 'REGLAS',
@@ -28,9 +26,9 @@ const ListReglas = () => {
     {
       field: 'ACCIONES',
       headerName: 'Acciones',
-      flex: .5
+      flex: 0.5
     }
-  ]
+  ];
 
   const rows = [
     {
@@ -40,16 +38,13 @@ const ListReglas = () => {
       CREADA: 'Creada',
       REGLAS: 1
     }
-  ]
+  ];
 
   return (
     <MainCard title="Listado de reglas">
-      <DataGrid
-        columns={columns}
-        rows={rows}
-      />
+      <DataGrid autoHeight columns={columns} rows={rows} />
     </MainCard>
-  )
-}
+  );
+};
 
-export default ListReglas
+export default ListReglas;

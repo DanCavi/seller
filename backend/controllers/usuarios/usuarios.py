@@ -1,6 +1,7 @@
 from database.database import getSession
 from models.models import User
 from sqlalchemy import select
+import json
 
 
 
@@ -14,7 +15,7 @@ def getUsers():
             result = [person.to_dict() for person in result]
             return result
     except Exception as e:
-        return print(f"Error: {e}")
+        return json.dumps({'message': 'No connection to db '})
 
     
 def getUser(id):
@@ -26,4 +27,4 @@ def getUser(id):
             result = result.to_dict()
         return result
     except Exception as e:
-        return print(f"Error: {e}")
+        return json.dumps({'message': 'No connection to db '})

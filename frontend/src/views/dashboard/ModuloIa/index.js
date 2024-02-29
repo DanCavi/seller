@@ -70,7 +70,7 @@ const ModuloIa = () => (
               Guardar
             </Button>
           </Grid>
-          <DataGrid sx={{ mt: 2 }} rows={rows} columns={columns} />
+          <DataGrid autoHeight sx={{ mt: 2 }} rows={rows} columns={columns} />
         </Grid>
       </MainCard>
     </Grid>

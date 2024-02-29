@@ -17,7 +17,7 @@ const VisuallyHiddenInput = styled('input')({
   bottom: 0,
   left: 0,
   whiteSpace: 'nowrap',
-  width: 1,
+  width: 1
 });
 
 const rows = [
@@ -27,9 +27,9 @@ const rows = [
     apellido: 'test',
     correo: 'test',
     telefono: 'test',
-    Nacionalidad: 'test',
+    Nacionalidad: 'test'
   }
-]
+];
 
 const columns = [
   {
@@ -57,37 +57,31 @@ const columns = [
     headerName: 'Nacionalidad',
     width: 200
   }
-]
+];
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
 const CargaDeDatos = () => (
   <MainCard title="Modulo de Cargas">
     <InputLabel>Seleccione canal para subir datos</InputLabel>
-    <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
+    <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
     <InputLabel>Seleccione la data cargada</InputLabel>
-    <SelectStandar datos={["hola"]} value={'3'} onChange={() => {}}/>
-    <Button
-      fullWidth
-      sx={{ mb: 2 }}
-      component="label"
-      variant="contained"
-      tabIndex={-1}
-      startIcon={<IconCloudUpload />}
-    >
+    <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+    <Button fullWidth sx={{ mb: 2 }} component="label" variant="contained" tabIndex={-1} startIcon={<IconCloudUpload />}>
       Carga de datos
       <VisuallyHiddenInput type="file" />
     </Button>
-    <DataGrid
-      rows={rows}
-      columns={columns}
-      sx={{ mb: 2 }}
-    />
+    <DataGrid autoHeight autoHeight rows={rows} columns={columns} sx={{ mb: 2 }} />
     <Button
-      variant='contained'
+      variant="contained"
       fullWidth
-      onClick={() => { alert('Carga de datos exitosa') }}>Cargar</Button>
+      onClick={() => {
+        alert('Carga de datos exitosa');
+      }}
+    >
+      Cargar
+    </Button>
   </MainCard>
 );
 
-export default CargaDeDatos
+export default CargaDeDatos;

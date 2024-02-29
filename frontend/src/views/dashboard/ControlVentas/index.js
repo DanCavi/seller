@@ -10,37 +10,37 @@ import Input from 'ui-component/Input/Input';
 const column = [
   {
     field: 'ejecutivo',
-    headerName: 'Ejecutivo',    
+    headerName: 'Ejecutivo'
   },
   {
     field: 'comision',
-    headerName: 'Comisión',
+    headerName: 'Comisión'
   },
   {
     field: 'nombre_cliente',
-    headerName: 'Nombre Cliente',
+    headerName: 'Nombre Cliente'
   },
   {
     field: 'rut_cliente',
-    headerName: 'Rut Cliente',
+    headerName: 'Rut Cliente'
   },
   {
     field: 'nombre_contacto',
-    headerName: 'Nombre Contacto',
+    headerName: 'Nombre Contacto'
   },
   {
     field: 'fecha_cierre',
-    headerName: 'Fecha Cierre',
+    headerName: 'Fecha Cierre'
   },
   {
     field: 'producto',
-    headerName: 'Producto',
+    headerName: 'Producto'
   },
   {
     field: 'estado_negocio',
-    headerName: 'Estado Negocio',
+    headerName: 'Estado Negocio'
   }
-]
+];
 
 const row = [
   {
@@ -52,7 +52,7 @@ const row = [
     nombre_contacto: 'test',
     fecha_cierre: 'test',
     producto: 'test',
-    estado_negocio: 'test',
+    estado_negocio: 'test'
   },
   {
     id: 2,
@@ -63,11 +63,9 @@ const row = [
     nombre_contacto: 'test2',
     fecha_cierre: 'test2',
     producto: 'test2',
-    estado_negocio: 'test2',
+    estado_negocio: 'test2'
   }
-]
-
-
+];
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
@@ -76,10 +74,13 @@ const ControlVentas = () => (
     <Grid container spacing={2}>
       <Grid item xs={8}>
         <Button
-          onClick={() => {alert('Descargando')}}
+          onClick={() => {
+            alert('Descargando');
+          }}
           variant="contained"
           startIcon={<IconFileDownload />}
-          sx={{ mb: 2 }}>
+          sx={{ mb: 2 }}
+        >
           Descargar
         </Button>
       </Grid>
@@ -88,13 +89,16 @@ const ControlVentas = () => (
       </Grid>
     </Grid>
     <DataGrid
+      
+      autoHeight
       columns={column}
       rows={row}
       disableColumnFilter
       disableColumnMenu
       disableColumnSelector
-      disableDensitySelector/>
+      disableDensitySelector
+    />
   </MainCard>
 );
 
-export default ControlVentas
+export default ControlVentas;

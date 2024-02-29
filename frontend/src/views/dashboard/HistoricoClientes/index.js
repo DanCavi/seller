@@ -25,9 +25,9 @@ const columns = [
   {
     field: 'opcion',
     headerName: 'Opción',
-    flex: .3
+    flex: 0.3
   }
-]
+];
 
 const rows = [
   {
@@ -36,7 +36,7 @@ const rows = [
     razon_social: 'test',
     fecha_creacion: 'test',
     opcion: {
-      icon: <IconEye/>
+      icon: <IconEye />
     }
   },
   {
@@ -45,24 +45,20 @@ const rows = [
     razon_social: 'test',
     fecha_creacion: 'test',
     opcion: {
-      icon: <IconEye/>
+      icon: <IconEye />
     }
   }
-]
+];
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
 const HistoricoClientes = () => (
   <MainCard title="">
-    <Button
-      variant="contained"
-      sx={{ mb: 2 }}>
+    <Button variant="contained" sx={{ mb: 2 }}>
       Agregar nuevo cliente
     </Button>
-    <DataGrid
-      columns={columns}
-      rows={rows}/>
+    <DataGrid autoHeight columns={columns} rows={rows} />
   </MainCard>
 );
 
-export default HistoricoClientes
+export default HistoricoClientes;

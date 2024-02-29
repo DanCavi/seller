@@ -1,8 +1,20 @@
-import { DataGrid } from "@mui/x-data-grid";
-
+import { DataGrid } from '@mui/x-data-grid';
 
 const GridMetas = () => {
-  const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+  const meses = [
+    'Enero',
+    'Febrero',
+    'Marzo',
+    'Abril',
+    'Mayo',
+    'Junio',
+    'Julio',
+    'Agosto',
+    'Septiembre',
+    'Octubre',
+    'Noviembre',
+    'Diciembre'
+  ];
 
   const rows = [
     {
@@ -10,7 +22,7 @@ const GridMetas = () => {
       EJECUTIVO: 'Ejecutivo 1',
       ENERO: 2000
     }
-  ]
+  ];
 
   const columns = [
     {
@@ -24,19 +36,11 @@ const GridMetas = () => {
       width: 100,
       filterable: false,
       editable: true,
-      type: 'number',
-      
+      type: 'number'
     }))
-    
+  ];
 
-  ]
+  return <DataGrid autoHeight columns={columns} rows={rows} />;
+};
 
-  return (
-    <DataGrid
-      columns={columns}
-      rows={rows}
-    />
-  );
-}
-
-export default GridMetas
+export default GridMetas;

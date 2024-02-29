@@ -1,7 +1,7 @@
 // material-ui
 import { Button } from '@mui/material';
 import { IconPlus } from '@tabler/icons-react';
-import { columns }  from './utils/utils';
+import { columns } from './utils/utils';
 import { DataGrid } from '@mui/x-data-grid';
 
 // project imports
@@ -11,34 +11,40 @@ import { useEffect, useState } from 'react';
 // ==============================|| SAMPLE PAGE ||============================== //
 
 const Usuarios = () => {
-
   const array = [];
   const [rows, setRows] = useState(array);
-  
+
   const fetchRows = async () => {
     const response = await fetch('/users').then((response) => response.json());
-    
+
     setRows(response);
-    
   };
   useEffect(() => {
     fetchRows();
-  }, [])
+  }, []);
 
   return (
     <MainCard title="Lista de Usuarios">
       <Button variant="contained" startIcon={<IconPlus />}>
         Nuevo usuario
       </Button>
-      <DataGrid 
+      <DataGrid
+        autoHeight
         sx={{ mt: 2 }}
-        rows={rows} 
+        rows={rows}
         columns={columns}
         getRowId={(row) => row.USU_ID}
-
+        initialState={{
+          pagination: {
+            paginationModel: {
+              pageSize: 5
+            }
+          }
+        }}
+        pageSizeOptions={[5, 10, 20]}
       />
     </MainCard>
-  )
+  );
 };
 
 export default Usuarios;

@@ -16,5 +16,5 @@ def getPerfiles():
                 return json.dumps(profile_dict)
             return json.dumps({'message': 'No existen perfiles'})
     except Exception as e:
-        return print(f"Error: {e}")
+        return json.dumps({'message': 'No connection to db '})
     

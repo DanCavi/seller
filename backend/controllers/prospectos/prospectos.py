@@ -1,6 +1,7 @@
 from database.database import getSession
 from models.models import Prospecto
 from sqlalchemy import select
+import json
 
 
 def getProspectos():
@@ -12,7 +13,7 @@ def getProspectos():
             result = [person.to_dict() for person in result]
             return result
     except Exception as e:
-        return print(f"Error: {e}")
+        return json.dumps({'message': 'No connection to db '})
 
 def getProspecto(id):
     '''Obtiene los datos del prospecto filtrando por id'''
@@ -23,4 +24,4 @@ def getProspecto(id):
             result = result.to_dict()
         return result
     except Exception as e:
-        return print(f"Error: {e}")
+        return json.dumps({'message': 'No connection to db '})

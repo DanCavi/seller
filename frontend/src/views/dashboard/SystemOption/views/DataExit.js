@@ -1,4 +1,4 @@
-const { DataGrid } = require("@mui/x-data-grid");
+const { DataGrid } = require('@mui/x-data-grid');
 
 const DataExit = () => {
   const columns = [
@@ -10,23 +10,18 @@ const DataExit = () => {
     {
       field: 'acciones',
       headerName: 'Acciones',
-      flex: .6
+      flex: 0.6
     }
-  ]
+  ];
 
   const rows = [
     {
       id: 1,
-      perfil: 'Administrador',
+      perfil: 'Administrador'
     }
-  ]
+  ];
 
-  return (
-    <DataGrid
-      columns={columns}
-      rows={rows}
-    />
-  );
-}
+  return <DataGrid autoHeight columns={columns} rows={rows} />;
+};
 
-export default DataExit
+export default DataExit;

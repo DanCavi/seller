@@ -15,7 +15,8 @@
 //             </Button>
 //           </Grid>
 //           <Grid item xs={12}>
-//             <DataGrid rows={rows} columns={columns} />
+//             <DataGrid
+  autoHeight rows={rows} columns={columns} />
 //           </Grid>
 //         </Grid>
 //     )

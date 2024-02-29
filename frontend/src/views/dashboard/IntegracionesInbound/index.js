@@ -7,17 +7,17 @@ import MainCard from 'ui-component/cards/MainCard';
 const rows = [
   {
     id: 1,
-    name: 'Integracion 1',
+    name: 'Integracion 1'
   },
   {
     id: 2,
-    name: 'Integracion 2',
+    name: 'Integracion 2'
   },
   {
     id: 3,
-    name: 'Integracion 3',
-  },
-]
+    name: 'Integracion 3'
+  }
+];
 
 const columns = [
   {
@@ -29,15 +29,13 @@ const columns = [
     field: 'actions',
     headerName: 'Acciones'
   }
-]
+];
 // ==============================|| SAMPLE PAGE ||============================== //
 
 const IntegracionesInbound = () => (
   <MainCard title="Integraciones disponibles">
-    <DataGrid
-      rows={rows}
-      columns={columns}/>
+    <DataGrid autoHeight rows={rows} columns={columns} />
   </MainCard>
 );
 
-export default IntegracionesInbound
+export default IntegracionesInbound;

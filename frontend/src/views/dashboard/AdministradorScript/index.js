@@ -129,7 +129,7 @@ const AdministradorScript = () => {
               <InputLabel>Header</InputLabel>
               <Input /> <InputLabel>Cuerpo</InputLabel>
               <Input /> <InputLabel>Footer</InputLabel>
-              <Input />{' '}
+              <Input />
             </Grid>
           </Grid>
         </MainCard>
@@ -137,6 +137,7 @@ const AdministradorScript = () => {
       <Grid item xs={12}>
         <MainCard title="Repositorio de Script">
           <DataGrid
+            autoHeight
             initialState={{
               pagination: {
                 paginationModel: { page: 0, pageSize: 5 }

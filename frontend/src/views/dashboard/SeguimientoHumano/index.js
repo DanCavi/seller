@@ -9,35 +9,33 @@ import MainCard from 'ui-component/cards/MainCard';
 // ==============================|| SAMPLE PAGE ||============================== //
 
 const SeguimientoHumano = () => {
-
   const array = [];
   const [rows, setRows] = useState(array);
-  
+
   const fetchRows = async () => {
     const response = await fetch('/prospectos').then((response) => response.json());
     setRows(response);
-    
   };
   useEffect(() => {
     fetchRows();
-  }, [])
+  }, []);
 
   return (
-
     <MainCard title="Prospectos">
-    <DataGrid
-      rows={rows}
-      columns={columns}
-      getRowId={(row) => row.ID}
-      initialState={{
-        pagination: {
-          paginationModel: { pageSize: 5 },
-        }
-      }}
-      pageSizeOptions={[5, 10, 20]}
+      <DataGrid
+        autoHeight
+        rows={rows}
+        columns={columns}
+        getRowId={(row) => row.ID}
+        initialState={{
+          pagination: {
+            paginationModel: { pageSize: 5 }
+          }
+        }}
+        pageSizeOptions={[5, 10, 20]}
       />
     </MainCard>
   );
-}
+};
 
-export default SeguimientoHumano
+export default SeguimientoHumano;

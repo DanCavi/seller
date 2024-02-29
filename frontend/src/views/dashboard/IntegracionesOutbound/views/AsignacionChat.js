@@ -24,7 +24,7 @@ const AsignacionChat = () => {
           </Button>
         </Grid>
         <Grid item xs={12}>
-          <DataGrid columns={columns} rows={rows} />
+          <DataGrid autoHeight columns={columns} rows={rows} />
         </Grid>
       </Grid>
     </MainCard>
