@@ -2,7 +2,7 @@ import { Dialog, DialogContent, DialogTitle } from "@material-ui/core"
 import { Button, DialogActions, DialogContentText } from "@mui/material"
 
 
-const ConfirmDialog = ({isOpen, handleClose}) => {
+const ConfirmDialog = ({isOpen, handleClose, handleDeleteClick}) => {
   return (
     <Dialog
       open={isOpen}
@@ -17,8 +17,8 @@ const ConfirmDialog = ({isOpen, handleClose}) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} variant="contained" color="warning">Confirmar</Button>
-        <Button onClick={handleClose} variant="contained" color="error">Cancelar</Button>
+        <Button onClick={handleDeleteClick} variant="contained" color="error">Confirmar</Button>
+        <Button onClick={handleClose} variant="contained" color="primary">Cancelar</Button>
       </DialogActions>
     </Dialog>
   )

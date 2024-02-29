@@ -53,9 +53,14 @@ function DataGridPerfiles() {
   };
 
   const handleDeleteClick = (PER_ID) => () => {
-    setIsOpen(true);
-    setRows(rows.filter((row) => row.PER_ID !== PER_ID));
+    setIsOpen(true)
+    
+    // setRows(rows.filter((row) => row.PER_ID !== PER_ID));
   };
+
+  const handleConfirmClick = (PER_ID) => () => {
+    setRows(rows.filter((row) => row.PER_ID !== PER_ID));
+  }
 
   const handleCancelClick = (PER_ID) => () => {
     setRowModesModel({
@@ -142,7 +147,7 @@ function DataGridPerfiles() {
           toolbar: { setRows, setRowModesModel }
         }}
       />
-      <ConfirmDialog isOpen={isOpen} handleClose={() => setIsOpen(false)} />
+      <ConfirmDialog isOpen={isOpen} handleClose={() => setIsOpen(false)} handleDeleteClick={handleConfirmClick} />
     </div>
   );
 }
