@@ -1,48 +1,223 @@
 // material-ui
-import { Button } from '@mui/material';
-import { IconPlus } from '@tabler/icons-react';
-import { columns } from './utils/utils';
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridActionsCellItem, GridRowEditStopReasons, GridToolbarContainer } from '@mui/x-data-grid';
+
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
+import url from 'baseUrl';
+import ConfirmDialog from 'ui-component/Confirm/ConfirmDialog';
+import { Button } from '@mui/material';
+import { IconEdit, IconLockOff, IconPlus, IconLock, IconRotate2 } from '@tabler/icons-react';
+import DialogUsuario from './components/DialogUsuario';
+
+const urlModulo = '/usuarios';
+const URIGETALL = `${url.BASE_URL}${urlModulo}`;
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
-const Usuarios = () => {
-  const array = [];
-  const [rows, setRows] = useState(array);
+function EditToolbar() {
+  // const { setRows, setRowModesModel } = props;
+  // const apiRef = useGridApiContext();
+  const [open, setOpen] = useState(false);
 
-  const fetchRows = async () => {
-    const response = await fetch('/users').then((response) => response.json());
-
-    setRows(response);
+  const handleClick = () => {
+    // apiRef.current.setPage(0);
+    // const id = Math.floor(Math.random() * 10000);
+    // setRows((oldRows) => [...oldRows, { usuario_id: id, usuario: '', nombre: 'nombre', isNew: true }]);
+    // setRowModesModel((oldModel) => ({
+    //   ...oldModel,
+    //   [id]: { mode: GridRowModes.Edit, fieldToFocus: 'usuario' }
+    // }));
+    setOpen(true)
   };
+
+  return (
+    <GridToolbarContainer>
+      <Button variant="contained" startIcon={<IconPlus />} onClick={handleClick} size="small">
+        Agregar usuario
+      </Button>
+      <DialogUsuario open={open} setOpen={setOpen} />
+    </GridToolbarContainer>
+    
+  );
+}
+
+const Usuarios = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  // TRAIGO LAS FILAS DEL DATAGRID
+
+  const [rows, setRows] = useState([]);
+
   useEffect(() => {
-    fetchRows();
+    axios
+      .get(URIGETALL)
+      .then((response) => {
+        setRows(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
+
+
+  // COLUMNAS DEL DATAGRID
+
+  function getFullRut(params) {
+    if (params.row.digito_verificador != null && params.row.rut != null && params.row.rut > 0) {
+      return params.row.rut + '-' + (params.row.digito_verificador == 0 ? 'K' : params.row.digito_verificador);
+    }
+  }
+
+  const columns = [
+    {
+      field: 'usuario',
+      headerName: 'Usuario',
+      flex: 1,
+      editable: false,
+    },
+    {
+      field: 'nombre',
+      headerName: 'Nombre',
+      flex: 1,
+      editable: false,
+    },
+    {
+      field: 'apellido',
+      headerName: 'Apellido',
+      flex: 1,
+      editable: false,
+    },
+    {
+      field: 'dni',
+      headerName: 'DNI',
+      flex: 1,
+      editable: false,
+      valueGetter: getFullRut,
+    },
+    {
+      field: 'perfil',
+      headerName: 'Perfil',
+      flex: 1,
+      editable: false,
+      valueGetter: (params) => {
+        try {
+          params.row.perfil.nombre
+          return params.row.perfil.nombre
+        } catch (error) {
+          return 'Sin Perfil'
+        }
+          
+        },
+    },
+    {
+      field: 'estado',
+      headerName: 'Estado',
+      flex: 1,
+      editable: false,
+
+    },
+    {
+      field: 'actions',
+      type: 'actions',
+      headerName: 'Acciones',
+      flex: 1,
+      getActions: ( {id} ) => {
+        const isBlocked = rows.find(row => row.estado == "Bloqueado")
+        return [
+          <GridActionsCellItem 
+            key={`edit-${id}`}
+            icon={<IconEdit />}
+            label="Editar"  
+          />,
+          <GridActionsCellItem
+            key={`refresh-${id}`}
+            icon={<IconRotate2/>}
+            label="Reestablecer contraseña"
+          />,
+          isBlocked ? (
+            <GridActionsCellItem
+              key={`unblock-${id}`}
+              icon={<IconLockOff />}
+              label="Desbloquear" 
+            />
+          ) : (
+            <GridActionsCellItem
+              key={`block-${id}`}
+              icon={<IconLock />}
+              label='Bloquear'
+            />
+          )
+        ]
+      }
+    }
+  ]
+
+  const [rowModesModel, setRowModesModel] = useState({});
+
+  const handleRowModesModelChange = (newRowModesModel) => {
+    setRowModesModel(newRowModesModel);
+  };
+
+  const handleRowEditStop = (params, event) => {
+    if (params.reason === GridRowEditStopReasons.rowFocusOut) {
+      event.defaultMuiPrevented = true;
+    }
+  };
+
+  const processRowUpdate = (newRow) => {
+    const updatedRow = { ...newRow, isNew: false };
+    setRows(rows.map((row) => (row.usuario_id === newRow.usuario_id ? updatedRow : row)));
+    return updatedRow;
+  };
+
+  const handleBlockClick = (usuario_id) => () => {
+    setIsOpen(true);
+
+    setRows(rows.filter((row) => row.usuario_id !== usuario_id));
+  };
 
   return (
     <MainCard title="Lista de Usuarios">
-      <Button variant="contained" startIcon={<IconPlus />}>
-        Nuevo usuario
-      </Button>
       <DataGrid
         autoHeight
+        disableColumnMenu
+        editMode="row"
+        rowModesModel={rowModesModel}
+        onRowModesModelChange={handleRowModesModelChange}
+        onRowEditStop={handleRowEditStop}
+        processRowUpdate={processRowUpdate}
         sx={{ mt: 2 }}
         rows={rows}
         columns={columns}
-        getRowId={(row) => row.USU_ID}
+        getRowId={(row) => row.usuario_id}
         initialState={{
           pagination: {
             paginationModel: {
               pageSize: 5
+            },
+            sorting: {
+              sortModel: [
+                {
+                  field: 'usuario',
+                  sort: 'asc'
+                }
+              ]
             }
           }
         }}
         pageSizeOptions={[5, 10, 20]}
+        slots={{
+          toolbar: EditToolbar
+        }}
+        slotProps={{
+          toolbar: { setRows, setRowModesModel }
+        }}
       />
+      <ConfirmDialog isOpen={isOpen} handleClose={() => setIsOpen(false)} handleBlockClick={handleBlockClick} />
+      
     </MainCard>
   );
 };

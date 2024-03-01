@@ -14,7 +14,7 @@ const MaestroLeads = () => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Typography variant="subtitle1">
-            <IconFilter size={20} /> Filtros{' '}
+            <IconFilter size={20} /> Filtros
           </Typography>
         </Grid>
         <Grid item xs={4}>

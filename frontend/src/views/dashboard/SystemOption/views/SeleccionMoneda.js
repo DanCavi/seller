@@ -9,7 +9,7 @@ const SeleccionMoneda = () => {
     <Grid container spacing={2}>
       <Grid item xs={3}>
         <InputLabel>Nombre de la moneda</InputLabel>
-        <Input />{' '}
+        <Input />
       </Grid>
       <Grid item xs={3}>
         <InputLabel>País</InputLabel>

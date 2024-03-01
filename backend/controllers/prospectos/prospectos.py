@@ -1,5 +1,5 @@
 from database.database import getSession
-from models.models import Prospecto
+from models.old_models import Prospecto
 from sqlalchemy import select
 import json
 
@@ -24,4 +24,4 @@ def getProspecto(id):
             result = result.to_dict()
         return result
     except Exception as e:
-        return json.dumps({'message': 'No connection to db '})
+        return json.dumps([{'message': 'No connection to db '}, {'error': str(e)}])

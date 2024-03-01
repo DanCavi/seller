@@ -1,14 +1,15 @@
 import { DataGrid, GridRowEditStopReasons, GridToolbarContainer, useGridApiContext } from '@mui/x-data-grid';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
+import url from 'baseUrl';
 import { Button } from '@mui/material';
 import { IconPlus } from '@tabler/icons-react';
 import { GridActionsCellItem, GridRowModes } from '@mui/x-data-grid';
 import { IconDeviceFloppy, IconEdit, IconList, IconTrash, IconX } from '@tabler/icons-react';
 import ConfirmDialog from 'ui-component/Confirm/ConfirmDialog';
 
-const response = await axios.get('/api/v1/profiles');
-const initialRows = response.data;
+const urlModulo = '/perfiles-usuario';
+const URIGETALL = `${url.BASE_URL}${urlModulo}`;
 
 function EditToolbar(props) {
   const { setRows, setRowModesModel } = props;
@@ -17,10 +18,10 @@ function EditToolbar(props) {
   const handleClick = () => {
     apiRef.current.setPage(0);
     const id = Math.floor(Math.random() * 10000);
-    setRows((oldRows) => [...oldRows, { PER_ID: id, PER_NOMBRE: '', isNew: true }]);
+    setRows((oldRows) => [...oldRows, { perfil_id: id, nombre: '', isNew: true }]);
     setRowModesModel((oldModel) => ({
       ...oldModel,
-      [id]: { mode: GridRowModes.Edit, fieldToFocus: 'PER_NOMBRE' }
+      [id]: { mode: GridRowModes.Edit, fieldToFocus: 'nombre' }
     }));
   };
 
@@ -34,9 +35,20 @@ function EditToolbar(props) {
 }
 
 function DataGridPerfiles() {
-  const [rows, setRows] = useState(initialRows);
+  const [rows, setRows] = useState([]);
   const [rowModesModel, setRowModesModel] = useState({});
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get(URIGETALL)
+      .then((response) => {
+        setRows(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const handleRowEditStop = (params, event) => {
     if (params.reason === GridRowEditStopReasons.rowFocusOut) {
@@ -44,39 +56,39 @@ function DataGridPerfiles() {
     }
   };
 
-  const handleEditClick = (PER_ID) => () => {
-    setRowModesModel({ ...rowModesModel, [PER_ID]: { mode: GridRowModes.Edit } });
+  const handleEditClick = (perfil_id) => () => {
+    setRowModesModel({ ...rowModesModel, [perfil_id]: { mode: GridRowModes.Edit } });
   };
 
-  const handleSaveClick = (PER_ID) => () => {
-    setRowModesModel({ ...rowModesModel, [PER_ID]: { mode: GridRowModes.View } });
+  const handleSaveClick = (perfil_id) => () => {
+    setRowModesModel({ ...rowModesModel, [perfil_id]: { mode: GridRowModes.View } });
   };
 
-  const handleDeleteClick = (PER_ID) => () => {
-    setIsOpen(true)
-    
-    // setRows(rows.filter((row) => row.PER_ID !== PER_ID));
+  const handleDeleteClick = (perfil_id) => () => {
+    setIsOpen(true);
+
+    setRows(rows.filter((row) => row.perfil_id !== perfil_id));
   };
 
-  const handleConfirmClick = (PER_ID) => () => {
-    setRows(rows.filter((row) => row.PER_ID !== PER_ID));
-  }
+  const handleConfirmClick = (perfil_id) => () => {
+    setRows(rows.filter((row) => row.perfil_id !== perfil_id));
+  };
 
-  const handleCancelClick = (PER_ID) => () => {
+  const handleCancelClick = (perfil_id) => () => {
     setRowModesModel({
       ...rowModesModel,
-      [PER_ID]: { mode: GridRowModes.View, ignoreModifications: true }
+      [perfil_id]: { mode: GridRowModes.View, ignoreModifications: true }
     });
 
-    const editedRow = rows.find((row) => row.PER_ID === PER_ID);
+    const editedRow = rows.find((row) => row.perfil_id === perfil_id);
     if (editedRow.isNew) {
-      setRows(rows.filter((row) => row.PER_ID !== PER_ID));
+      setRows(rows.filter((row) => row.perfil_id !== perfil_id));
     }
   };
 
   const processRowUpdate = (newRow) => {
     const updatedRow = { ...newRow, isNew: false };
-    setRows(rows.map((row) => (row.PER_ID === newRow.PER_ID ? updatedRow : row)));
+    setRows(rows.map((row) => (row.perfil_id === newRow.perfil_id ? updatedRow : row)));
     return updatedRow;
   };
 
@@ -86,7 +98,7 @@ function DataGridPerfiles() {
 
   const columns = [
     {
-      field: 'PER_NOMBRE',
+      field: 'nombre',
       headerName: 'Nombre',
       flex: 1,
       editable: true,
@@ -104,15 +116,15 @@ function DataGridPerfiles() {
 
         if (isInEditMode) {
           return [
-            <GridActionsCellItem icon={<IconDeviceFloppy />} label="Guardar" onClick={handleSaveClick(id)} />,
-            <GridActionsCellItem icon={<IconX />} label="Cancelar" onClick={handleCancelClick(id)} />
+            <GridActionsCellItem key={`save-${id}`} icon={<IconDeviceFloppy />} label="Guardar" onClick={handleSaveClick(id)} />,
+            <GridActionsCellItem key={`cancel-${id}`} icon={<IconX />} label="Cancelar" onClick={handleCancelClick(id)} />
           ];
         }
 
         return [
-          <GridActionsCellItem icon={<IconList />} label="Menú" />,
-          <GridActionsCellItem icon={<IconEdit />} label="Editar" onClick={handleEditClick(id)} />,
-          <GridActionsCellItem icon={<IconTrash />} label="Eliminar" onClick={handleDeleteClick(id)} />
+          <GridActionsCellItem key={`menu-${id}`} icon={<IconList />} label="Menú" />,
+          <GridActionsCellItem key={`edit-${id}`} icon={<IconEdit />} label="Editar" onClick={handleEditClick(id)} />,
+          <GridActionsCellItem key={`delete-${id}`} icon={<IconTrash />} label="Eliminar" onClick={handleDeleteClick(id)} />
         ];
       }
     }
@@ -128,7 +140,7 @@ function DataGridPerfiles() {
         onRowModesModelChange={handleRowModesModelChange}
         onRowEditStop={handleRowEditStop}
         processRowUpdate={processRowUpdate}
-        getRowId={(row) => row.PER_ID}
+        getRowId={(row) => row.perfil_id}
         rows={rows}
         columns={columns}
         initialState={{
@@ -136,7 +148,7 @@ function DataGridPerfiles() {
             paginationModel: { pageSize: 5 }
           },
           sorting: {
-            sortModel: [{ field: 'PER_NOMBRE', sort: 'asc' }]
+            sortModel: [{ field: 'nombre', sort: 'asc' }]
           }
         }}
         pageSizeOptions={[5, 10, 20]}

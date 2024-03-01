@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Button, Grid, InputLabel } from '@mui/material';
 import { IconUsersGroup } from '@tabler/icons-react';
 
-
 const ButtonList = () => {
   const [data, setData] = useState([]);
   const fetchRows = async () => {
@@ -20,8 +19,8 @@ const ButtonList = () => {
       {data
         .filter((profile) => profile.ADMIN === 0)
         .map((profile) => (
-          <Button sx={{ m: 0.7 }} key={profile.PER_ID} variant="contained" size="small" startIcon={<IconUsersGroup />}>
-            {profile.PER_NOMBRE}
+          <Button sx={{ m: 0.7 }} key={profile.perfil_id} variant="contained" size="small" startIcon={<IconUsersGroup />}>
+            {profile.nombre}
           </Button>
         ))}
     </Grid>
