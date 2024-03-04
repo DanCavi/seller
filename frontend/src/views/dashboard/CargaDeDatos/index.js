@@ -64,14 +64,14 @@ const columns = [
 const CargaDeDatos = () => (
   <MainCard title="Modulo de Cargas">
     <InputLabel>Seleccione canal para subir datos</InputLabel>
-    <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+    <SelectStandar datos={['Archivo Local']} />
     <InputLabel>Seleccione la data cargada</InputLabel>
-    <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+    <SelectStandar datos={['Prospecto', 'Campaña']} />
     <Button fullWidth sx={{ mb: 2 }} component="label" variant="contained" tabIndex={-1} startIcon={<IconCloudUpload />}>
       Carga de datos
       <VisuallyHiddenInput type="file" />
     </Button>
-    <DataGrid autoHeight autoHeight rows={rows} columns={columns} sx={{ mb: 2 }} />
+    <DataGrid autoHeight rows={rows} columns={columns} sx={{ mb: 2 }} />
     <Button
       variant="contained"
       fullWidth

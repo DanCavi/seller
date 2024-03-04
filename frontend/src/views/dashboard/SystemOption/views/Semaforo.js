@@ -10,7 +10,7 @@ const Semaforo = () => {
         Formato de tiempo
       </Grid>
       <Grid item xs={3}>
-        <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+        <SelectStandar datos={['Segundos', 'Minutos', 'Horas', 'Dias', 'Semanas', 'Meses']} />
       </Grid>
       <Grid item xs={3}>
         <Button variant="contained" fullWidth startIcon={<IconDeviceFloppy />}>

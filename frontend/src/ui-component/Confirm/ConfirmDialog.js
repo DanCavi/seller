@@ -7,6 +7,15 @@ const ConfirmDialog = ({isOpen, handleClose, handleDeleteClick}) => {
     <Dialog
       open={isOpen}
       onClose={handleClose}
+      PaperProps={{
+        component: 'form',
+        onSubmit: (event) => {
+          event.preventDefault();
+          const formData = new FormData(event.currentTarget);
+          const formJson = Object.fromEntries(formData.entries);
+          console.log(formJson);
+        }
+      }}
     >
       <DialogTitle>
         Eliminar
@@ -17,7 +26,7 @@ const ConfirmDialog = ({isOpen, handleClose, handleDeleteClick}) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleDeleteClick} variant="contained" color="error">Confirmar</Button>
+        <Button onClick={handleDeleteClick} variant="contained" type="submit" color="error">Confirmar</Button>
         <Button onClick={handleClose} variant="contained" color="primary">Cancelar</Button>
       </DialogActions>
     </Dialog>

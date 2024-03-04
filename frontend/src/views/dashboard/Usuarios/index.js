@@ -1,7 +1,6 @@
 // material-ui
 import { DataGrid, GridActionsCellItem, GridRowEditStopReasons, GridToolbarContainer } from '@mui/x-data-grid';
 
-
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import { useEffect, useState } from 'react';
@@ -11,26 +10,19 @@ import ConfirmDialog from 'ui-component/Confirm/ConfirmDialog';
 import { Button } from '@mui/material';
 import { IconEdit, IconLockOff, IconPlus, IconLock, IconRotate2 } from '@tabler/icons-react';
 import DialogUsuario from './components/DialogUsuario';
+import DialogEditUsuario from './components/DialogEditUsuario';
 
 const urlModulo = '/usuarios';
 const URIGETALL = `${url.BASE_URL}${urlModulo}`;
+const URIEDITUSER = `${url.BASE_URL}${urlModulo}/`;
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
-function EditToolbar() {
-  // const { setRows, setRowModesModel } = props;
-  // const apiRef = useGridApiContext();
+function EditToolbar({ setRows }) {
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
-    // apiRef.current.setPage(0);
-    // const id = Math.floor(Math.random() * 10000);
-    // setRows((oldRows) => [...oldRows, { usuario_id: id, usuario: '', nombre: 'nombre', isNew: true }]);
-    // setRowModesModel((oldModel) => ({
-    //   ...oldModel,
-    //   [id]: { mode: GridRowModes.Edit, fieldToFocus: 'usuario' }
-    // }));
-    setOpen(true)
+    setOpen(true);
   };
 
   return (
@@ -38,14 +30,15 @@ function EditToolbar() {
       <Button variant="contained" startIcon={<IconPlus />} onClick={handleClick} size="small">
         Agregar usuario
       </Button>
-      <DialogUsuario open={open} setOpen={setOpen} />
+      <DialogUsuario open={open} setOpen={setOpen} setRows={setRows} />
     </GridToolbarContainer>
-    
   );
 }
 
 const Usuarios = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
+  const [selectedRow, setSelectedRow] = useState(null);
 
   // TRAIGO LAS FILAS DEL DATAGRID
 
@@ -62,7 +55,6 @@ const Usuarios = () => {
       });
   }, []);
 
-
   // COLUMNAS DEL DATAGRID
 
   function getFullRut(params) {
@@ -76,26 +68,26 @@ const Usuarios = () => {
       field: 'usuario',
       headerName: 'Usuario',
       flex: 1,
-      editable: false,
+      editable: false
     },
     {
       field: 'nombre',
       headerName: 'Nombre',
       flex: 1,
-      editable: false,
+      editable: false
     },
     {
       field: 'apellido',
       headerName: 'Apellido',
       flex: 1,
-      editable: false,
+      editable: false
     },
     {
       field: 'dni',
       headerName: 'DNI',
       flex: 1,
       editable: false,
-      valueGetter: getFullRut,
+      valueGetter: getFullRut
     },
     {
       field: 'perfil',
@@ -104,56 +96,48 @@ const Usuarios = () => {
       editable: false,
       valueGetter: (params) => {
         try {
-          params.row.perfil.nombre
-          return params.row.perfil.nombre
+          params.row.perfil.nombre;
+          return params.row.perfil.nombre;
         } catch (error) {
-          return 'Sin Perfil'
+          return 'Sin Perfil';
         }
-          
-        },
+      }
     },
     {
       field: 'estado',
       headerName: 'Estado',
       flex: 1,
-      editable: false,
-
+      editable: false
     },
     {
       field: 'actions',
       type: 'actions',
       headerName: 'Acciones',
       flex: 1,
-      getActions: ( {id} ) => {
-        const isBlocked = rows.find(row => row.estado == "Bloqueado")
+      getActions: ({ id }) => {
+        const isBlocked = rows.find((row) => row.usuario_id === id)?.estado === 'Bloqueado';
+        function handleEditClick () {
+          setSelectedRow(rows.find((row) => row.usuario_id === id));
+          setEditOpen(true);
+        }
+
+        function handleBlockClick () {
+          setSelectedRow(rows.find((row) => row.usuario_id === id));
+          setIsOpen(true);
+        }
+
         return [
-          <GridActionsCellItem 
-            key={`edit-${id}`}
-            icon={<IconEdit />}
-            label="Editar"  
-          />,
-          <GridActionsCellItem
-            key={`refresh-${id}`}
-            icon={<IconRotate2/>}
-            label="Reestablecer contraseña"
-          />,
+          <GridActionsCellItem key={`edit-${id}`} icon={<IconEdit />} label="Editar" onClick={handleEditClick} />,
+          <GridActionsCellItem key={`refresh-${id}`} icon={<IconRotate2 />} label="Reestablecer contraseña" />,
           isBlocked ? (
-            <GridActionsCellItem
-              key={`unblock-${id}`}
-              icon={<IconLockOff />}
-              label="Desbloquear" 
-            />
+            <GridActionsCellItem key={`unblock-${id}`} icon={<IconLockOff />} label="Desbloquear" />
           ) : (
-            <GridActionsCellItem
-              key={`block-${id}`}
-              icon={<IconLock />}
-              label='Bloquear'
-            />
+            <GridActionsCellItem key={`block-${id}`} icon={<IconLock />} label="Bloquear" onClick={handleBlockClick} />
           )
-        ]
+        ];
       }
     }
-  ]
+  ];
 
   const [rowModesModel, setRowModesModel] = useState({});
 
@@ -173,11 +157,17 @@ const Usuarios = () => {
     return updatedRow;
   };
 
-  const handleBlockClick = (usuario_id) => () => {
-    setIsOpen(true);
+  const handleConfirmClick = () => {
+    axios
+      .patch(URIEDITUSER + selectedRow.usuario_id, )
+      .then((response) => {
+        console.log(response)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
 
-    setRows(rows.filter((row) => row.usuario_id !== usuario_id));
-  };
 
   return (
     <MainCard title="Lista de Usuarios">
@@ -216,8 +206,8 @@ const Usuarios = () => {
           toolbar: { setRows, setRowModesModel }
         }}
       />
-      <ConfirmDialog isOpen={isOpen} handleClose={() => setIsOpen(false)} handleBlockClick={handleBlockClick} />
-      
+      <ConfirmDialog isOpen={isOpen} handleClose={() => setIsOpen(false)} handleDeleteClick={handleConfirmClick} />
+      <DialogEditUsuario editOpen={editOpen} setEditOpen={setEditOpen} rowData={selectedRow} processRowUpdate={processRowUpdate}  />
     </MainCard>
   );
 };

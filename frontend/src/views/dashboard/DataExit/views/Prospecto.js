@@ -11,18 +11,18 @@ const Prospecto = () => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <InputLabel>Seleccione el modulo</InputLabel>
-          <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+          <SelectStandar datos={['Maestro Leads', 'Crea prospecto', 'Seguimiento humano']} />
         </Grid>
         <Grid item xs={12}>
           <ButtonList />
         </Grid>
         <Grid item xs={4}>
           <InputLabel>Seleccione tabla</InputLabel>
-          <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+          <SelectStandar datos={['Traer tablas']} />
         </Grid>
         <Grid item xs={4}>
           <InputLabel>Seleccione campo</InputLabel>
-          <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+          <SelectStandar datos={['Traer columnas']} />
         </Grid>
         <Grid item xs={2}>
           <Input />

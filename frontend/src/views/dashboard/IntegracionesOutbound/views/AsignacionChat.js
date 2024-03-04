@@ -16,7 +16,7 @@ const AsignacionChat = () => {
         </Grid>
         <Grid item xs={4}>
           <InputLabel>Producto</InputLabel>
-          <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+          <SelectStandar datos={['GO911', 'MAF', 'Provida', 'USJMX']} />
         </Grid>
         <Grid item xs={4}>
           <Button variant="contained" sx={{ mt: 2.7 }} fullWidth startIcon={<IconPlus />}>

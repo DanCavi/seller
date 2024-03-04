@@ -20,7 +20,7 @@ const RepoWhats = () => {
         </Grid>
         <Grid item xs={3}>
           <InputLabel>Telefono</InputLabel>
-          <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+          <SelectStandar datos={['+56932505935', '+56983904231']} />
         </Grid>
         <Grid item xs={3} sx={{ mt: 2.4 }}>
           <Button variant="contained" fullWidth startIcon={<IconPlus />}>

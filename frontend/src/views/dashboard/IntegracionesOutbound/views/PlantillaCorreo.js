@@ -17,7 +17,7 @@ const PlantillaCorreo = () => {
         </Grid>
         <Grid item xs={2}>
           <InputLabel>Correo</InputLabel>
-          <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+          <SelectStandar datos={['soporte.tecnico@ast.education']} />
         </Grid>
         <Grid item xs={2.5}>
           <InputLabel>Fecha Inicio</InputLabel>

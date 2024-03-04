@@ -19,15 +19,15 @@ const MaestroLeads = () => {
         </Grid>
         <Grid item xs={4}>
           <InputLabel>Canal Entrada</InputLabel>
-          <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+          <SelectStandar datos={['Whatsapp', 'Chat', 'Correo']} value={'3'} onChange={() => {}} />
         </Grid>
         <Grid item xs={4}>
           <InputLabel>Funnel Comercial</InputLabel>
-          <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+          <SelectStandar datos={['Prospecto', 'Cotización', 'Orden de compra', 'Cliente']} value={'3'} onChange={() => {}} />
         </Grid>
         <Grid item xs={4}>
           <InputLabel>Producto</InputLabel>
-          <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+          <SelectStandar datos={['GO911', 'MAF', 'Provida', 'USJMX']} value={'3'} onChange={() => {}} />
         </Grid>
         <Grid item xs={12}>
           <Button variant="contained" startIcon={<IconRefresh />} size="small">

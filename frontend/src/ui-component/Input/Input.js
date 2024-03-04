@@ -21,10 +21,11 @@ const ValidationTextField = styled(TextField)({
     borderRadius: 2
   }
 });
-function InputNombreVariable({ onChange, name, value }) {
+function InputNombreVariable({ onChange, name, value, defaultValue }) {
   return (
     <>
       <ValidationTextField
+        defaultValue={defaultValue}
         onChange={onChange}
         name={name}
         value={value}

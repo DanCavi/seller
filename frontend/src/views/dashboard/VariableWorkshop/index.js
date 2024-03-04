@@ -16,15 +16,15 @@ const VariableWorkshop = () => (
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <InputLabel>Tipo Persona</InputLabel>
-            <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+            <SelectStandar datos={['Natural', 'Juridico']} />
             <InputLabel>País</InputLabel>
-            <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+            <SelectStandar datos={['Chile', 'USA', 'ETC...']} />
             <InputLabel>Origen variable</InputLabel>
-            <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+            <SelectStandar datos={['Datos', 'ETC...']} />
             <Grid container spacing={2} alignItems={'center'}>
               <Grid item xs={8}>
                 <InputLabel>Variable</InputLabel>
-                <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+                <SelectStandar datos={['MAPEAR....']} />
               </Grid>
               <Grid item xs={4}>
                 <Button variant="contained">Agregar</Button>
@@ -77,7 +77,7 @@ const VariableWorkshop = () => (
               </Grid>
               <Grid item xs={4}>
                 <InputLabel>Variables Creadas</InputLabel>
-                <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+                <SelectStandar datos={['Tasa finalización', 'Tasa de pago']} />
               </Grid>
               <Grid item xs={4}>
                 <Button variant="contained" fullWidth>

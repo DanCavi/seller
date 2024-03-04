@@ -29,3 +29,7 @@ export const rows = [
         activa: 'Si'
     }
 ]
+
+export const diasSemana = [
+    'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'
+]

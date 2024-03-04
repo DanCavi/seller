@@ -44,7 +44,7 @@ function SeccionFiltro() {
         }}
       >
         <div className="row">
-          <div className="col-xs12 col-md-3">
+          <div className="col-xs6 col-md-6">
             <div className="form-body">
               <div className="form-group">
                 <ThemeProvider theme={theme}>
@@ -67,7 +67,7 @@ function SeccionFiltro() {
             </div>
           </div>
           {/**=============seccion de radio group ====================== */}
-          <div className="col-xs12 col-md-6">
+          <div className="col-xs6 col-md-6">
             <div className="form-body">
               <div className="form-group">
                 <FormControl>

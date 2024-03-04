@@ -13,7 +13,7 @@ const SeleccionMoneda = () => {
       </Grid>
       <Grid item xs={3}>
         <InputLabel>País</InputLabel>
-        <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+        <SelectStandar datos={['Internacional', 'Chile', 'USA']} />
       </Grid>
       <Grid item xs={3}></Grid>
       <Grid item xs={3}>

@@ -1,7 +1,7 @@
 from flask import Blueprint
 from routes.profiles.route_perfiles import route_get_perfiles
 from routes.prospectos.route_prospectos import route_get_prospecto, route_get_prospectos
-from routes.usuarios.route_usuarios import route_get_usuarios, route_get_usuarios_columns, route_set_usuario
+from routes.usuarios.route_usuarios import route_get_usuarios, route_get_usuarios_columns, route_set_usuario, route_update_usuario
 from routes.ejecutivos.route_ejecutivos import route_get_ejecutivos
 
 
@@ -18,6 +18,7 @@ routes.register_blueprint(route_get_prospecto)
 routes.register_blueprint(route_get_usuarios)
 routes.register_blueprint(route_get_usuarios_columns)
 routes.register_blueprint(route_set_usuario)
+routes.register_blueprint(route_update_usuario)
 
 # Modulo Ejecutivos
 routes.register_blueprint(route_get_ejecutivos)

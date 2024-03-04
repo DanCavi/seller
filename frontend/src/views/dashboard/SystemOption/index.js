@@ -8,6 +8,7 @@ import { SeleccionPais, SeleccionMoneda, DataExit, Semaforo } from './views';
 import SelectStandar from 'ui-component/Select/Select';
 import Input from 'ui-component/Input/Input';
 import { HoraDesde, HoraHasta } from './components';
+
 // ==============================|| SAMPLE PAGE ||============================== //
 
 const SystemOption = () => (
@@ -50,7 +51,7 @@ const SystemOption = () => (
         <Grid container spacing={2}>
           <Grid item xs={3}>
             <InputLabel>Día de la Semana</InputLabel>
-            <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+            <SelectStandar datos={['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo']} />
           </Grid>
           <Grid item xs={3}>
             <HoraDesde />
@@ -76,10 +77,10 @@ const SystemOption = () => (
             Rango de conversación
           </Grid>
           <Grid item xs={3}>
-            <Input />{' '}
+            <Input />
           </Grid>
           <Grid item xs={3}>
-            <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+            <SelectStandar datos={['Segundos', 'Minutos', 'Horas', 'Días', 'Semanas', 'Meses']} />
           </Grid>
           <Grid item xs={3}>
             <Button variant="contained" fullWidth startIcon={<IconDeviceFloppy />}>
@@ -90,7 +91,7 @@ const SystemOption = () => (
             Limite de frases por conversación
           </Grid>
           <Grid item xs={3}>
-            <Input />{' '}
+            <Input />
           </Grid>
           <Grid item xs={3}></Grid>
           <Grid item xs={3}>
@@ -120,7 +121,7 @@ const SystemOption = () => (
             Propensión de cierre
           </Grid>
           <Grid item xs={4}>
-            <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+            <SelectStandar datos={['Tasa finalización', 'Tasa pago']} />
           </Grid>
           <Grid item xs={4}>
             <Button variant="contained" fullWidth startIcon={<IconDeviceFloppy />}>
@@ -131,7 +132,7 @@ const SystemOption = () => (
             Prioridad
           </Grid>
           <Grid item xs={4}>
-            <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+            <SelectStandar datos={['Tasa finalización', 'Tasa pago']} />
           </Grid>
           <Grid item xs={4}>
             <Button variant="contained" fullWidth startIcon={<IconDeviceFloppy />}>

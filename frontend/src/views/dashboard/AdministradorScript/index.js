@@ -53,11 +53,11 @@ const AdministradorScript = () => {
             </Grid>
             <Grid item xs={4}>
               <InputLabel>Funnel Comercial</InputLabel>
-              <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+              <SelectStandar datos={['No inscritos', 'Preventa', 'Venta', 'Titulados']} />
             </Grid>
             <Grid item xs={4}>
               <InputLabel>Canal</InputLabel>
-              <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+              <SelectStandar datos={['Correo', 'SMS', 'Whatsapp']} />
             </Grid>
             <Grid item xs={7}>
               <InputLabel>Cc</InputLabel>
@@ -77,11 +77,11 @@ const AdministradorScript = () => {
             </Grid>
             <Grid item xs={3}>
               <InputLabel>Campaña</InputLabel>
-              <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+              <SelectStandar datos={['¿Si?', '¿No?']} />
             </Grid>
             <Grid item xs={3}>
               <InputLabel>Estado</InputLabel>
-              <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+              <SelectStandar datos={['Cargado', 'Visado', 'Producción con reparos', 'Sin reparos']} />
             </Grid>
             <Grid item xs={12}>
               <SubCard title="Archivos Adjuntos" sx={{ mb: 2 }}>
@@ -105,17 +105,17 @@ const AdministradorScript = () => {
                 <Grid container spacing={2}>
                   <Grid item xs={4}>
                     <InputLabel>Tabla</InputLabel>
-                    <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+                    <SelectStandar datos={['Traer tablas']} />
                   </Grid>
                   <Grid item xs={4}>
                     <InputLabel>Variable</InputLabel>
-                    <SelectStandar datos={['hola']} value={'3'} onChange={() => {}} />
+                    <SelectStandar datos={['Traer columnas']} />
                   </Grid>
                   <Grid item xs={4}>
                     <InputLabel>Shortcode</InputLabel>
                     <Grid container spacing={1}>
                       <Grid item xs={6}>
-                        <Input />{' '}
+                        <Input />
                       </Grid>
                       <Grid item xs={6}>
                         <Button variant="contained" startIcon={<IconCopy />}>
