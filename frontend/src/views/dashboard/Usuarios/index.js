@@ -39,6 +39,7 @@ const Usuarios = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
+  const [isConfirmed, setIsConfirmed] = useState({action: ''});
 
   // TRAIGO LAS FILAS DEL DATAGRID
 
@@ -157,16 +158,19 @@ const Usuarios = () => {
     return updatedRow;
   };
 
-  const handleConfirmClick = () => {
-    axios
-      .patch(URIEDITUSER + selectedRow.usuario_id, )
-      .then((response) => {
-        console.log(response)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
+  useEffect(() => {
+    if (isConfirmed.action === 'block') {
+      axios
+        .patch(URIEDITUSER + selectedRow.usuario_id, isConfirmed)
+        .then((response) => {
+          console.log(isConfirmed)
+          console.log(response.data)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
+  }, [isConfirmed]);
 
 
   return (
@@ -186,7 +190,7 @@ const Usuarios = () => {
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 5
+              pageSize: 10
             },
             sorting: {
               sortModel: [
@@ -206,8 +210,21 @@ const Usuarios = () => {
           toolbar: { setRows, setRowModesModel }
         }}
       />
-      <ConfirmDialog isOpen={isOpen} handleClose={() => setIsOpen(false)} handleDeleteClick={handleConfirmClick} />
-      <DialogEditUsuario editOpen={editOpen} setEditOpen={setEditOpen} rowData={selectedRow} processRowUpdate={processRowUpdate}  />
+      <ConfirmDialog
+        isOpen={isOpen}
+        handleClose={() => setIsOpen(false)} 
+        titulo={'Bloquear usuario'}
+        contenido={'Está seguro que desea bloquear este usuario?'}
+        setIsConfirmed={setIsConfirmed}
+        action={'block'}
+        isConfirmed={isConfirmed}
+      />
+      <DialogEditUsuario
+        editOpen={editOpen}
+        setEditOpen={setEditOpen} 
+        rowData={selectedRow} 
+        processRowUpdate={processRowUpdate}
+      />
     </MainCard>
   );
 };

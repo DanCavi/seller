@@ -1,24 +1,16 @@
 from flask import Blueprint
-from routes.profiles.route_perfiles import route_get_perfiles
-from routes.prospectos.route_prospectos import route_get_prospecto, route_get_prospectos
-from routes.usuarios.route_usuarios import route_get_usuarios, route_get_usuarios_columns, route_set_usuario, route_update_usuario
-from routes.ejecutivos.route_ejecutivos import route_get_ejecutivos
+from routes.route_ejecutivos import ejecutivos_blueprint
+from routes.route_perfiles_usuario import perfiles_usuario_blueprint
+from routes.route_usuarios import usuarios_blueprint
 
 
-routes = Blueprint("routes", __name__)
 
-# Modulo Perfiles
-routes.register_blueprint(route_get_perfiles)
+routes_blueprint = Blueprint("routes", __name__)
 
-# Modulo Prospectos (REVISAR)
-routes.register_blueprint(route_get_prospectos)
-routes.register_blueprint(route_get_prospecto)
+# Modulo perfiles-usuario
+routes_blueprint.register_blueprint(perfiles_usuario_blueprint)
+# Modulo usuarios
+routes_blueprint.register_blueprint(usuarios_blueprint)
 
-# Modulo Usuarios
-routes.register_blueprint(route_get_usuarios)
-routes.register_blueprint(route_get_usuarios_columns)
-routes.register_blueprint(route_set_usuario)
-routes.register_blueprint(route_update_usuario)
-
-# Modulo Ejecutivos
-routes.register_blueprint(route_get_ejecutivos)
+# Modulo ejecutivos
+routes_blueprint.register_blueprint(ejecutivos_blueprint)

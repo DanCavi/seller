@@ -1,0 +1,64 @@
+Listado de rutas de carpetas para el volumen Windows-SSD
+El número de serie del volumen es 68BC-3853
+C:.
++---AdministradorScript
+¦   +---utils
++---CalendarioGestion
++---CargaDeDatos
++---ControlVentas
++---CrearProspecto
++---DataExit
+¦   +---views
+¦       +---components
++---Default
+¦   +---chart-data
+¦   +---components
++---Ejecutivos
+¦   +---components
++---EstadoEC2
++---FunnelComercial
+¦   +---views
+¦       +---components
++---HistoricoClientes
++---IngresoMetas
+¦   +---components
++---IntegracionesInbound
++---IntegracionesOutbound
+¦   +---views
+¦       +---utils
++---InteligenciaMaquina
+¦   +---components
+¦   +---utils
+¦   +---workFlow
+¦       +---actions
+¦       +---canales
+¦       +---componentesPanel
+¦       +---condiciones
+¦       +---esperar
+¦       +---filtrar
+¦       +---input
+¦       +---listening
+¦       +---multiSelected
+¦       +---operadores
+¦       +---script
+¦       +---semantico
+¦       +---sideBarNodos
+¦       +---sideBarOperadores
+¦       +---tabla
++---MaestroLeads
+¦   +---utils
++---ModuloIa
++---PerfilesUsuario
+¦   +---components
++---SeguimientoHumano
+¦   +---utils
++---SeguimientoScripts
+¦   +---components
++---SystemOption
+¦   +---components
+¦   +---utils
+¦   +---views
+¦       +---components
++---Usuarios
+¦   +---components
++---VariableWorkshop

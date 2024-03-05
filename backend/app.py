@@ -1,12 +1,15 @@
 from flask import Flask
 from flask_cors import CORS
-from routes.routes import routes
+from routes.routes import routes_blueprint
 
 app = Flask(__name__)
 CORS(app)
 
-app.register_blueprint(routes, url_prefix="/api/v1")
+app.register_blueprint(routes_blueprint, url_prefix="/api/v1")
 
+@app.errorhandler(404)
+def page_not_found(error):
+    return 'FLASK API'
 
 
 

@@ -1,4 +1,4 @@
-from sqlalchemy import DateTime, ForeignKey, Column, Table
+from sqlalchemy import DateTime, ForeignKey, Column, Table, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from sqlalchemy_serializer import SerializerMixin
 from datetime import datetime

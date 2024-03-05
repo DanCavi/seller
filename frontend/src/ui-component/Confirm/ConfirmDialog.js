@@ -2,32 +2,29 @@ import { Dialog, DialogContent, DialogTitle } from "@material-ui/core"
 import { Button, DialogActions, DialogContentText } from "@mui/material"
 
 
-const ConfirmDialog = ({isOpen, handleClose, handleDeleteClick}) => {
+const ConfirmDialog = ({ setIsConfirmed, action, isOpen, handleClose, titulo, contenido}) => {
+
+  const handleConfirm = () => {
+    setIsConfirmed({action: action})
+    handleClose()
+  }
+
   return (
     <Dialog
       open={isOpen}
       onClose={handleClose}
-      PaperProps={{
-        component: 'form',
-        onSubmit: (event) => {
-          event.preventDefault();
-          const formData = new FormData(event.currentTarget);
-          const formJson = Object.fromEntries(formData.entries);
-          console.log(formJson);
-        }
-      }}
     >
       <DialogTitle>
-        Eliminar
+        {titulo}
       </DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Esta acción es permanente
+          {contenido}
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleDeleteClick} variant="contained" type="submit" color="error">Confirmar</Button>
-        <Button onClick={handleClose} variant="contained" color="primary">Cancelar</Button>
+        <Button onClick={handleConfirm} variant="contained" color="primary">Confirmar</Button>
+        <Button onClick={handleClose} variant="contained" color="error">Cancelar</Button>
       </DialogActions>
     </Dialog>
   )

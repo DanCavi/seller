@@ -1,23 +1,26 @@
 import { DataGrid, GridRowEditStopReasons, GridToolbarContainer, useGridApiContext } from '@mui/x-data-grid';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
-import url from 'baseUrl';
+// import axios from 'axios';
+// import url from 'baseUrl';
+import { getData, postData } from '../api';
 import { Button } from '@mui/material';
 import { IconPlus } from '@tabler/icons-react';
 import { GridActionsCellItem, GridRowModes } from '@mui/x-data-grid';
 import { IconDeviceFloppy, IconEdit, IconList, IconTrash, IconX } from '@tabler/icons-react';
 import ConfirmDialog from 'ui-component/Confirm/ConfirmDialog';
 
-const urlModulo = '/perfiles-usuario';
-const URIGETALL = `${url.BASE_URL}${urlModulo}`;
+// const urlModulo = '/perfiles-usuario';
+// const URIGETALL = `${url.BASE_URL}${urlModulo}`;
+// const URIDELETE = `${url.BASE_URL}${urlModulo}/`;
 
 function EditToolbar(props) {
-  const { setRows, setRowModesModel } = props;
+  const { setRows, setRowModesModel, rows } = props;
   const apiRef = useGridApiContext();
 
   const handleClick = () => {
     apiRef.current.setPage(0);
-    const id = Math.floor(Math.random() * 10000);
+    const maxId = Math.max(...rows.map((row) => row.perfil_id), 0);
+    const id = maxId + 1;
     setRows((oldRows) => [...oldRows, { perfil_id: id, nombre: '', isNew: true }]);
     setRowModesModel((oldModel) => ({
       ...oldModel,
@@ -38,30 +41,33 @@ function DataGridPerfiles() {
   const [rows, setRows] = useState([]);
   const [rowModesModel, setRowModesModel] = useState({});
   const [isOpen, setIsOpen] = useState(false);
+  // const [isConfirmed, setIsConfirmed] = useState({ action: '' });
 
   useEffect(() => {
-    axios
-      .get(URIGETALL)
-      .then((response) => {
-        setRows(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    getData('')
+      .then(
+        data => setRows(data)
+        )
+      .catch(error => console.log('Error: \n', error))
   }, []);
 
+  
   const handleRowEditStop = (params, event) => {
     if (params.reason === GridRowEditStopReasons.rowFocusOut) {
       event.defaultMuiPrevented = true;
     }
   };
 
-  const handleEditClick = (perfil_id) => () => {
-    setRowModesModel({ ...rowModesModel, [perfil_id]: { mode: GridRowModes.Edit } });
-  };
+  // const handleEditClick = (perfil_id) => () => {
+  //   setRowModesModel({ ...rowModesModel, [perfil_id]: { mode: GridRowModes.Edit } });
+  // };
 
   const handleSaveClick = (perfil_id) => () => {
     setRowModesModel({ ...rowModesModel, [perfil_id]: { mode: GridRowModes.View } });
+    const row = rows.find((row) => row.perfil_id === perfil_id);
+    postData('', row)
+      .then(console.log(perfil_id))
+      .catch(error => console.log('Error: \n', error));
   };
 
   const handleDeleteClick = (perfil_id) => () => {
@@ -123,7 +129,7 @@ function DataGridPerfiles() {
 
         return [
           <GridActionsCellItem key={`menu-${id}`} icon={<IconList />} label="Menú" />,
-          <GridActionsCellItem key={`edit-${id}`} icon={<IconEdit />} label="Editar" onClick={handleEditClick(id)} />,
+          <GridActionsCellItem key={`edit-${id}`} icon={<IconEdit />} label="Editar" onClick={setRows['holi']} />,
           <GridActionsCellItem key={`delete-${id}`} icon={<IconTrash />} label="Eliminar" onClick={handleDeleteClick(id)} />
         ];
       }
@@ -156,10 +162,18 @@ function DataGridPerfiles() {
           toolbar: EditToolbar
         }}
         slotProps={{
-          toolbar: { setRows, setRowModesModel }
+          toolbar: { setRows, setRowModesModel, rows }
         }}
       />
-      <ConfirmDialog isOpen={isOpen} handleClose={() => setIsOpen(false)} handleDeleteClick={handleConfirmClick} />
+      <ConfirmDialog 
+        isOpen={isOpen}
+        handleClose={() => setIsOpen(false)}
+        handleDeleteClick={handleConfirmClick}
+        action={'eliminar'}
+        titulo={'Eliminar perfil'}
+        contenido={'¿Desea eliminar el perfil?'}
+        setIsConfirmed={setIsConfirmed}
+      />
     </div>
   );
 }
