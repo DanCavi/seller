@@ -1,6 +1,6 @@
 from database.database import getSession
 from models.models import Perfil
-from sqlalchemy import select, insert
+from sqlalchemy import select, insert, update, delete
 from flask import request, jsonify
 
 
@@ -23,7 +23,7 @@ def addPerfil():
         with getSession() as session:
             session.execute(insert(Perfil), request.json)
             session.commit()
-            return 'Se guardó el perfil, creo...'
+            return jsonify([{'message': 'Perfil guardado correctamente'}])
     except Exception as e:
         return jsonify([{"message": "Unknown error"}, {"error": str(e)}])
 
@@ -32,10 +32,9 @@ def deletePerfil(id):
     """Borra un perfil"""
     try:
         with getSession() as session:
-            perfil = session.get(Perfil, id)
-            session.delete(perfil)
+            session.execute(delete(Perfil).where(Perfil.perfil_id == id))
             session.commit()
-            return "Y se perdió el perfil"
+            return jsonify([{'message': 'Se borró el perfil correctamente'}])
     except Exception as e:
         return jsonify([{"message": "Unknown error"}, {"error": str(e)}])
 
@@ -44,6 +43,18 @@ def setPerfil(id):
     """Actualiza los datos de un perfil"""
     try:
         with getSession() as session:
-            return "Setting..." + id
+            session.execute(update(Perfil).where(Perfil.perfil_id == id), request.json)
+            session.commit()
+            return jsonify([{'message': 'Se actualizo el perfil'}])
     except Exception as e:
         return jsonify([{"message": "Unknown error"}, {"error": str(e)}])
+
+def getPerfil(id):
+    '''Obtiene un perfil por id'''
+    try:
+        with getSession() as session:
+            result = session.scalar(select(Perfil).where(Perfil.perfil_id == id))
+            result = result.to_dict()
+        return result
+    except Exception as e:
+        return jsonify([{"message": "No connection to db "}, {"error": str(e)}])

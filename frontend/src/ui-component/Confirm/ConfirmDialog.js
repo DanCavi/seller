@@ -1,5 +1,6 @@
 import { Dialog, DialogContent, DialogTitle } from "@material-ui/core"
-import { Button, DialogActions, DialogContentText } from "@mui/material"
+import { Button, DialogActions, DialogContentText, Grid } from "@mui/material"
+import { IconAlertTriangle } from "@tabler/icons-react"
 
 
 const ConfirmDialog = ({ setIsConfirmed, action, isOpen, handleClose, titulo, contenido}) => {
@@ -19,12 +20,19 @@ const ConfirmDialog = ({ setIsConfirmed, action, isOpen, handleClose, titulo, co
       </DialogTitle>
       <DialogContent>
         <DialogContentText>
-          {contenido}
+          <Grid container spacing={2}>
+            <Grid item xs={4} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <IconAlertTriangle color="red" size={80} />
+            </Grid>
+            <Grid item xs={8} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              {contenido}
+            </Grid>
+          </Grid>
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleConfirm} variant="contained" color="primary">Confirmar</Button>
-        <Button onClick={handleClose} variant="contained" color="error">Cancelar</Button>
+        <Button onClick={handleConfirm} variant="contained" color="error">Confirmar</Button>
+        <Button onClick={handleClose} variant="contained" color="primary">Cancelar</Button>
       </DialogActions>
     </Dialog>
   )

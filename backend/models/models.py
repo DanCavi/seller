@@ -1,8 +1,6 @@
-from sqlalchemy import DateTime, ForeignKey, Column, Table, String
+from sqlalchemy import DateTime, ForeignKey
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from sqlalchemy_serializer import SerializerMixin
-from datetime import datetime
-from typing import List
 
 class Base(DeclarativeBase, SerializerMixin):
     pass
@@ -29,4 +27,3 @@ class Usuario(Base):
     estado: Mapped[str]
     perfil_id: Mapped[int] = mapped_column(ForeignKey('perfil.perfil_id'))
     perfil: Mapped["Perfil"] = relationship() 
-

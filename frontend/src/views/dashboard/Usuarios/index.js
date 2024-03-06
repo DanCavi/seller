@@ -96,11 +96,10 @@ const Usuarios = () => {
       flex: 1,
       editable: false,
       valueGetter: (params) => {
-        try {
-          params.row.perfil.nombre;
-          return params.row.perfil.nombre;
-        } catch (error) {
-          return 'Sin Perfil';
+        if (params.row.perfil_nombre) {
+          return params.row.perfil_nombre
+        } else {
+          return 'Sin perfil'
         }
       }
     },

@@ -14,8 +14,8 @@ def group_perfiles_usuario():
 @perfiles_usuario_blueprint.route("/perfiles-usuario/<int:id>", methods=["DELETE", "PATCH", "GET"])
 def item_perfiles_usuario(id):
     if request.method == "GET":
-        return 'getPerfil(id)'
+        return getPerfil(id)
     if request.method == "DELETE":
         return deletePerfil(id)
     if request.method == "PATCH":
-        return setPerfil()
+        return setPerfil(id)

@@ -1,18 +1,30 @@
 from database.database import getSession
-from models.models import Usuario
+from models.models import Usuario, Perfil
 from sqlalchemy import select, insert, update
 from flask import request, jsonify
 from utils.rut import validaRut
 
 
 def getUsuarios():
-    """Obtiene todos los datos de la tabla perfil y lo regresa como dict"""
+    """Obtiene todos los datos de la clase Usuario"""
     try:
         with getSession() as session:
-            result = session.scalars(select(Usuario))
+            result = session.execute(
+                select(
+                    Usuario.usuario,
+                    Usuario.usuario_id,
+                    Usuario.nombre,
+                    Usuario.apellido,
+                    Usuario.rut,
+                    Usuario.digito_verificador,
+                    Perfil.nombre.label('perfil_nombre'),
+                    Usuario.estado,
+                )
+                .join(Usuario.perfil, isouter=True)
+                .order_by(Usuario.usuario_id)
+            )
             if result:
-                user_dict = [user.to_dict() for user in result]
-                return jsonify(user_dict)
+                return jsonify([row._asdict() for row in result])
             return jsonify({"message": "No existen usuarios"})
     except Exception as e:
         return jsonify([{"message": "No connection to db "}, {"error": str(e)}])

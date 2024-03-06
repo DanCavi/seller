@@ -27,3 +27,23 @@ export const postData = async (endpoint, data) => {
     throw error
   }
 }
+
+export const patchData = async (endpoint, data) => {
+  try {
+    const response = await instance.patch(endpoint, data);
+    return response.data
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
+}
+
+export const deleteData = async (endpoint) => {
+  try {
+    const response = await instance.delete(endpoint);
+    return response.data
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
+}

@@ -1,17 +1,12 @@
 import { DataGrid, GridRowEditStopReasons, GridToolbarContainer, useGridApiContext } from '@mui/x-data-grid';
 import { useState, useEffect } from 'react';
-// import axios from 'axios';
-// import url from 'baseUrl';
-import { getData, postData } from '../api';
+import { getData, postData, patchData, deleteData } from '../api';
 import { Button } from '@mui/material';
 import { IconPlus } from '@tabler/icons-react';
 import { GridActionsCellItem, GridRowModes } from '@mui/x-data-grid';
 import { IconDeviceFloppy, IconEdit, IconList, IconTrash, IconX } from '@tabler/icons-react';
 import ConfirmDialog from 'ui-component/Confirm/ConfirmDialog';
 
-// const urlModulo = '/perfiles-usuario';
-// const URIGETALL = `${url.BASE_URL}${urlModulo}`;
-// const URIDELETE = `${url.BASE_URL}${urlModulo}/`;
 
 function EditToolbar(props) {
   const { setRows, setRowModesModel, rows } = props;
@@ -41,43 +36,47 @@ function DataGridPerfiles() {
   const [rows, setRows] = useState([]);
   const [rowModesModel, setRowModesModel] = useState({});
   const [isOpen, setIsOpen] = useState(false);
-  // const [isConfirmed, setIsConfirmed] = useState({ action: '' });
+  const [isConfirmed, setIsConfirmed] = useState();
+  const [isEdit, setIsEdit] = useState(false);
+  const [eliminarId, setEliminarId] = useState([]);
 
   useEffect(() => {
     getData('')
-      .then(
-        data => setRows(data)
-        )
-      .catch(error => console.log('Error: \n', error))
+      .then((data) => setRows(data))
+      .catch((error) => console.log('Error: \n', error));
   }, []);
 
-  
+  useEffect(() => {
+    if (isConfirmed) {
+      handleConfirmClick();
+    }
+  }, [isConfirmed]);
+
   const handleRowEditStop = (params, event) => {
     if (params.reason === GridRowEditStopReasons.rowFocusOut) {
       event.defaultMuiPrevented = true;
     }
   };
 
-  // const handleEditClick = (perfil_id) => () => {
-  //   setRowModesModel({ ...rowModesModel, [perfil_id]: { mode: GridRowModes.Edit } });
-  // };
+  const handleEditClick = (perfil_id) => () => {
+    setRowModesModel({ ...rowModesModel, [perfil_id]: { mode: GridRowModes.Edit, fieldToFocus: 'nombre' } });
+    setIsEdit(true);
+  };
 
   const handleSaveClick = (perfil_id) => () => {
     setRowModesModel({ ...rowModesModel, [perfil_id]: { mode: GridRowModes.View } });
-    const row = rows.find((row) => row.perfil_id === perfil_id);
-    postData('', row)
-      .then(console.log(perfil_id))
-      .catch(error => console.log('Error: \n', error));
   };
 
   const handleDeleteClick = (perfil_id) => () => {
     setIsOpen(true);
-
-    setRows(rows.filter((row) => row.perfil_id !== perfil_id));
+    setEliminarId(perfil_id);
   };
 
-  const handleConfirmClick = (perfil_id) => () => {
-    setRows(rows.filter((row) => row.perfil_id !== perfil_id));
+  const handleConfirmClick = () => {
+    deleteData(`/${eliminarId}`)
+      .then(console.log('perfil_id: ', eliminarId))
+      .catch((error) => console.log('Error: \n', error));
+    setRows(rows.filter((row) => row.perfil_id !== eliminarId));
   };
 
   const handleCancelClick = (perfil_id) => () => {
@@ -95,6 +94,14 @@ function DataGridPerfiles() {
   const processRowUpdate = (newRow) => {
     const updatedRow = { ...newRow, isNew: false };
     setRows(rows.map((row) => (row.perfil_id === newRow.perfil_id ? updatedRow : row)));
+    isEdit
+      ? patchData(`/${newRow.perfil_id}`, newRow)
+          .then((data) => console.log(data))
+          .catch((error) => console.log('Error: \n', error))
+      : postData('', newRow)
+          .then((data) => console.log(data))
+          .catch((error) => console.log('Error: \n', error));
+    setIsEdit(false);
     return updatedRow;
   };
 
@@ -129,7 +136,7 @@ function DataGridPerfiles() {
 
         return [
           <GridActionsCellItem key={`menu-${id}`} icon={<IconList />} label="Menú" />,
-          <GridActionsCellItem key={`edit-${id}`} icon={<IconEdit />} label="Editar" onClick={setRows['holi']} />,
+          <GridActionsCellItem key={`edit-${id}`} icon={<IconEdit />} label="Editar" onClick={handleEditClick(id)} />,
           <GridActionsCellItem key={`delete-${id}`} icon={<IconTrash />} label="Eliminar" onClick={handleDeleteClick(id)} />
         ];
       }
@@ -151,7 +158,7 @@ function DataGridPerfiles() {
         columns={columns}
         initialState={{
           pagination: {
-            paginationModel: { pageSize: 5 }
+            paginationModel: { pageSize: 10 }
           },
           sorting: {
             sortModel: [{ field: 'nombre', sort: 'asc' }]
@@ -165,7 +172,7 @@ function DataGridPerfiles() {
           toolbar: { setRows, setRowModesModel, rows }
         }}
       />
-      <ConfirmDialog 
+      <ConfirmDialog
         isOpen={isOpen}
         handleClose={() => setIsOpen(false)}
         handleDeleteClick={handleConfirmClick}
