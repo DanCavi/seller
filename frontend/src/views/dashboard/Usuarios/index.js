@@ -1,20 +1,18 @@
 // material-ui
 import { DataGrid, GridActionsCellItem, GridRowEditStopReasons, GridToolbarContainer } from '@mui/x-data-grid';
-
-// project imports
 import MainCard from 'ui-component/cards/MainCard';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import url from 'baseUrl';
+import {
+  getData,
+  // postData,
+  // patchData
+  } from './api';
 import ConfirmDialog from 'ui-component/Confirm/ConfirmDialog';
 import { Button } from '@mui/material';
 import { IconEdit, IconLockOff, IconPlus, IconLock, IconRotate2 } from '@tabler/icons-react';
 import DialogUsuario from './components/DialogUsuario';
 import DialogEditUsuario from './components/DialogEditUsuario';
 
-const urlModulo = '/usuarios';
-const URIGETALL = `${url.BASE_URL}${urlModulo}`;
-const URIEDITUSER = `${url.BASE_URL}${urlModulo}/`;
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
@@ -40,20 +38,16 @@ const Usuarios = () => {
   const [editOpen, setEditOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
   const [isConfirmed, setIsConfirmed] = useState({action: ''});
+  // const [isBlocked, setIsBlocked] = useState(false);
 
   // TRAIGO LAS FILAS DEL DATAGRID
 
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(URIGETALL)
-      .then((response) => {
-        setRows(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    getData()
+      .then((data) => setRows(data))
+      .catch((error) => console.log('Error: \n', error));
   }, []);
 
   // COLUMNAS DEL DATAGRID
@@ -96,11 +90,7 @@ const Usuarios = () => {
       flex: 1,
       editable: false,
       valueGetter: (params) => {
-        if (params.row.perfil_nombre) {
-          return params.row.perfil_nombre
-        } else {
-          return 'Sin perfil'
-        }
+        return params.row.perfil_nombre ? params.row.perfil_nombre : 'Sin perfil'
       }
     },
     {
@@ -116,6 +106,8 @@ const Usuarios = () => {
       flex: 1,
       getActions: ({ id }) => {
         const isBlocked = rows.find((row) => row.usuario_id === id)?.estado === 'Bloqueado';
+        // isBlocked ? setIsBlocked(true) : setIsBlocked(false);
+
         function handleEditClick () {
           setSelectedRow(rows.find((row) => row.usuario_id === id));
           setEditOpen(true);
@@ -130,7 +122,7 @@ const Usuarios = () => {
           <GridActionsCellItem key={`edit-${id}`} icon={<IconEdit />} label="Editar" onClick={handleEditClick} />,
           <GridActionsCellItem key={`refresh-${id}`} icon={<IconRotate2 />} label="Reestablecer contraseña" />,
           isBlocked ? (
-            <GridActionsCellItem key={`unblock-${id}`} icon={<IconLockOff />} label="Desbloquear" />
+            <GridActionsCellItem key={`unblock-${id}`} icon={<IconLockOff />} label="Desbloquear" onClick={handleBlockClick} />
           ) : (
             <GridActionsCellItem key={`block-${id}`} icon={<IconLock />} label="Bloquear" onClick={handleBlockClick} />
           )

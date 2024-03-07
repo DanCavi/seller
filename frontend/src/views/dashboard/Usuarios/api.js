@@ -1,7 +1,7 @@
 import axios from 'axios';
 import url from 'baseUrl';
 
-const urlModulo = '/perfiles-usuario';
+const urlModulo = '/usuarios';
 const baseURL = `${url.BASE_URL}${urlModulo}`;
 
 const instance = axios.create({
@@ -17,6 +17,15 @@ export const getData = async () => {
     throw error;
   }
 };
+
+export const getColumns = async () => {
+  try {
+    const response = await instance.get('/columns');
+    return response.data
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }}
 
 export const postData = async (data) => {
   try {

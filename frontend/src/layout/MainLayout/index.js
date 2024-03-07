@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
-
+import { ErrorBoundary } from 'react-error-boundary';
 // material-ui
 import { styled, useTheme } from '@mui/material/styles';
 import { AppBar, Box, CssBaseline, Toolbar, useMediaQuery } from '@mui/material';
@@ -15,6 +15,7 @@ import { SET_MENU } from 'store/actions';
 
 // assets
 import { IconChevronRight } from '@tabler/icons-react';
+import ErrorPage from 'views/errors';
 
 // styles
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' && prop !== 'theme' })(({ theme, open }) => ({
@@ -53,6 +54,8 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' && pr
 // ==============================|| MAIN LAYOUT ||============================== //
 
 const MainLayout = () => {
+  
+
   const theme = useTheme();
   const matchDownMd = useMediaQuery(theme.breakpoints.down('md'));
   // Handle left drawer
@@ -61,6 +64,10 @@ const MainLayout = () => {
   const handleLeftDrawerToggle = () => {
     dispatch({ type: SET_MENU, opened: !leftDrawerOpened });
   };
+
+  function ErrorFallback({ resetErrorBoundary }) {
+    return <ErrorPage resetErrorBoundary={resetErrorBoundary} />;
+  }
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -88,7 +95,9 @@ const MainLayout = () => {
       <Main theme={theme} open={leftDrawerOpened}>
         {/* breadcrumb */}
         <Breadcrumbs separator={IconChevronRight} navigation={navigation} icon title rightAlign />
-        <Outlet />
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <Outlet />
+        </ErrorBoundary>
       </Main>
     </Box>
   );

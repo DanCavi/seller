@@ -1,87 +1,74 @@
-// material-ui
-import { Button, InputLabel } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { Button, Grid, InputLabel, Typography } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
-import { IconCloudUpload } from '@tabler/icons-react';
-// project imports
 import MainCard from 'ui-component/cards/MainCard';
-
 import SelectStandar from 'ui-component/Select/Select';
+import { ExampleCSV, UploadFile, columns } from './utils.js/UtilsCSV';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const VisuallyHiddenInput = styled('input')({
-  clip: 'rect(0 0 0 0)',
-  clipPath: 'inset(50%)',
-  height: 1,
-  overflow: 'hidden',
-  position: 'absolute',
-  bottom: 0,
-  left: 0,
-  whiteSpace: 'nowrap',
-  width: 1
-});
 
-const rows = [
-  {
-    id: 1,
-    nombre: 'test',
-    apellido: 'test',
-    correo: 'test',
-    telefono: 'test',
-    Nacionalidad: 'test'
-  }
-];
 
-const columns = [
-  {
-    field: 'nombre',
-    headerName: 'Nombre',
-    width: 200
-  },
-  {
-    field: 'apellido',
-    headerName: 'Apellido',
-    width: 200
-  },
-  {
-    field: 'correo',
-    headerName: 'Correo',
-    width: 200
-  },
-  {
-    field: 'telefono',
-    headerName: 'Telefono',
-    width: 200
-  },
-  {
-    field: 'Nacionalidad',
-    headerName: 'Nacionalidad',
-    width: 200
-  }
-];
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
-const CargaDeDatos = () => (
-  <MainCard title="Modulo de Cargas">
-    <InputLabel>Seleccione canal para subir datos</InputLabel>
-    <SelectStandar datos={['Archivo Local']} />
-    <InputLabel>Seleccione la data cargada</InputLabel>
-    <SelectStandar datos={['Prospecto', 'Campaña']} />
-    <Button fullWidth sx={{ mb: 2 }} component="label" variant="contained" tabIndex={-1} startIcon={<IconCloudUpload />}>
-      Carga de datos
-      <VisuallyHiddenInput type="file" />
-    </Button>
-    <DataGrid autoHeight rows={rows} columns={columns} sx={{ mb: 2 }} />
-    <Button
-      variant="contained"
-      fullWidth
-      onClick={() => {
-        alert('Carga de datos exitosa');
-      }}
-    >
-      Cargar
-    </Button>
+const CargaDeDatos = () => {
+  const [rows, setRows] = useState([]);
+
+  useEffect(() => () =>  {
+    axios
+      .post('/api/v1/usuarios', rows)
+      .then((data) => {
+        console.log(data)
+      })
+  }, [rows, setRows])
+
+  return (
+
+    
+    <MainCard title="Modulo de Cargas">
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <InputLabel>Seleccione canal para subir datos</InputLabel>
+        <SelectStandar datos={['Archivo Local']} value={''} />
+      </Grid>
+      <Grid item xs={12}>
+        <InputLabel>Seleccione la data cargada</InputLabel>
+        <SelectStandar datos={['Prospecto', 'Campaña']} value={''} />
+      </Grid>
+      <Grid item xs={12}>
+        <Typography variant='h5'>
+          Descargar ejemplo CSV <ExampleCSV />
+        </Typography>
+        <UploadFile setRows={setRows}/>
+      </Grid>
+      <Grid item xs={12}>
+        <DataGrid
+          autoHeight 
+          rows={rows} 
+          columns={columns} 
+          sx={{ mb: 2 }}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 10
+              }
+            }
+          }}
+          pageSizeOptions={[10, 20, 30]}
+        />
+        <Button
+          variant="contained"
+          fullWidth
+          onClick={() => {
+            alert('Carga de datos exitosa');
+          }}
+          >
+          Cargar
+        </Button>
+      </Grid>
+    </Grid>
   </MainCard>
-);
+  )
+};
 
 export default CargaDeDatos;

@@ -41,7 +41,7 @@ function DataGridPerfiles() {
   const [eliminarId, setEliminarId] = useState([]);
 
   useEffect(() => {
-    getData('')
+    getData()
       .then((data) => setRows(data))
       .catch((error) => console.log('Error: \n', error));
   }, []);
@@ -98,7 +98,7 @@ function DataGridPerfiles() {
       ? patchData(`/${newRow.perfil_id}`, newRow)
           .then((data) => console.log(data))
           .catch((error) => console.log('Error: \n', error))
-      : postData('', newRow)
+      : postData(newRow)
           .then((data) => console.log(data))
           .catch((error) => console.log('Error: \n', error));
     setIsEdit(false);

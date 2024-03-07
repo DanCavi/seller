@@ -36,6 +36,7 @@ const DashboardVariableWorkshop = Loadable(lazy(() => import('views/dashboard/Va
 const MainRoutes = {
   path: '/',
   element: <MainLayout />,
+  
   children: [
     {
       path: '/',
@@ -44,6 +45,7 @@ const MainRoutes = {
     {
       path: 'dashboard',
       children: [
+
         {
           path: 'default',
           element: <DashboardDefault />
