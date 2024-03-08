@@ -1,7 +1,7 @@
 from database.database import getSession
 from models.models import Usuario, Perfil
 from sqlalchemy import select
-import json
+from flask import jsonify
 
 
 def getEjecutivos():

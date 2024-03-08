@@ -42,9 +42,18 @@ def getUsuario(id):
 
 def getColumns():
     """Trae el nombre de las columnas de la tabla"""
-    keys_list = list(Usuario.__table__.columns.keys())
-    keys_list = [key.title() for key in keys_list if key not in ["usuario_id", "password", "perfil_id", "digito_verificador", "estado"]]
-    return jsonify(keys_list)
+    try:
+        with getSession() as session:
+            result = session.execute(
+                select(Perfil.nombre)
+            )
+            result_as_json = jsonify([row._asdict() for row in result])
+            keys_list = Usuario.__table__.columns.keys()
+            print(keys_list)
+            return jsonify(keys_list)
+    except Exception as e:
+        return jsonify([{"message": "No connection to db "}, {"error": str(e)}])
+            
 
 def addUsuario():
     """Crea un nuevo usuario"""

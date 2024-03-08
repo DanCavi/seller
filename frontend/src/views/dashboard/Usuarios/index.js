@@ -3,16 +3,17 @@ import { DataGrid, GridActionsCellItem, GridRowEditStopReasons, GridToolbarConta
 import MainCard from 'ui-component/cards/MainCard';
 import { useEffect, useState } from 'react';
 import {
-  getData,
+  getData, patchData,
   // postData,
   // patchData
   } from './api';
-import ConfirmDialog from 'ui-component/Confirm/ConfirmDialog';
 import { Button } from '@mui/material';
 import { IconEdit, IconLockOff, IconPlus, IconLock, IconRotate2 } from '@tabler/icons-react';
 import DialogUsuario from './components/DialogUsuario';
 import DialogEditUsuario from './components/DialogEditUsuario';
+import { lazy } from 'react';
 
+const ConfirmDialog = lazy(() => import('ui-component/Confirm/ConfirmDialog')); 
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
@@ -38,7 +39,7 @@ const Usuarios = () => {
   const [editOpen, setEditOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
   const [isConfirmed, setIsConfirmed] = useState({action: ''});
-  // const [isBlocked, setIsBlocked] = useState(false);
+  const [dialog, setDialog] = useState({ titulo: '', contenido: ''});
 
   // TRAIGO LAS FILAS DEL DATAGRID
 
@@ -106,7 +107,6 @@ const Usuarios = () => {
       flex: 1,
       getActions: ({ id }) => {
         const isBlocked = rows.find((row) => row.usuario_id === id)?.estado === 'Bloqueado';
-        // isBlocked ? setIsBlocked(true) : setIsBlocked(false);
 
         function handleEditClick () {
           setSelectedRow(rows.find((row) => row.usuario_id === id));
@@ -114,9 +114,17 @@ const Usuarios = () => {
         }
 
         function handleBlockClick () {
-          setSelectedRow(rows.find((row) => row.usuario_id === id));
+          setSelectedRow((prevSelectedRow) => {
+            console.log(prevSelectedRow);
+            const currentSelectedRow = rows.find((row) => row.usuario_id === id);
+           currentSelectedRow.estado === 'Bloqueado'
+            ? setDialog({titulo: 'Desbloquear usuario', contenido: '¿Desea desbloquear el usuario?'})
+            : setDialog({titulo: 'Bloquear usuario', contenido: '¿Desea bloquear el usuario?'});
           setIsOpen(true);
-        }
+
+          return currentSelectedRow;
+        });
+      }
 
         return [
           <GridActionsCellItem key={`edit-${id}`} icon={<IconEdit />} label="Editar" onClick={handleEditClick} />,
@@ -151,14 +159,18 @@ const Usuarios = () => {
 
   useEffect(() => {
     if (isConfirmed.action === 'block') {
-      axios
-        .patch(URIEDITUSER + selectedRow.usuario_id, isConfirmed)
-        .then((response) => {
-          console.log(isConfirmed)
-          console.log(response.data)
+      patchData(`/${selectedRow?.usuario_id}`, {action: 'block'})
+        .then((data) => {
+          if (data.lenght) {
+            console.log(data)
+          } else {
+            selectedRow.estado = data.estado
+            processRowUpdate(selectedRow)
+          }
         })
-        .catch((error) => {
-          console.log(error)
+        .catch((error) => console.log('Error: \n', error))
+        .finally(() => {
+          setIsConfirmed({action: ''})
         })
     }
   }, [isConfirmed]);
@@ -204,8 +216,8 @@ const Usuarios = () => {
       <ConfirmDialog
         isOpen={isOpen}
         handleClose={() => setIsOpen(false)} 
-        titulo={'Bloquear usuario'}
-        contenido={'Está seguro que desea bloquear este usuario?'}
+        titulo={dialog.titulo}
+        contenido={dialog.contenido}
         setIsConfirmed={setIsConfirmed}
         action={'block'}
         isConfirmed={isConfirmed}

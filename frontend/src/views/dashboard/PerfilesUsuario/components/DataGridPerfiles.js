@@ -7,11 +7,9 @@ import { GridActionsCellItem, GridRowModes } from '@mui/x-data-grid';
 import { IconDeviceFloppy, IconEdit, IconList, IconTrash, IconX } from '@tabler/icons-react';
 import ConfirmDialog from 'ui-component/Confirm/ConfirmDialog';
 
-
 function EditToolbar(props) {
   const { setRows, setRowModesModel, rows } = props;
   const apiRef = useGridApiContext();
-
   const handleClick = () => {
     apiRef.current.setPage(0);
     const maxId = Math.max(...rows.map((row) => row.perfil_id), 0);
@@ -43,7 +41,7 @@ function DataGridPerfiles() {
   useEffect(() => {
     getData()
       .then((data) => setRows(data))
-      .catch((error) => console.log('Error: \n', error));
+      .catch((error) => console.error(error))
   }, []);
 
   useEffect(() => {
@@ -54,7 +52,13 @@ function DataGridPerfiles() {
 
   const handleRowEditStop = (params, event) => {
     if (params.reason === GridRowEditStopReasons.rowFocusOut) {
-      event.defaultMuiPrevented = true;
+      setRowModesModel({
+        ...rowModesModel,
+        [params.id]: { mode: GridRowModes.View, ignoreModifications: true }
+      });
+      setRows(rows.filter((row) => row.perfil_id !== params.id));
+      console.log(setRowModesModel);
+      console.log(event)
     }
   };
 
@@ -74,9 +78,11 @@ function DataGridPerfiles() {
 
   const handleConfirmClick = () => {
     deleteData(`/${eliminarId}`)
-      .then(console.log('perfil_id: ', eliminarId))
+      .then(() => {
+        setRows(rows.filter((row) => row.perfil_id !== eliminarId));
+        setEliminarId([]);
+      })
       .catch((error) => console.log('Error: \n', error));
-    setRows(rows.filter((row) => row.perfil_id !== eliminarId));
   };
 
   const handleCancelClick = (perfil_id) => () => {
@@ -153,6 +159,7 @@ function DataGridPerfiles() {
         onRowModesModelChange={handleRowModesModelChange}
         onRowEditStop={handleRowEditStop}
         processRowUpdate={processRowUpdate}
+        onProcessRowUpdateError={(error) => console.log('Error: \n', error)}
         getRowId={(row) => row.perfil_id}
         rows={rows}
         columns={columns}
@@ -175,7 +182,6 @@ function DataGridPerfiles() {
       <ConfirmDialog
         isOpen={isOpen}
         handleClose={() => setIsOpen(false)}
-        handleDeleteClick={handleConfirmClick}
         action={'eliminar'}
         titulo={'Eliminar perfil'}
         contenido={'¿Desea eliminar el perfil?'}

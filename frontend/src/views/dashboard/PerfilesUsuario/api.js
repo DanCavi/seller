@@ -8,6 +8,7 @@ const instance = axios.create({
   baseURL,
 });
 
+
 export const getData = async () => {
   try {
     const response = await instance.get();

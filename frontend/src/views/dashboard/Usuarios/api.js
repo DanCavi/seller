@@ -4,6 +4,7 @@ import url from 'baseUrl';
 const urlModulo = '/usuarios';
 const baseURL = `${url.BASE_URL}${urlModulo}`;
 
+
 const instance = axios.create({
   baseURL,
 });
