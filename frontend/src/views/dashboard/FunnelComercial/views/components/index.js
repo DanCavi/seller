@@ -1,3 +1,4 @@
 import ProspectosChart from "./ProspectosChart";
+import DialogFunnel from "./DialogFunnel"
 
-export { ProspectosChart }
+export { ProspectosChart, DialogFunnel }

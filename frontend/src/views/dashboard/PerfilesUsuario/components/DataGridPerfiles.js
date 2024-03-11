@@ -10,11 +10,13 @@ import ConfirmDialog from 'ui-component/Confirm/ConfirmDialog';
 function EditToolbar(props) {
   const { setRows, setRowModesModel, rows } = props;
   const apiRef = useGridApiContext();
+
   const handleClick = () => {
     apiRef.current.setPage(0);
     const maxId = Math.max(...rows.map((row) => row.perfil_id), 0);
     const id = maxId + 1;
-    setRows((oldRows) => [...oldRows, { perfil_id: id, nombre: '', isNew: true }]);
+    setRows((oldRows) => [...oldRows, { perfil_id: id, nombre: '', isNew: true}]);
+    apiRef.current.sortColumn({ field: 'perfil_id', sortable: true }, 'desc');
     setRowModesModel((oldModel) => ({
       ...oldModel,
       [id]: { mode: GridRowModes.Edit, fieldToFocus: 'nombre' }
@@ -35,13 +37,12 @@ function DataGridPerfiles() {
   const [rowModesModel, setRowModesModel] = useState({});
   const [isOpen, setIsOpen] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState();
-  const [isEdit, setIsEdit] = useState(false);
   const [eliminarId, setEliminarId] = useState([]);
 
   useEffect(() => {
     getData()
       .then((data) => setRows(data))
-      .catch((error) => console.error(error))
+      .catch((error) => console.error(error));
   }, []);
 
   useEffect(() => {
@@ -50,25 +51,13 @@ function DataGridPerfiles() {
     }
   }, [isConfirmed]);
 
-  const handleRowEditStop = (params, event) => {
-    if (params.reason === GridRowEditStopReasons.rowFocusOut) {
-      setRowModesModel({
-        ...rowModesModel,
-        [params.id]: { mode: GridRowModes.View, ignoreModifications: true }
-      });
-      setRows(rows.filter((row) => row.perfil_id !== params.id));
-      console.log(setRowModesModel);
-      console.log(event)
-    }
-  };
-
   const handleEditClick = (perfil_id) => () => {
     setRowModesModel({ ...rowModesModel, [perfil_id]: { mode: GridRowModes.Edit, fieldToFocus: 'nombre' } });
-    setIsEdit(true);
   };
 
   const handleSaveClick = (perfil_id) => () => {
     setRowModesModel({ ...rowModesModel, [perfil_id]: { mode: GridRowModes.View } });
+
   };
 
   const handleDeleteClick = (perfil_id) => () => {
@@ -98,16 +87,17 @@ function DataGridPerfiles() {
   };
 
   const processRowUpdate = (newRow) => {
+    newRow.isNew
+      ? postData(newRow)
+        .then((data) => console.log(data))
+        .catch((error) => console.log('Error: \n', error))
+      : patchData(`/${newRow.perfil_id}`, newRow)
+        .then((data) => console.log(data))
+        .catch((error) => console.log('Error: \n', error));
     const updatedRow = { ...newRow, isNew: false };
-    setRows(rows.map((row) => (row.perfil_id === newRow.perfil_id ? updatedRow : row)));
-    isEdit
-      ? patchData(`/${newRow.perfil_id}`, newRow)
-          .then((data) => console.log(data))
-          .catch((error) => console.log('Error: \n', error))
-      : postData(newRow)
-          .then((data) => console.log(data))
-          .catch((error) => console.log('Error: \n', error));
-    setIsEdit(false);
+    const estasRows = rows.map((row) => (row.perfil_id === newRow.perfil_id ? updatedRow : row));
+    setRows(estasRows)
+    
     return updatedRow;
   };
 
@@ -117,11 +107,17 @@ function DataGridPerfiles() {
 
   const columns = [
     {
+      field: 'perfil_id'
+    },
+    {
       field: 'nombre',
       headerName: 'Nombre',
       flex: 1,
       editable: true,
-      sortable: false
+      // preProcessEditCellProps: (params) => {
+      //   console.log(params.props)
+      //   return { ...params.props, error: true };
+      // }
     },
     {
       field: 'actions',
@@ -155,20 +151,27 @@ function DataGridPerfiles() {
         autoHeight
         disableColumnMenu
         editMode="row"
+        onRowEditStop={(params, event) => {
+          if (params.reason === GridRowEditStopReasons.rowFocusOut) {
+            event.defaultMuiPrevented = true;
+          }
+        }}
         rowModesModel={rowModesModel}
         onRowModesModelChange={handleRowModesModelChange}
-        onRowEditStop={handleRowEditStop}
         processRowUpdate={processRowUpdate}
-        onProcessRowUpdateError={(error) => console.log('Error: \n', error)}
+        onProcessRowUpdateError={(error) => console.log(error)}
         getRowId={(row) => row.perfil_id}
         rows={rows}
         columns={columns}
         initialState={{
+          columns: {
+            columnVisibilityModel: { perfil_id: false }
+          },
           pagination: {
             paginationModel: { pageSize: 10 }
           },
           sorting: {
-            sortModel: [{ field: 'nombre', sort: 'asc' }]
+            sortModel: [{ field: 'perfil_id', sort: 'asc' }]
           }
         }}
         pageSizeOptions={[5, 10, 20]}
@@ -178,6 +181,10 @@ function DataGridPerfiles() {
         slotProps={{
           toolbar: { setRows, setRowModesModel, rows }
         }}
+        sx={{ '& .MuiDataGrid-row--editing .MuiDataGrid-cell':  {
+          backgroundColor: '#f3a3a347'
+        } }}
+        
       />
       <ConfirmDialog
         isOpen={isOpen}

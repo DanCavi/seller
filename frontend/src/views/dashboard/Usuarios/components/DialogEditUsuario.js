@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import url from 'baseUrl';
 import { Alert, Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, InputLabel } from '@mui/material';
 import Input from 'ui-component/Input/Input';
+import SelectStandar from 'ui-component/Select/Select';
 
 const urlModulo = '/usuarios';
 const URIGETCOLUMNS = `${url.BASE_URL}${urlModulo}/columns`;
@@ -15,19 +16,19 @@ function DialogEditUsuario({ editOpen, setEditOpen, rowData, processRowUpdate })
 
   const handleClose = () => {
     setEditOpen(false);
-  }
-  
+  };
+
   useEffect(() => {
     axios
-    .get(URIGETCOLUMNS)
-    .then ((response) => {
-      setList(response.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    })
+      .get(URIGETCOLUMNS)
+      .then((response) => {
+        setList(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
-  
+
   if (!rowData) return null;
   return (
     <>
@@ -40,7 +41,7 @@ function DialogEditUsuario({ editOpen, setEditOpen, rowData, processRowUpdate })
             const formData = new FormData(event.currentTarget);
             const formJson = Object.fromEntries(formData.entries());
             axios
-              .patch(URIEDITUSER+'/'+rowData.usuario_id, formJson)
+              .patch(URIEDITUSER + '/' + rowData.usuario_id, formJson)
               .then((response) => {
                 if (response.data.length) {
                   setAlertOpen(true);
@@ -49,7 +50,6 @@ function DialogEditUsuario({ editOpen, setEditOpen, rowData, processRowUpdate })
                   processRowUpdate(response.data);
                   handleClose();
                 }
-                
               })
               .catch((error) => {
                 console.log(error);
@@ -62,20 +62,24 @@ function DialogEditUsuario({ editOpen, setEditOpen, rowData, processRowUpdate })
           <Grid container spacing={2}>
             <Grid container item xs={12} spacing={2}>
               {list.map((item) => (
-                
-                <Grid item xs={6} key={item.toLowerCase()}>
-                  
-                  <InputLabel>{item === 'Rut' ? 'Rut (12345678-9)' : item}</InputLabel>
-                  <Input 
-                    name={item.toLowerCase()} 
-                    defaultValue={
-                      item === 'Rut' ? rowData[item.toLowerCase()] + '-' + rowData['digito_verificador'] : rowData[item.toLowerCase()]
-                    }
-                    
-                    
-                  />
+                <Grid item xs={6} key={item}>
+                  {Array.isArray(item) ? (
+                    <>
+                      <InputLabel>{'Perfil'}</InputLabel>
+                      <SelectStandar datos={item} value={rowData['perfil_nombre']}  />
+                    </>
+                  ) : (
+                    <>
+                      <InputLabel>{item === 'Rut' ? 'Rut (12345678-9)' : item}</InputLabel>
+                      <Input
+                        name={item.toLowerCase()}
+                        defaultValue={
+                          item === 'Rut' ? rowData[item.toLowerCase()] + '-' + rowData['digito_verificador'] : rowData[item.toLowerCase()]
+                        }
+                      />
+                    </>
+                  )}
                 </Grid>
-
               ))}
             </Grid>
             <Grid item xs={12}>

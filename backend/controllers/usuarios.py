@@ -47,9 +47,10 @@ def getColumns():
             result = session.execute(
                 select(Perfil.nombre)
             )
-            result_as_json = jsonify([row._asdict() for row in result])
+            perfiles = result.scalars().all()
             keys_list = Usuario.__table__.columns.keys()
-            print(keys_list)
+            keys_list = [key.capitalize() for key in keys_list if key not in ["password", 'usuario_id', 'perfil_id', 'digito_verificador']]
+            keys_list.append(perfiles)
             return jsonify(keys_list)
     except Exception as e:
         return jsonify([{"message": "No connection to db "}, {"error": str(e)}])
@@ -61,7 +62,7 @@ def addUsuario():
         with getSession() as session:
             rut_dict = validaRut(request.json["rut"])
             if rut_dict is None:
-                return jsonify([{"message": "Rut invalido."}])
+                return jsonify([{"message": "Rut invalido."}]), 400
             request.json["rut"], request.json["digito_verificador"] = rut_dict
             session.execute(insert(Usuario), request.json)
             session.commit()

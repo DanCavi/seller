@@ -12,9 +12,10 @@ def getPerfiles():
                 select(Perfil.perfil_id, Perfil.nombre).order_by(Perfil.perfil_id)
             )
             if result:
-                return jsonify([row._asdict() for row in result])
+                return jsonify([row._asdict() for row in result]), 200
+            return jsonify([{"message": "No existen perfiles"}]), 404
     except Exception as e:
-        return jsonify([{"message": "No connection to db "}, {"error": str(e)}])
+        return jsonify([{"message": "No connection to db "}, {"error": str(e)}]), 500
 
 
 def addPerfil():
@@ -23,9 +24,9 @@ def addPerfil():
         with getSession() as session:
             session.execute(insert(Perfil), request.json)
             session.commit()
-            return jsonify([{'message': 'Perfil guardado correctamente'}])
+            return jsonify([{'message': 'Perfil guardado correctamente'}]), 200
     except Exception as e:
-        return jsonify([{"message": "Unknown error"}, {"error": str(e)}])
+        return jsonify([{"message": "Unknown error"}, {"error": str(e)}]), 500
 
 
 def deletePerfil(id):
@@ -34,9 +35,9 @@ def deletePerfil(id):
         with getSession() as session:
             session.execute(delete(Perfil).where(Perfil.perfil_id == id))
             session.commit()
-            return jsonify([{'message': 'Se borró el perfil correctamente'}])
+            return jsonify([{'message': 'Se borró el perfil correctamente'}]), 200
     except Exception as e:
-        return jsonify([{"message": "Unknown error"}, {"error": str(e)}])
+        return jsonify([{"message": "Unknown error"}, {"error": str(e)}]), 500
 
 
 def setPerfil(id):
@@ -45,9 +46,9 @@ def setPerfil(id):
         with getSession() as session:
             session.execute(update(Perfil).where(Perfil.perfil_id == id), request.json)
             session.commit()
-            return jsonify([{'message': 'Se actualizo el perfil'}])
+            return jsonify([{'message': 'Se actualizo el perfil'}]), 200
     except Exception as e:
-        return jsonify([{"message": "Unknown error"}, {"error": str(e)}])
+        return jsonify([{"message": "Unknown error"}, {"error": str(e)}]), 500
 
 def getPerfil(id):
     '''Obtiene un perfil por id'''
@@ -57,4 +58,4 @@ def getPerfil(id):
             result = result.to_dict()
         return result
     except Exception as e:
-        return jsonify([{"message": "No connection to db "}, {"error": str(e)}])
+        return jsonify([{"message": "No connection to db "}, {"error": str(e)}]), 500

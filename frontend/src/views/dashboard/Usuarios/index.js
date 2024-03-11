@@ -98,7 +98,7 @@ const Usuarios = () => {
       field: 'estado',
       headerName: 'Estado',
       flex: 1,
-      editable: false
+      editable: false,
     },
     {
       field: 'actions',
