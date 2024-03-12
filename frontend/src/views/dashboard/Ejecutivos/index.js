@@ -7,24 +7,18 @@ import EjecutivoCard from './components/CardEjecutivo';
 import { useTheme } from '@mui/material/styles';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import axios from 'axios';
-import url from 'baseUrl';
+import { getData } from './api';
+import { useNavigate } from 'react-router-dom';
 
-const urlModulo = '/ejecutivos';
-const URIGETALL = `${url.BASE_URL}${urlModulo}`;
 
 function Ejecutivos() {
   const [ejecutivos, setEjecutivos] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get(URIGETALL)
-      .then((response) => {
-        setEjecutivos(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    getData()
+      .then((data) => setEjecutivos(data))
+      .catch((error) => console.log(error));
   }, []);
 
 
@@ -44,14 +38,15 @@ function Ejecutivos() {
         </Grid>
       </Grid>
       <Grid container spacing={3}>
-        {ejecutivos.map((ejecutivo, index) => (
-          <Grid item md={3} xs={12} key={index}>
+        {ejecutivos.map((ejecutivo) => (
+          <Grid item md={3} xs={12} key={ejecutivo.usuario_id}>
             <EjecutivoCard
-              nombre={ejecutivo.nombre}
+              nombre={ejecutivo.nombre + ' ' + ejecutivo.apellido}
               cantidadDeudores={ejecutivo.deudores}
               porcentajeMetasCumplidas={ejecutivo.metas_cumplidas}
-              gestiones={index[3]}
-              cargo={ejecutivo.perfil.nombre}
+              gestiones={0}
+              cargo={ejecutivo.perfil}
+              onClick={() => navigate(`/dashboard/ejecutivos/${ejecutivo.usuario_id}`)}
             />
           </Grid>
         ))}

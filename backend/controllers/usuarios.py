@@ -84,17 +84,17 @@ def setUsuario(id):
     """Actualiza los datos de un usuario"""
     try:
         with getSession() as session:
-            if request.json["action"]:
+            if (request.json["action"] == 'block'):
                 usuario = session.scalar(
                     select(Usuario).where(Usuario.usuario_id == id)
                 )
                 usuario.estado = "Activo" if usuario.estado == "Bloqueado" else "Bloqueado"
                 session.commit()
-                return usuario.to_dict()
-            else:
+                return jsonify({"message": "Operacion exitosa"}), 200
+            if (request.json["action"] == 'edit'):
                 result = getUsuario(id)
                 if result is None:
-                    return jsonify([{"message": "No se encontro el usuario"}])
+                    return jsonify([{"message": "No se encontro el usuario"}]), 404
                 rut_dict = validaRut(request.json["rut"])
                 if rut_dict is None:
                     return jsonify([{"message": "Rut invalido."}])
@@ -106,8 +106,16 @@ def setUsuario(id):
                 session.commit()
                 result = session.scalar(select(Usuario).where(Usuario.usuario_id == id))
                 return result.to_dict()
+            if (request.json["action"] == 'reset'):
+                usuario = session.scalar(
+                    select(Usuario).where(Usuario.usuario_id == id)
+                )
+                usuario.password = "pass"
+                session.commit()
+                return jsonify({"message": "Operacion exitosa"}), 200
+                
     except Exception as e:
-        return jsonify([{"message": "Unknown error"}, {"error": str(e)}])
+        return jsonify([{"message": "Unknown error"}, {"error": str(e)}]), 500
 
 
 def deleteUsuario(id):

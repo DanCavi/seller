@@ -39,7 +39,7 @@ const Usuarios = () => {
   const [editOpen, setEditOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
   const [isConfirmed, setIsConfirmed] = useState({action: ''});
-  const [dialog, setDialog] = useState({ titulo: '', contenido: ''});
+  const [dialog, setDialog] = useState({ titulo: '', contenido: '', action: ''});
 
   // TRAIGO LAS FILAS DEL DATAGRID
 
@@ -113,13 +113,18 @@ const Usuarios = () => {
           setEditOpen(true);
         }
 
+        function handleResetClick () {
+          setSelectedRow(rows.find((row) => row.usuario_id === id));
+          setDialog({titulo: 'Reestablecer contraseña', contenido: '¿Desea reestablecer la contraseña del usuario?', action: 'reset'});
+          setIsOpen(true)
+        }
+
         function handleBlockClick () {
-          setSelectedRow((prevSelectedRow) => {
-            console.log(prevSelectedRow);
+          setSelectedRow(() => {
             const currentSelectedRow = rows.find((row) => row.usuario_id === id);
            currentSelectedRow.estado === 'Bloqueado'
-            ? setDialog({titulo: 'Desbloquear usuario', contenido: '¿Desea desbloquear el usuario?'})
-            : setDialog({titulo: 'Bloquear usuario', contenido: '¿Desea bloquear el usuario?'});
+            ? setDialog({titulo: 'Desbloquear usuario', contenido: '¿Desea desbloquear el usuario?', action: 'block'})
+            : setDialog({titulo: 'Bloquear usuario', contenido: '¿Desea bloquear el usuario?', action: 'block'});
           setIsOpen(true);
 
           return currentSelectedRow;
@@ -128,7 +133,7 @@ const Usuarios = () => {
 
         return [
           <GridActionsCellItem key={`edit-${id}`} icon={<IconEdit />} label="Editar" onClick={handleEditClick} />,
-          <GridActionsCellItem key={`refresh-${id}`} icon={<IconRotate2 />} label="Reestablecer contraseña" />,
+          <GridActionsCellItem key={`refresh-${id}`} icon={<IconRotate2 />}  label="Reestablecer contraseña" onClick={handleResetClick} />,
           isBlocked ? (
             <GridActionsCellItem key={`unblock-${id}`} icon={<IconLockOff />} label="Desbloquear" onClick={handleBlockClick} />
           ) : (
@@ -171,6 +176,16 @@ const Usuarios = () => {
         .catch((error) => console.log('Error: \n', error))
         .finally(() => {
           setIsConfirmed({action: ''})
+        })
+    }
+    if (isConfirmed.action === 'reset') {
+      patchData(`/${selectedRow?.usuario_id}`, {action: 'reset'})
+        .then((data) => {
+          if (data.lenght) {
+            console.log(data)
+          } else {
+            console.log(data)
+          }
         })
     }
   }, [isConfirmed]);
@@ -219,7 +234,7 @@ const Usuarios = () => {
         titulo={dialog.titulo}
         contenido={dialog.contenido}
         setIsConfirmed={setIsConfirmed}
-        action={'block'}
+        action={dialog.action}
         isConfirmed={isConfirmed}
       />
       <DialogEditUsuario

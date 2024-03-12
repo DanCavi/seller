@@ -21,7 +21,7 @@ const ValidationTextField = styled(TextField)({
     borderRadius: 2
   }
 });
-function InputNombreVariable({ onChange, name, value, defaultValue }) {
+function InputNombreVariable({ onChange, name, value, defaultValue, readOnly = false }) {
   return (
     <>
       <ValidationTextField
@@ -34,6 +34,10 @@ function InputNombreVariable({ onChange, name, value, defaultValue }) {
         id="validation-outlined-input"
         size="small"
         sx={{ width: '100%', mt: 1, mb: 1 }}
+        InputProps={{
+          readOnly: readOnly
+        }}
+
       />
     </>
   );

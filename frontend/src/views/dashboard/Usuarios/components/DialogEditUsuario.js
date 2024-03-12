@@ -9,10 +9,14 @@ const urlModulo = '/usuarios';
 const URIGETCOLUMNS = `${url.BASE_URL}${urlModulo}/columns`;
 const URIEDITUSER = `${url.BASE_URL}${urlModulo}`;
 
-function DialogEditUsuario({ editOpen, setEditOpen, rowData, processRowUpdate }) {
+function DialogEditUsuario({ editOpen, setEditOpen, rowData, processRowUpdate}) {
   const [list, setList] = useState([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [message, setMessage] = useState('');
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  }
 
   const handleClose = () => {
     setEditOpen(false);
@@ -39,7 +43,7 @@ function DialogEditUsuario({ editOpen, setEditOpen, rowData, processRowUpdate })
           onSubmit: (event) => {
             event.preventDefault();
             const formData = new FormData(event.currentTarget);
-            const formJson = Object.fromEntries(formData.entries());
+            const formJson = { ...Object.fromEntries(formData.entries()), action: 'edit' };
             axios
               .patch(URIEDITUSER + '/' + rowData.usuario_id, formJson)
               .then((response) => {
@@ -66,7 +70,7 @@ function DialogEditUsuario({ editOpen, setEditOpen, rowData, processRowUpdate })
                   {Array.isArray(item) ? (
                     <>
                       <InputLabel>{'Perfil'}</InputLabel>
-                      <SelectStandar datos={item} value={rowData['perfil_nombre']}  />
+                      <SelectStandar datos={item} value={rowData.perfil_nombre ? rowData.perfil_nombre : ''} onChange={handleChange} />
                     </>
                   ) : (
                     <>

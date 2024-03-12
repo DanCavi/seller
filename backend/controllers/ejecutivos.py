@@ -8,14 +8,18 @@ def getEjecutivos():
     """Obtiene todos los datos de la tabla perfil y lo regresa como dict"""
     try:
         with getSession() as session:
-            result = session.scalars(
-                select(Usuario, Perfil)
-                .join(Usuario.perfil)
+            result = session.execute(
+                select(
+                    Usuario.usuario_id,
+                    Usuario.nombre,
+                    Usuario.apellido,
+                    Perfil.nombre.label('perfil')
+                )
+                .join(Usuario.perfil, isouter=True)
                 .where(Perfil.ejecutivo == True)
             )
             if result:
-                user_dict = [user.to_dict() for user in result]
-                return jsonify(user_dict)
-            return jsonify({"message": "No existen ejecutivos"})
+                return jsonify([row._asdict() for row in result])
+            return jsonify({"message": "No existen usuarios"}), 404
     except Exception as e:
-        return jsonify([{"message": "No connection to db "}, {"error": str(e)}])
+        return jsonify([{"message": "No connection to db "}, {"error": str(e)}]), 500

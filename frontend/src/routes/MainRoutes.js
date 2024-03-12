@@ -28,6 +28,7 @@ const DashboardSeguimientoScripts = Loadable(lazy(() => import('views/dashboard/
 const DashboardSystemOption = Loadable(lazy(() => import('views/dashboard/SystemOption')));
 const DashboardUsuarios = Loadable(lazy(() => import('views/dashboard/Usuarios')));
 const DashboardVariableWorkshop = Loadable(lazy(() => import('views/dashboard/VariableWorkshop')));
+const Ejecutivos = Loadable(lazy(() => import('views/dashboard/Ejecutivos/ejecutivo')));
 
 
 
@@ -80,13 +81,11 @@ const MainRoutes = {
         },
         {
           path: 'ejecutivos',
-          element: <DashboardEjecutivos />,
-          chilndren: [
-            {
-              path: '{}',
-              element: <DashboardEjecutivos />
-            }
-          ]
+          element: <DashboardEjecutivos />
+        },
+        {
+          path: 'ejecutivos/:id',
+          element: <Ejecutivos />
         },
         {
           path: 'estado-ec2',

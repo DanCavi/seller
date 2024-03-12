@@ -5,7 +5,7 @@ from controllers.funnel_comercial import *
 funnel_comercial_blueprint = Blueprint("funnel-comercial", __name__)
 
 
-@funnel_comercial_blueprint.route("/funnel-comercial", methods=["GET", "POST"])
+@funnel_comercial_blueprint.route("/funnel-comercial/ejecutivos", methods=["GET"])
 def group_funnel_comercial():
     if request.method == "GET":
         return getFunnel()
