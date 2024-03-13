@@ -15,7 +15,7 @@ def group_ejecutivos():
 @ejecutivos_blueprint.route("/ejecutivos/<int:id>", methods=["DELETE", "PATCH", "GET"])
 def item_ejecutivos(id):
     if request.method == "GET":
-        return 'getEjecutivo(id)'
+        return getEjecutivo(id)
     if request.method == "DELETE":
         return 'deleteEjecutivo(id)'
     if request.method == "PATCH":

@@ -1,6 +1,14 @@
-import { Avatar, Button, ButtonGroup, Grid, LinearProgress, Paper, Typography, Divider } from "@mui/material"
+import { Avatar, Button, ButtonGroup, Grid, LinearProgress, Paper, Typography, Divider, Box } from "@mui/material"
 import { IconBrandFacebook, IconBrandLinkedin, IconBrandTwitter, IconCalendar } from "@tabler/icons-react"
-const PerfilEjecutivo = () => {
+
+const PerfilEjecutivo = ({ejecutivo}) => {
+  
+  function fullRut(rut, digito_verificador) {
+    rut = rut.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    let rutCompleto = rut + '-' + digito_verificador
+    return rutCompleto
+  } 
+
 
   return (
     <Grid item xs={4}>
@@ -22,10 +30,10 @@ const PerfilEjecutivo = () => {
             <Avatar sx={{ width: 100, height: 100 }} />
           </Grid>
           <Grid item xs={12} m={2}>
-            <Typography variant="h3">Dante Cavieres</Typography>
+            <Typography variant="h3">{`${ejecutivo.nombre} ${ejecutivo.apellido}`}</Typography>
           </Grid>
           <Grid item xs={12} m={2}>
-            <Typography variant="body1">Ejecutivo</Typography>
+            <Typography variant="body1">{`${ejecutivo.perfil}`}</Typography>
           </Grid>
           <Grid item xs={12} ml={2} mr={2}>
             <LinearProgress 
@@ -44,15 +52,27 @@ const PerfilEjecutivo = () => {
             <Divider variant='fullWidth' sx={{ border: '1px solid', color: '#1e88e5'}} />
           </Grid>
           <Grid item xs={12} m={2}>
-            <Typography display={'inline'} variant="h4">Rut:</Typography> <Typography display={'inline'} variant='subtitle1'>20.039.869-6</Typography>
+            <Typography display={'inline'} variant="h4">Rut:</Typography> <Typography display={'inline'} variant='subtitle1'>{fullRut(ejecutivo.rut, ejecutivo.digito_verificador)}</Typography>
           </Grid>
           <Grid item xs={12} m={2} mt={-2}>
             <Typography display={'inline'} variant="h4">Sucursal:</Typography> <Typography display={'inline'} variant='subtitle1'>ExpertChoice</Typography>
           </Grid>
-          <Grid item xs={12}>
+          <Box>
+
+          <Grid item xs={12} height={'100%'}>
             <Divider variant='fullWidth' sx={{ border: '1px solid', color: '#a0a0a0' }} />
           </Grid>
-          <Grid container p={2} display={'flex'} textAlign={'center'} justifyContent={'space-between'} item xs={12} sx={{ backgroundColor: '#eaeaea' }}>
+          <Grid
+            container 
+            p={2} 
+            textAlign={'center'} 
+            justifyContent={'space-between'} 
+            item 
+            xs={12} 
+            sx={{ 
+              backgroundColor: '#eaeaea',
+              height: '100%'
+            }}>
             <Grid item xs={3}>
               Proyectos:
               <Typography variant="body1">10</Typography>
@@ -68,6 +88,7 @@ const PerfilEjecutivo = () => {
               <Button variant="outlined"><IconCalendar /></Button>
             </Grid>
           </Grid>
+          </Box>
         </Paper>
       </Grid>
   )

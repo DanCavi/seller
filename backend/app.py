@@ -10,7 +10,7 @@ app.register_blueprint(routes_blueprint, url_prefix="/api/v1")
 
 @app.errorhandler(404)
 def page_not_found(error):
-    return 'FLASK API'
+    return {"message": "Flask API"}, 404
 
 
 

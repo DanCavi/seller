@@ -5,7 +5,7 @@ import { IconUsersGroup } from '@tabler/icons-react';
 const ButtonList = () => {
   const [data, setData] = useState([]);
   const fetchRows = async () => {
-    const response = await fetch('/profiles').then((response) => response.json());
+    const response = await fetch('http://localhost:5000/api/v1/data-exit/perfiles').then((response) => response.json());
 
     setData(response);
   };
@@ -17,7 +17,6 @@ const ButtonList = () => {
     <Grid item xs={10}>
       <InputLabel>Perfiles</InputLabel>
       {data
-        .filter((profile) => profile.ADMIN === 0)
         .map((profile) => (
           <Button sx={{ m: 0.7 }} key={profile.perfil_id} variant="contained" size="small" startIcon={<IconUsersGroup />}>
             {profile.nombre}

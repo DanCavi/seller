@@ -1,5 +1,4 @@
-import { Button, Grid, InputLabel, MenuItem, Select } from '@mui/material';
-import { IconDeviceFloppy } from '@tabler/icons-react';
+import { Grid, InputLabel, MenuItem, Select } from '@mui/material';
 import { useState } from 'react';
 import { GridMetas, ButtonList } from './components';
 
@@ -31,10 +30,6 @@ const IngresoMetas = () => {
         </Grid>
 
         <ButtonList/>
-        
-        <Grid item xs={12}>
-          <Button variant="contained" startIcon={<IconDeviceFloppy />}>Guardar</Button>
-        </Grid>
         <Grid item xs={12}>
           <GridMetas/>
         </Grid>

@@ -4,15 +4,15 @@ import { IconDeviceFloppy, IconPlus, IconTrash } from '@tabler/icons-react';
 import MainCard from 'ui-component/cards/MainCard';
 import { ButtonList } from './components';
 
-function Toolbar({ setRows }) {
-  console.log(setRows)
+function Toolbar() {
+
   return (
     <GridToolbarContainer>
       <Button 
         variant="contained"
         startIcon={<IconPlus />}
         sx={{ mb: 2, mr: 2 }}
-        onClick={handleClick}
+        onClick={console.log('click')}
       >
         Agregar Data
       </Button>

@@ -49,9 +49,9 @@ export const deleteData = async (endpoint) => {
   }
 }
 
-export const getEjecutivo = async(endpoint) => {
+export const getEjecutivo = async(id) => {
   try {
-    const response = await instance.get(endpoint);
+    const response = await instance.get(`/${id}`);
     return response.data
   } catch (error) {
     console.log(error)
