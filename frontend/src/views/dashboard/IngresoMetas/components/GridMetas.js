@@ -1,11 +1,40 @@
 import { Button } from '@mui/material';
-import { DataGrid, GridToolbarContainer, useGridApiRef } from '@mui/x-data-grid';
+import { DataGrid, GridToolbarContainer, useGridApiContext, useGridApiRef } from '@mui/x-data-grid';
 import { IconDeviceFloppy } from '@tabler/icons-react';
+import { useLayoutEffect } from 'react';
 import { useRef } from 'react';
 import { useState } from 'react';
 
+const FormatedInput = (props) => {
+  const { id, value, field, hasFocus } = props
+  const apiRef = useGridApiContext();
+  const ref = useRef();
+
+  useLayoutEffect(() => {
+    if (hasFocus) {
+      ref.current.focus();
+    }
+  }, [hasFocus])
+
+  const currencyFormatter = new Intl.NumberFormat('es-CL', {
+    style: 'currency',
+    currency: 'CLP'
+  });
+
+  const formattedValue = currencyFormatter.format(value ? Number(value) : 0);
+  const handleValueChange = (event) => {
+    const newValue = event.target.value;
+    apiRef.current.setEditCellValue({ id, field, value: newValue})
+    
+  }
+  return (
+    <input ref={ref} style={{ backgroundColor: 'rgb(0,0,0,0)', height: '150%', width: '150%', padding: '10px', margin: '-10px'}} type='text' value={formattedValue} onChange={handleValueChange}/>
+  )
+}
+
 function Toolbar(props) {
   function handleSave() {
+    props.setCellsEdited([]);
     props.setHasUnsavedCells(false);
     props.unsavedChangesRef.current = {
       unsavedRows: {},
@@ -24,6 +53,7 @@ function Toolbar(props) {
 
 const GridMetas = () => {
   const [hasUnsavedCells, setHasUnsavedCells] = useState(false);
+  const [cellsEdited, setCellsEdited] = useState([]);
 
   const apiRef = useGridApiRef();
   const unsavedChangesRef = useRef({
@@ -33,12 +63,15 @@ const GridMetas = () => {
     cellBeforeChange: {}
   });
 
-  const onCellEditStop = (params) => {
-    unsavedChangesRef.current.unsavedCells[params.id] = params.field;
-    if (!unsavedChangesRef.current.cellBeforeChange[params.id]) {
-      unsavedChangesRef.current.cellBeforeChange[params.id] = params.field;
+  const onCellEditStop = (params, event) => {
+    const alreadyExists = cellsEdited.some((row) => row.rowid === params.id && row.field === params.field);
+    if (!alreadyExists) {
+      const maxId = Math.max(...cellsEdited.map((row) => row.id), 0);
+      setCellsEdited((prevCells) => [...prevCells, { id: maxId + 1, rowid: params.id, field: params.field }]);
     }
-  }
+    setHasUnsavedCells(true);
+    event.defaultMuiPrevented = true;
+  };
 
   const processRowUpdate = (newRow, oldRow) => {
     const rowId = newRow.id;
@@ -47,7 +80,6 @@ const GridMetas = () => {
     if (!unsavedChangesRef.current.rowsBeforeChange[rowId]) {
       unsavedChangesRef.current.rowsBeforeChange[rowId] = oldRow;
     }
-    setHasUnsavedCells(true);
     return newRow;
   };
 
@@ -99,6 +131,12 @@ const GridMetas = () => {
       filterable: false,
       editable: true,
       type: 'number',
+      renderEditCell: (params) => (
+        <FormatedInput {...params} />
+      ),
+      valueParser: (value) => {
+        return parseInt(value.replace(/\D/g, ''), 10);
+      },
       valueFormatter: ({ value }) => currencyFormatter.format(Number(value) ? Number(value) : 0)
     }))
   ];
@@ -109,9 +147,10 @@ const GridMetas = () => {
       columns={columns}
       rows={rows}
       processRowUpdate={processRowUpdate}
-      disableRowSelectionOnClick
+      onProcessRowUpdateError={(e) => console.log('ERROR:  \n', e)}
       apiRef={apiRef}
       onCellEditStop={onCellEditStop}
+      disableRowSelectionOnClick
       sx={{
         '& .MuiDataGrid-row.row--edited': {
           backgroundColor: '#feff3842'
@@ -127,7 +166,8 @@ const GridMetas = () => {
         toolbar: {
           hasUnsavedCells,
           setHasUnsavedCells,
-          unsavedChangesRef
+          unsavedChangesRef,
+          setCellsEdited
         }
       }}
       getRowClassName={({ id }) => {
@@ -135,11 +175,13 @@ const GridMetas = () => {
         return unsavedRow ? 'row--edited' : '';
       }}
       getCellClassName={(params) => {
-        const unsavedRow = unsavedChangesRef.current.unsavedRows[params.id];
-        const unsavedCell = unsavedChangesRef.current.unsavedCells[params.id];
-        if (unsavedRow && unsavedCell === params.field) {console.log('params: \n',params)}
-        if (unsavedCell === params.field && unsavedRow)
-          {return 'cell--edited'}
+        const unsavedRowId = params.id;
+        const unsavedField = params.field;
+        const alreadyExists = cellsEdited.some((row) => row.rowid === unsavedRowId && row.field === unsavedField);
+        if (alreadyExists) {
+          return 'cell--edited';
+        }
+        return '';
       }}
     />
   );

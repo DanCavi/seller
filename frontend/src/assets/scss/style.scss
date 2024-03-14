@@ -34,6 +34,11 @@
   }
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 .scrollbar-container.ps,
 .scrollbar-container > .ps {
   &.ps--active-y > .ps__rail-y {
@@ -126,3 +131,4 @@
     transform: translateX(10px);
   }
 }
+
